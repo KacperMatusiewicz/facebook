@@ -1,10 +1,10 @@
-package ripoff.facebook;
+package ripoff.facebook.user;
 
 import lombok.*;
 
 
 @Data
-public class UserDTO {
+public class UserRequest {
 
     private String name;
     private String lastName;
