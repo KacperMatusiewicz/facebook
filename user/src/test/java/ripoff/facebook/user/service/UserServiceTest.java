@@ -61,7 +61,31 @@ class UserServiceTest {
     }
 
     @Test
-    void shouldCallUserRepositoryToSaveUser() {
+    void shouldCallUserRepositoryToSaveUserWhenUserRegisters() {
+        //given
+        User expectedUser = User.builder()
+                .name("Jan")
+                .lastName("Kowalski")
+                .email("kowalski@gmail.com")
+                .password("password")
+                .userStatus(UserStatus.INACTIVE)
+                .build();
+
+        UserRequest userRequest = UserRequest.builder()
+                .name("Jan")
+                .lastName("Kowalski")
+                .email("kowalski@gmail.com")
+                .password("password")
+                .build();
+        given(validationService.validateUserInputData(userRequest)).willReturn(true);
+        given(userRepository.checkIfMailExists(userRequest.getEmail())).willReturn(false);
+        //when
+        service.registerUser(userRequest);
+        //then
+        ArgumentCaptor<User> userArgumentCaptor = ArgumentCaptor.forClass(User.class);
+        Mockito.verify(userRepository).save(userArgumentCaptor.capture());
+        User capturedUser = userArgumentCaptor.getValue();
+        assertThat(capturedUser).usingRecursiveComparison().isEqualTo(expectedUser);
     }
 
     @Test
@@ -84,6 +108,26 @@ class UserServiceTest {
         String capturedEmail = emailCaptor.getValue();
         String capturedName = nameCaptor.getValue();
         assertThat(capturedEmail+capturedName).isEqualTo(userRequest.getEmail()+userRequest.getName());
+    }
+
+    @Test
+    void shouldCallValidationServiceWhenUserRegisters() {
+        //given
+        UserRequest userRequest = UserRequest.builder()
+                .name("Jan")
+                .lastName("Kowalski")
+                .email("kowalski@gmail.com")
+                .password("password")
+                .build();
+        given(validationService.validateUserInputData(userRequest)).willReturn(true);
+        given(userRepository.checkIfMailExists(userRequest.getEmail())).willReturn(false);
+        //when
+        service.registerUser(userRequest);
+        //then
+        ArgumentCaptor<UserRequest> userArgumentCaptor = ArgumentCaptor.forClass(UserRequest.class);
+        Mockito.verify(validationService).validateUserInputData(userArgumentCaptor.capture());
+        UserRequest capturedUserRequest = userArgumentCaptor.getValue();
+        assertThat(capturedUserRequest).usingRecursiveComparison().isEqualTo(userRequest);
     }
 
     @Test
