@@ -1,7 +1,9 @@
 package ripoff.facebook.user.service;
 
 import lombok.AllArgsConstructor;
+import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Service;
+import org.springframework.web.server.ResponseStatusException;
 import ripoff.facebook.user.exceptions.BadUserDataException;
 import ripoff.facebook.user.exceptions.EmailExistsException;
 import ripoff.facebook.mail.MailingService;
@@ -26,6 +28,7 @@ public class UserService {
         if(repository.checkIfMailExists(userRequest.getEmail())) {
             throw new EmailExistsException("Email exists.");
         }
+
         repository.save(
                 User.builder()
                         .name(userRequest.getName())

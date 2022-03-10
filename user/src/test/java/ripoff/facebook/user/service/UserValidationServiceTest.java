@@ -20,6 +20,21 @@ class UserValidationServiceTest {
     }
 
     @Test
+    void shouldValidateUserInputData() {
+        //given
+        UserRequest userRequest = UserRequest.builder()
+                .name("Jan")
+                .lastName("Kowalski")
+                .email("kowalski@gmail.com")
+                .password("password")
+                .build();
+        //when
+        boolean result = userValidationService.validateUserInputData(userRequest);
+        //then
+        Assertions.assertTrue(result);
+    }
+
+    @Test
     void shouldValidateName() {
         //given
         String name = "Jan";
@@ -80,7 +95,7 @@ class UserValidationServiceTest {
 
     @Test
     void shouldValidatePassword() {
-        String password = "12345678";
+        String password = "password";
         boolean result = userValidationService.validatePassword(password);
         Assertions.assertTrue(result);
     }
