@@ -14,6 +14,7 @@
 
     <modules>
         <module>user</module>
+        <module>post</module>
     </modules>
 
     <properties>

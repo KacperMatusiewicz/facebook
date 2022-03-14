@@ -1,8 +1,8 @@
 version: '3.5'
 
 services:
-  postgres:
-    container_name: postgres_db
+  postgres_user:
+    container_name: postgres_user
     image: postgres
     environment:
       POSTGRES_USER: user
@@ -10,12 +10,29 @@ services:
       POSTGRES_DB: users
       PGDATA: /data/postgres
     volumes:
-      - postgres:/data/postgres
+      - postgres-user:/data/postgres
     ports:
       - "5432:5432"
     networks:
       - postgres
     restart: unless-stopped
+
+  postgres_post:
+    container_name: postgres_post
+    image: postgres
+    environment:
+      POSTGRES_USER: user
+      POSTGRES_PASSWORD: password
+      POSTGRES_DB: posts
+      PGDATA: /data/postgres
+    volumes:
+      - postgres-post:/data/postgres
+    ports:
+      - "5433:5432"
+    networks:
+      - postgres
+    restart: unless-stopped
+
 
   pgadmin:
     container_name: pgadmin1
@@ -37,5 +54,6 @@ networks:
     driver: bridge
 
 volumes:
-  postgres:
+  postgres-user:
+  postgres-post:
   pgadmin:
