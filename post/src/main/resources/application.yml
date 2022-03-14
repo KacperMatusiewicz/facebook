@@ -1,0 +1,15 @@
+spring:
+  application:
+    name: post
+  datasource:
+    username: user
+    password: password
+    url: jdbc:postgresql://localhost:5433/posts
+  jpa:
+    hibernate:
+      ddl-auto: update
+    properties:
+      hibernate:
+        dialect: org.hibernate.dialect.PostgreSQLDialect
+        format-sql: true
+      show-sql: true
