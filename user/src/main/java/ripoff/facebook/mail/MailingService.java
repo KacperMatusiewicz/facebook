@@ -9,7 +9,11 @@ import org.springframework.stereotype.Service;
 @AllArgsConstructor
 public class MailingService {
 
-    private JavaMailSender mailSender;
+    MailConfig mailConfig;
+
+    public MailingService() {
+        this.mailConfig = MailConfig.getInstance();
+    }
 
     public void sendConfirmationEmail(String email, String name) {
 
@@ -20,7 +24,7 @@ public class MailingService {
         message.setTo(email);
         message.setSubject("Account activation");
         message.setText(emailBody);
-        mailSender.send(message);
+        mailConfig.getJavaMailSender().send(message);
 
     }
 }
