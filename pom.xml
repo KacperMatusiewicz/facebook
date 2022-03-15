@@ -16,6 +16,7 @@
         <module>user</module>
         <module>post</module>
         <module>relation</module>
+        <module>amqp</module>
     </modules>
 
     <properties>

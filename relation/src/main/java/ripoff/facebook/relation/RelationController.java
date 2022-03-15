@@ -15,7 +15,7 @@ public class RelationController {
     RelationService service;
 
     @GetMapping
-    public Set<GroupUser> getUsersByGroupId(@RequestBody Long groupId) {
+    public Set<GroupUser> getUsersByGroupId(@PathVariable Long groupId) {
         return service.getUsersByGroupId(groupId);
     }
 
