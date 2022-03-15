@@ -15,6 +15,7 @@
         <module>user</module>
         <module>post</module>
         <module>relation</module>
+        <module>amqp</module>
         <module>notification</module>
         <module>eureka</module>
         <module>clients</module>
