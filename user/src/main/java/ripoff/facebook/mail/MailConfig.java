@@ -7,22 +7,35 @@ import org.springframework.mail.javamail.JavaMailSenderImpl;
 
 import java.util.Properties;
 
-@Configuration
+
 public class MailConfig {
 
-    @Bean
-    public JavaMailSender getJavaMailSender() {
-        JavaMailSenderImpl mailSender = new JavaMailSenderImpl();
-        mailSender.setHost("smtp.gmail.com");
-        mailSender.setPort(587);
-        mailSender.setUsername("confirmation.fb.ripoff@gmail.com");
-        mailSender.setPassword("D@Dmin2022");
-        Properties props = mailSender.getJavaMailProperties();
+    private JavaMailSenderImpl javaMailSender;
+    private static MailConfig mailConfig;
+
+    private MailConfig() {
+        javaMailSender = new JavaMailSenderImpl();
+        javaMailSender.setHost("smtp.gmail.com");
+        javaMailSender.setPort(587);
+        javaMailSender.setUsername("confirmation.fb.ripoff@gmail.com");
+        javaMailSender.setPassword("D@Dmin2022");
+        Properties props = javaMailSender.getJavaMailProperties();
         props.put("mail.transport.protocol", "smtp");
         props.put("mail.smtp.auth", "true");
         props.put("mail.smtp.starttls.enable", "true");
         props.put("mail.debug", "true");
-
-        return mailSender;
     }
+
+    public synchronized static MailConfig getInstance() {
+        if(mailConfig == null) {
+            mailConfig = new MailConfig();
+        }
+        return mailConfig;
+
+    }
+
+    public JavaMailSenderImpl getJavaMailSender() {
+        return javaMailSender;
+    }
+
 }
