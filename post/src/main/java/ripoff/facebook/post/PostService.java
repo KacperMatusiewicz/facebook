@@ -10,6 +10,7 @@ import java.util.List;
 @Service
 @AllArgsConstructor
 public class PostService {
+
     private PostRepository repository;
 
     public void createPost(PostCreationRequest request){
