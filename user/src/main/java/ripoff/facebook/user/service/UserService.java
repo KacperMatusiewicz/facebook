@@ -41,5 +41,7 @@ public class UserService {
         mailingService.sendConfirmationEmail(userRequest.getEmail(), userRequest.getName());
     }
 
-
+    public boolean checkIfUserExistsById(Long userId) {
+        return repository.existsById(userId);
+    }
 }

@@ -12,12 +12,19 @@ import java.util.List;
 public class PostService {
 
     private PostRepository repository;
+    private TimeService timeService;
+    private PostDataValidationService postDataValidationService;
 
     public void createPost(PostCreationRequest request){
+
+        if(!postDataValidationService.validatePost(request)){
+            throw new BadPostDataException("Post data is not correct.");
+        }
+
         Post post = Post.builder()
                 .userId(request.getUserId())
                 .content(request.getContent())
-                .creationDate(LocalDateTime.now())
+                .creationDate(timeService.getCurrentDateTime())
                 .attachmentPath(null)
                 .build();
 
