@@ -167,4 +167,22 @@ class UserServiceTest {
         verify(mailingService, never()).sendConfirmationEmail(anyString(), anyString());
     }
 
+    @Test
+    void shouldCallUserExistsById(){
+        //given
+        Long givenUserId = 123L;
+        //when
+        service.checkIfUserExistsById(givenUserId);
+        //then
+        ArgumentCaptor<Long> userIdCaptor = ArgumentCaptor.forClass(Long.class);
+        verify(userRepository).existsById(userIdCaptor.capture());
+        Long capturedUserId = userIdCaptor.getValue();
+        assertThat(capturedUserId).isEqualTo(givenUserId);
+
+    }
+
+    void shoudNotValidateThatUserExistsById(){
+
+    }
+
 }
