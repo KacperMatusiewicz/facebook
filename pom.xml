@@ -10,12 +10,14 @@
     <version>1.0-SNAPSHOT</version>
 
     <name>facebook-ripoff</name>
+    <url></url>
 
     <modules>
         <module>user</module>
         <module>post</module>
         <module>relation</module>
         <module>notification</module>
+        <module>eureka</module>
     </modules>
 
     <properties>
@@ -31,6 +33,13 @@
                 <groupId>org.springframework.boot</groupId>
                 <artifactId>spring-boot-dependencies</artifactId>
                 <version>${spring.boot.depependencies.version}</version>
+                <scope>import</scope>
+                <type>pom</type>
+            </dependency>
+            <dependency>
+                <groupId>org.springframework.cloud</groupId>
+                <artifactId>spring-cloud-dependencies</artifactId>
+                <version>2020.0.3</version>
                 <scope>import</scope>
                 <type>pom</type>
             </dependency>

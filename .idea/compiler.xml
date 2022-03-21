@@ -10,11 +10,13 @@
         <module name="notification" />
         <module name="post" />
         <module name="user" />
+        <module name="eureka" />
         <module name="relation" />
       </profile>
     </annotationProcessing>
     <bytecodeTargetLevel>
       <module name="amqp" target="11" />
+      <module name="notification" target="11" />
     </bytecodeTargetLevel>
   </component>
 </project>
