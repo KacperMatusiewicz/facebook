@@ -1,10 +1,9 @@
 package ripoff.facebook.post;
 
 import lombok.AllArgsConstructor;
-import org.springframework.boot.autoconfigure.security.SecurityProperties;
 import org.springframework.stereotype.Service;
+import ripoff.facebook.post.exceptions.BadPostDataException;
 
-import java.time.LocalDateTime;
 import java.util.List;
 
 @Service
