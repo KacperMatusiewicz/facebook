@@ -1,4 +1,4 @@
-package ripoff.facebook;
+package ripoff.facebook.amqp;
 
 import lombok.AllArgsConstructor;
 import org.springframework.amqp.core.AmqpTemplate;
@@ -32,7 +32,6 @@ public class RabbitConfig {
 
     @Bean
     public MessageConverter jacksonConverter() {
-        MessageConverter jsonMessageConverter = new Jackson2JsonMessageConverter();
-        return  jsonMessageConverter;
+        return new Jackson2JsonMessageConverter();
     }
 }
