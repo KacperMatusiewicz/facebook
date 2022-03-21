@@ -16,13 +16,14 @@
         <module>user</module>
         <module>post</module>
         <module>relation</module>
+        <module>eureka</module>
     </modules>
 
     <properties>
         <maven.compiler.source>11</maven.compiler.source>
         <maven.compiler.target>11</maven.compiler.target>
-        <spring.boot.depependencies.version>2.6.4</spring.boot.depependencies.version>
-        <spring.boot.maven.plugin>2.6.4</spring.boot.maven.plugin>
+        <spring.boot.depependencies.version>2.5.7</spring.boot.depependencies.version>
+        <spring.boot.maven.plugin>2.5.7</spring.boot.maven.plugin>
     </properties>
 
     <dependencyManagement>
@@ -31,6 +32,13 @@
                 <groupId>org.springframework.boot</groupId>
                 <artifactId>spring-boot-dependencies</artifactId>
                 <version>${spring.boot.depependencies.version}</version>
+                <scope>import</scope>
+                <type>pom</type>
+            </dependency>
+            <dependency>
+                <groupId>org.springframework.cloud</groupId>
+                <artifactId>spring-cloud-dependencies</artifactId>
+                <version>2020.0.3</version>
                 <scope>import</scope>
                 <type>pom</type>
             </dependency>
