@@ -10,12 +10,12 @@
     <version>1.0-SNAPSHOT</version>
 
     <name>facebook-ripoff</name>
-    <url></url>
 
     <modules>
         <module>user</module>
         <module>post</module>
         <module>relation</module>
+        <module>notification</module>
     </modules>
 
     <properties>
