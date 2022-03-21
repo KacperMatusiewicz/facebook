@@ -16,7 +16,6 @@
     </annotationProcessing>
     <bytecodeTargetLevel>
       <module name="amqp" target="11" />
-      <module name="notification" target="11" />
     </bytecodeTargetLevel>
   </component>
 </project>

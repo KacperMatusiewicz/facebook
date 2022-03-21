@@ -8,7 +8,7 @@ public class MailNotification implements Notification{
 
     @Override
     public void notify(NotificationParameters parameters) {
-        System.out.println("sending mail to address: " + email);
+        System.out.println("sending mail to address: " + email + "and the content is:" + parameters.getText());
     }
 
     @Override

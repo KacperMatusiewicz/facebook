@@ -1,13 +1,24 @@
 package ripoff.facebook.notification.preferences;
 
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.Id;
+import lombok.AllArgsConstructor;
+import lombok.Builder;
+import lombok.Getter;
+import lombok.NoArgsConstructor;
+
+import javax.persistence.*;
 
 @Entity
 public class NotificationEntry {
 
     @Id
+    @SequenceGenerator(
+            sequenceName = "notification_entry_id_sequence",
+            name = "notification_entry_id_sequence"
+    )
+    @GeneratedValue(
+            strategy = GenerationType.SEQUENCE,
+            generator = "notification_entry_id_sequence"
+    )
     private Long id;
 
 
