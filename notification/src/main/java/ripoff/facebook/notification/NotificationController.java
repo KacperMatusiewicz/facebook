@@ -19,4 +19,9 @@ public class NotificationController {
     public void sendNotification(@RequestBody SendNotificationDTO sendNotificationDTO) {
         service.sendNotification(sendNotificationDTO);
     }
+
+    @PostMapping("/preference")
+    public void createPreference(@RequestBody CreatePreferenceRequest request) {
+        service.createPreference(request);
+    }
 }

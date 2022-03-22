@@ -8,7 +8,7 @@ public class TwilioNotification implements Notification{
 
     @Override
     public void notify(NotificationParameters parameters) {
-        System.out.println("sending twilio notification to number: " + phoneNumber);
+        System.out.println("sending twilio notification to number: " + phoneNumber + " and the content is: " + parameters.getText());
     }
 
     @Override

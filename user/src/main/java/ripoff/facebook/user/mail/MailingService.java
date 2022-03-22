@@ -1,8 +1,7 @@
-package ripoff.facebook.mail;
+package ripoff.facebook.user.mail;
 
 import lombok.AllArgsConstructor;
 import org.springframework.mail.SimpleMailMessage;
-import org.springframework.mail.javamail.JavaMailSender;
 import org.springframework.stereotype.Service;
 
 @Service

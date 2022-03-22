@@ -1,7 +1,9 @@
 package ripoff.facebook.notification;
 
+import org.springframework.stereotype.Component;
 import ripoff.facebook.notification.preferences.NotificationMethod;
 
+@Component
 public class NotificationFactory {
     public Notification createNotification(NotificationMethod channel, String destination) {
         switch (channel) {

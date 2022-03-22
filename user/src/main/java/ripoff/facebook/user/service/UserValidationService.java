@@ -13,7 +13,7 @@ public class UserValidationService {
 
         boolean result = validateName(userRequest.getName())
                 && validateLastName(userRequest.getLastName())
-                && validateEmail(userRequest.getEmail())
+               // && validateEmail(userRequest.getEmail())
                 && validatePassword(userRequest.getPassword());
         return result;
     }
