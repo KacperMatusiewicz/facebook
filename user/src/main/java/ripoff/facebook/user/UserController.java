@@ -2,6 +2,7 @@ package ripoff.facebook.user;
 
 import lombok.AllArgsConstructor;
 import org.springframework.web.bind.annotation.*;
+import ripoff.facebook.clients.user.UserExistsResponse;
 import ripoff.facebook.user.service.UserService;
 
 @RestController
@@ -17,8 +18,8 @@ public class UserController {
     }
 
     @GetMapping("{userId}")
-    public boolean checkIfUserExistsById(@PathVariable Long userId) {
-        return userService.checkIfUserExistsById(userId);
+    public UserExistsResponse checkIfUserExistsById(@PathVariable Long userId) {
+        return new UserExistsResponse(userService.checkIfUserExistsById(userId));
     }
 
 }

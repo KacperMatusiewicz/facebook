@@ -10,7 +10,6 @@
     <version>1.0-SNAPSHOT</version>
 
     <name>facebook-ripoff</name>
-    <url></url>
 
     <modules>
         <module>user</module>
@@ -18,6 +17,7 @@
         <module>relation</module>
         <module>notification</module>
         <module>eureka</module>
+        <module>clients</module>
     </modules>
 
     <properties>
@@ -25,6 +25,7 @@
         <maven.compiler.target>11</maven.compiler.target>
         <spring.boot.depependencies.version>2.6.4</spring.boot.depependencies.version>
         <spring.boot.maven.plugin>2.6.4</spring.boot.maven.plugin>
+        <spring.cloud.version>2021.0.1</spring.cloud.version>
     </properties>
 
     <dependencyManagement>
@@ -39,7 +40,7 @@
             <dependency>
                 <groupId>org.springframework.cloud</groupId>
                 <artifactId>spring-cloud-dependencies</artifactId>
-                <version>2020.0.3</version>
+                <version>${spring.cloud.version}</version>
                 <scope>import</scope>
                 <type>pom</type>
             </dependency>
@@ -54,6 +55,10 @@
         <dependency>
             <groupId>org.springframework.boot</groupId>
             <artifactId>spring-boot-starter-test</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>org.springframework.cloud</groupId>
+            <artifactId>spring-cloud-starter-openfeign</artifactId>
         </dependency>
     </dependencies>
 

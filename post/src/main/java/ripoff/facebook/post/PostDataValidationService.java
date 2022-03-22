@@ -6,6 +6,8 @@ import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Service;
 import org.springframework.web.client.RestTemplate;
 import org.springframework.web.server.ResponseStatusException;
+import ripoff.facebook.clients.user.UserClient;
+import ripoff.facebook.clients.user.UserExistsResponse;
 
 import java.util.Optional;
 
@@ -14,6 +16,7 @@ import java.util.Optional;
 @AllArgsConstructor
 public class PostDataValidationService {
 
+    private final UserClient userClient;
     private final int contentMaxLength = 512;
     private final RestTemplate restTemplate;
 
@@ -27,15 +30,7 @@ public class PostDataValidationService {
     }
 
     public boolean validateUserId(Long userId) {
-        Optional<Boolean> response = Optional.ofNullable(
-                restTemplate.getForObject("localhost:8080/api/v1/user/"+userId, Boolean.class)
-        );
-        return response.orElseThrow(
-                () -> new ResponseStatusException(
-                        HttpStatus.INTERNAL_SERVER_ERROR,
-                        "Could not connect to the User service"
-                )
-        );
+        return userClient.checkIfUserExistsById(userId).getUserExists();
     }
 
 }

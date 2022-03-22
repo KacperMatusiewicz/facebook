@@ -9,6 +9,7 @@ import org.mockito.Mockito;
 import org.mockito.junit.jupiter.MockitoExtension;
 import org.springframework.web.client.RestTemplate;
 import org.springframework.web.server.ResponseStatusException;
+import ripoff.facebook.clients.user.UserClient;
 
 import static org.assertj.core.api.AssertionsForClassTypes.assertThatThrownBy;
 import static org.junit.jupiter.api.Assertions.*;
@@ -18,11 +19,13 @@ class PostDataValidationServiceTest {
 
     @Mock
     RestTemplate restTemplate;
+    @Mock
+    UserClient userClient;
     PostDataValidationService service;
 
     @BeforeEach
     void setUp() {
-        service = new PostDataValidationService(restTemplate);
+        service = new PostDataValidationService(userClient,restTemplate);
     }
 
     @Test
