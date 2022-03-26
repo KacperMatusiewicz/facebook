@@ -1,15 +1,11 @@
-package ripoff.facebook.post;
+package ripoff.facebook.post.service;
 
 import lombok.AllArgsConstructor;
 import lombok.Getter;
-import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Service;
 import org.springframework.web.client.RestTemplate;
-import org.springframework.web.server.ResponseStatusException;
 import ripoff.facebook.clients.user.UserClient;
-import ripoff.facebook.clients.user.UserExistsResponse;
-
-import java.util.Optional;
+import ripoff.facebook.post.dto.PostCreationRequest;
 
 @Service
 @Getter

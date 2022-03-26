@@ -13,14 +13,13 @@ services:
       - postgres-user:/data/postgres
     ports:
       - "5432:5432"
-    networks:
-      - postgres
     restart: unless-stopped
 
   postgres_post:
     container_name: postgres_post
     image: postgres
     environment:
+      POSTGRES_HOST: postgres-post
       POSTGRES_USER: user
       POSTGRES_PASSWORD: password
       POSTGRES_DB: posts
@@ -29,8 +28,6 @@ services:
       - postgres-post:/data/postgres
     ports:
       - "5433:5432"
-    networks:
-      - postgres
     restart: unless-stopped
 
   postgres_relation:
@@ -61,8 +58,6 @@ services:
       - postgres-notification:/data/postgres
     ports:
       - "5435:5432"
-    networks:
-      - postgres
     restart: unless-stopped
 
   pgadmin:
@@ -79,6 +74,18 @@ services:
     networks:
       - postgres
     restart: unless-stopped
+
+  neo4j_relation:
+    image: neo4j
+    restart: unless-stopped
+    ports:
+      - "7474:7474"
+      - "7687:7687"
+    volumes:
+      - neo4j_relation_data:/data/
+    environment:
+      - NEO4J_dbms_default__database=neo4j
+      - NEO4J_AUTH=neo4j/password
 
   rabbitmq:
     image: rabbitmq:3.9.11-management-alpine
@@ -97,3 +104,4 @@ volumes:
   postgres-relation:
   postgres-notification:
   pgadmin:
+  neo4j_relation_data:

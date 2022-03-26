@@ -1,21 +1,17 @@
 spring:
   application:
     name: relation
-  datasource:
-    username: user
-    password: password
-    url: jdbc:postgresql://localhost:5434/relations
-  jpa:
-    hibernate:
-      ddl-auto: update
-    properties:
-      hibernate:
-        dialect: org.hibernate.dialect.PostgreSQLDialect
-        format-sql: true
-      show-sql: true
+  neo4j:
+    uri: bolt://localhost:7687
+    authentication:
+      username: neo4j
+      password: password
 eureka:
   client:
     service-url:
       defaultZone: "http://localhost:8761/eureka"
     fetch-registry: true
     register-with-eureka: true
+
+server:
+  port: 8082

@@ -5,7 +5,12 @@ import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.cloud.netflix.eureka.EnableEurekaClient;
 import org.springframework.cloud.openfeign.EnableFeignClients;
 
-@SpringBootApplication
+@SpringBootApplication(
+        scanBasePackages = {
+                "ripoff.facebook.post",
+                "ripoff.facebook.amqp"
+        }
+)
 @EnableEurekaClient
 @EnableFeignClients(
         basePackages = "ripoff.facebook.clients"

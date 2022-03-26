@@ -6,7 +6,13 @@ import org.junit.jupiter.api.extension.ExtendWith;
 import org.mockito.ArgumentCaptor;
 import org.mockito.Mock;
 import org.mockito.junit.jupiter.MockitoExtension;
+import org.springframework.amqp.core.AmqpTemplate;
+import ripoff.facebook.post.dto.PostCreationRequest;
 import ripoff.facebook.post.exceptions.BadPostDataException;
+import ripoff.facebook.post.service.PostDataValidationService;
+import ripoff.facebook.post.service.PostService;
+import ripoff.facebook.post.service.RelationService;
+import ripoff.facebook.post.service.TimeService;
 
 import java.time.LocalDateTime;
 import java.time.Month;
@@ -27,12 +33,15 @@ class PostServiceTest {
     TimeService timeService;
     @Mock
     PostDataValidationService validationService;
-    
+    @Mock
+    AmqpTemplate template;
+    @Mock
+    RelationService relationService;
     PostService service;
     
     @BeforeEach
     void setUp() {
-        service = new PostService(postRepository, timeService, validationService);
+        service = new PostService(postRepository, relationService, timeService, validationService, template);
     }
 
     @Test
