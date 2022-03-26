@@ -1,17 +1,17 @@
-package ripoff.facebook.relation;
+package ripoff.facebook.relation.query;
 
 import lombok.AllArgsConstructor;
 import org.springframework.stereotype.Service;
-import ripoff.facebook.clients.relation.GroupIdsResponse;
+import ripoff.facebook.relation.exception.GroupNotFoundException;
+import ripoff.facebook.relation.repository.GroupRepository;
 import ripoff.facebook.relation.entity.User;
 
-import java.util.List;
 import java.util.Set;
 import java.util.stream.Collectors;
 
 @Service
 @AllArgsConstructor
-public class RelationService {
+public class RelationQueryService {
 
     GroupRepository repository;
 
