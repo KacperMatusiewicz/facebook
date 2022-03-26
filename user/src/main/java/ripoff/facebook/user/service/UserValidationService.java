@@ -10,12 +10,10 @@ import java.util.regex.Pattern;
 public class UserValidationService {
 
     public boolean validateUserInputData(UserRequest userRequest) {
-
-        boolean result = validateName(userRequest.getName())
+        return validateName(userRequest.getName())
                 && validateLastName(userRequest.getLastName())
-               // && validateEmail(userRequest.getEmail())
+                && validateEmail(userRequest.getEmail())
                 && validatePassword(userRequest.getPassword());
-        return result;
     }
 
     public boolean validateName(String name){
@@ -44,7 +42,6 @@ public class UserValidationService {
     }
 
     public boolean validatePassword(String password){
-        // TODO: Require password to contain special characters and capital letters.
         String passwordRegex = "[^\\;]{6,}";
         if(password == null) {
             return false;

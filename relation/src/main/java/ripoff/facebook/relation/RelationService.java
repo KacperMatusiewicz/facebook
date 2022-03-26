@@ -2,8 +2,8 @@ package ripoff.facebook.relation;
 
 import lombok.AllArgsConstructor;
 import org.springframework.stereotype.Service;
-import ripoff.facebook.relation.entity.Group;
-import ripoff.facebook.relation.entity.GroupUser;
+import ripoff.facebook.clients.relation.GroupIdsResponse;
+import ripoff.facebook.relation.entity.User;
 
 import java.util.List;
 import java.util.Set;
@@ -15,27 +15,14 @@ public class RelationService {
 
     GroupRepository repository;
 
-    public Set<GroupUser> getUsersByGroupId(Long groupId) {
-        return repository
-                .findById(groupId)
-                .orElseThrow(() -> new GroupNotFoundException("Group not found."))
-                .getUsers();
-    }
 
-    public Long createNewGroup(CreateNewGroupRequest request) {
-
-        Set<GroupUser> groupUsers =  request.getUserIds().stream()
-                .map(
-                        (userId) -> GroupUser.builder()
-                                .userId(userId)
-                                .build()
+    public Set<Long> getFollowers(Long id){
+        return repository.getFollowersByUserId(id)
+                .orElseThrow(
+                        () -> new GroupNotFoundException("Group not found.")
                 )
+                .stream()
+                .map(User::getId)
                 .collect(Collectors.toSet());
-
-        Group group = Group.builder()
-                .users(groupUsers)
-                .build();
-
-        return repository.save(group).getGroupId();
     }
 }

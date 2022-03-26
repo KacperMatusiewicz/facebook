@@ -9,7 +9,7 @@
     </parent>
     <modelVersion>4.0.0</modelVersion>
 
-    <artifactId>relation</artifactId>
+    <artifactId>feed</artifactId>
 
     <properties>
         <maven.compiler.source>11</maven.compiler.source>
@@ -19,19 +19,11 @@
     <dependencies>
         <dependency>
             <groupId>org.springframework.boot</groupId>
-            <artifactId>spring-boot-starter-web</artifactId>
-        </dependency>
-        <dependency>
-            <groupId>org.springframework.boot</groupId>
-            <artifactId>spring-boot-starter-data-neo4j</artifactId>
-        </dependency>
-        <dependency>
-            <groupId>org.springframework.cloud</groupId>
-            <artifactId>spring-cloud-starter-netflix-eureka-client</artifactId>
+            <artifactId>spring-boot-starter-amqp</artifactId>
         </dependency>
         <dependency>
             <groupId>ripoff.facebook</groupId>
-            <artifactId>clients</artifactId>
+            <artifactId>amqp</artifactId>
             <version>1.0-SNAPSHOT</version>
         </dependency>
     </dependencies>

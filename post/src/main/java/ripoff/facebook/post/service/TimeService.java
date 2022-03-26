@@ -1,4 +1,4 @@
-package ripoff.facebook.post;
+package ripoff.facebook.post.service;
 
 import org.springframework.stereotype.Service;
 

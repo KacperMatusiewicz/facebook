@@ -2,9 +2,9 @@ package ripoff.facebook.relation;
 
 import lombok.AllArgsConstructor;
 import org.springframework.web.bind.annotation.*;
-import ripoff.facebook.relation.entity.GroupUser;
+import ripoff.facebook.clients.relation.GroupIdsResponse;
+import ripoff.facebook.relation.entity.User;
 
-import java.util.List;
 import java.util.Set;
 
 @RestController
@@ -14,13 +14,9 @@ public class RelationController {
 
     RelationService service;
 
-    @GetMapping
-    public Set<GroupUser> getUsersByGroupId(@RequestBody Long groupId) {
-        return service.getUsersByGroupId(groupId);
+    @GetMapping("/default/{id}")
+    public GroupIdsResponse getFollowers(@PathVariable("id") Long id){
+        return new GroupIdsResponse(service.getFollowers(id));
     }
 
-    @PostMapping
-    public Long addNewGroup(@RequestBody CreateNewGroupRequest request) {
-        return service.createNewGroup(request);
-    }
 }
