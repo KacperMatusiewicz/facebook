@@ -9,7 +9,7 @@
     </parent>
     <modelVersion>4.0.0</modelVersion>
 
-    <artifactId>amqp</artifactId>
+    <artifactId>amqp-general-feed</artifactId>
 
     <properties>
         <maven.compiler.source>11</maven.compiler.source>
@@ -19,6 +19,11 @@
         <dependency>
             <groupId>org.springframework.boot</groupId>
             <artifactId>spring-boot-starter-amqp</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>org.springframework.boot</groupId>
+            <artifactId>spring-boot-autoconfigure</artifactId>
+            <version>2.6.4</version>
         </dependency>
     </dependencies>
 

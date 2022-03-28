@@ -87,13 +87,19 @@ services:
       - NEO4J_dbms_default__database=neo4j
       - NEO4J_AUTH=neo4j/password
 
-  rabbitmq:
+  rabbitmq_general_feed:
     image: rabbitmq:3.9.11-management-alpine
-    container_name: rabbitmq
+    container_name: rabbitmq_general_feed
     ports:
       - "5672:5672"
       - "15672:15672"
 
+  rabbitmq_user_feed:
+    image: rabbitmq:3.9.11-management-alpine
+    container_name: rabbitmq_user_feed
+    ports:
+      - "5673:5672"
+      - "15673:15672"
 networks:
   postgres:
     driver: bridge
