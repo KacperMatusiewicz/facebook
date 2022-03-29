@@ -20,20 +20,24 @@ public class UserFeedConsumerService {
     private ConnectionFactoryContextWrapper wrapper;
     private MessageConverter userMessageConverter;
 
-    public PostIdsList getFeedPosts(Long userId) {
-        List<Long> postIds = new ArrayList<>();
-        wrapper.run(
-            "user",
-            () -> {
-                FeedPostEntry feedPostEntry =
-                        (FeedPostEntry) userMessageConverter.fromMessage(
-                                Optional.ofNullable(
-                                            template.receive(Long.toString(userId)))
-                                                    .orElseThrow(() -> new FeedEmptyException("Feed is empty."))
-                        );
-                postIds.add(feedPostEntry.getPostId());
+    public PostIdsList getFeedPosts(Long userId, int amount) {
+        List<Long> postIds = new ArrayList<>(amount);
+        for (int i = 0; i < amount; i++) {
+            try {
+                postIds.add(getFeedPost(userId).getPostId());
+            } catch (FeedEmptyException e) {
+                if(postIds.isEmpty()){
+                    throw new FeedEmptyException("Feed is empty");
+                } else {
+                    return new PostIdsList(postIds);
+                }
             }
-        );
+        }
         return new PostIdsList(postIds);
+    }
+
+    private FeedPostEntry getFeedPost(Long userId) {
+        Optional<Message> message = Optional.ofNullable(wrapper.call("user", () -> template.receive(Long.toString(userId))));
+        return (FeedPostEntry) userMessageConverter.fromMessage(message.orElseThrow(() -> new FeedEmptyException("Feed is empty")));
     }
 }

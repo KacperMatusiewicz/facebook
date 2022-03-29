@@ -1,10 +1,7 @@
 package ripoff.facebook.feed;
 
 import lombok.AllArgsConstructor;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
@@ -16,7 +13,7 @@ public class UserFeedController {
     UserFeedConsumerService service;
 
     @GetMapping("{userId}")
-    public PostIdsList getPostsByUserId(@PathVariable Long userId) {
-        return service.getFeedPosts(userId);
+    public PostIdsList getPostsByUserId(@PathVariable Long userId, @RequestParam(defaultValue = "10", required = false) Integer amount) {
+        return service.getFeedPosts(userId, amount);
     }
 }
