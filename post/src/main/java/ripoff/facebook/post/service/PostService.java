@@ -2,6 +2,7 @@ package ripoff.facebook.post.service;
 
 import lombok.AllArgsConstructor;
 import org.springframework.amqp.core.AmqpTemplate;
+import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.stereotype.Service;
 import ripoff.facebook.amqp.FeedPostInformation;
 import ripoff.facebook.post.*;
@@ -21,6 +22,7 @@ public class PostService {
     private RelationService relationService;
     private TimeService timeService;
     private PostDataValidationService postDataValidationService;
+    @Qualifier("general-feed-template")
     AmqpTemplate template;
 
     public void createPost(PostCreationRequest request){
