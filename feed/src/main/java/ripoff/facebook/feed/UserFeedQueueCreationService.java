@@ -10,7 +10,7 @@ import org.springframework.stereotype.Service;
 @Service
 public class UserFeedQueueCreationService {
 
-    RabbitAdmin userRabbitAdmin;
+    private final RabbitAdmin userRabbitAdmin;
 
     public UserFeedQueueCreationService(@Qualifier("userContainerFactory-admin") RabbitAdmin userRabbitAdmin) {
         this.userRabbitAdmin = userRabbitAdmin;
@@ -28,5 +28,9 @@ public class UserFeedQueueCreationService {
         );
         userRabbitAdmin.declareQueue(queue);
         userRabbitAdmin.declareBinding(binding);
+    }
+
+    public void deleteQueue(Long userId) {
+        userRabbitAdmin.deleteQueue(userId.toString());
     }
 }

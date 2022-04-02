@@ -25,7 +25,7 @@ public class ActivationLink {
     )
     Long key;
 
-    @OneToOne
+    @OneToOne(cascade = CascadeType.REMOVE)
     User user;
 
 }

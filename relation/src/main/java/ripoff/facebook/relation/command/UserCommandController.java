@@ -14,4 +14,9 @@ public class UserCommandController {
     public void createUser(@PathVariable Long id){
         service.createUser(id);
     }
+
+    @DeleteMapping("{id}")
+    public void deleteUser(@PathVariable Long id) {
+        service.deleteUser(id);
+    }
 }

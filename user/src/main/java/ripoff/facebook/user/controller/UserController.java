@@ -23,4 +23,9 @@ public class UserController {
         return new UserExistsResponse(userService.checkIfUserExistsById(userId));
     }
 
+    @DeleteMapping("{userId}")
+    public void deleteUser(@PathVariable Long userId) {
+        userService.deleteUser(userId);
+    }
+
 }

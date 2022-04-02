@@ -2,6 +2,9 @@ package ripoff.facebook.user.service;
 
 import lombok.AllArgsConstructor;
 import org.springframework.stereotype.Service;
+import ripoff.facebook.clients.feed.FeedUserClient;
+import ripoff.facebook.clients.post.PostClient;
+import ripoff.facebook.clients.relation.RelationClient;
 import ripoff.facebook.user.entity.ActivationLink;
 import ripoff.facebook.user.exceptions.BadUserDataException;
 import ripoff.facebook.user.exceptions.EmailExistsException;
@@ -22,6 +25,9 @@ public class UserService {
     private ActivationRepository activationRepository;
     private EmailAccountActivation emailAccountActivationService;
     private UserValidationService userValidationService;
+    private RelationClient relationClient;
+    private FeedUserClient feedUserClient;
+    private PostClient postClient;
 
     public void registerUser(UserRequest userRequest) {
 
@@ -48,6 +54,13 @@ public class UserService {
                 .name(user.getName())
                 .build();
         emailAccountActivationService.sendActivationEmail(activationEmail);
+    }
+
+    public void deleteUser(Long userId) {
+        feedUserClient.deleteUserQueue(userId);
+        relationClient.deleteUser(userId);
+        postClient.deleteAllPostsByUserId(userId);
+        userRepository.deleteById(userId);
     }
 
     public boolean checkIfUserExistsById(Long userId) {
