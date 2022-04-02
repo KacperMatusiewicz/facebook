@@ -10,6 +10,7 @@ import javax.persistence.*;
 @Getter
 @Entity
 @Table(name = "user_table")
+@Setter
 public class User {
 
     @Id

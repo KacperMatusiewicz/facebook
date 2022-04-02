@@ -7,6 +7,9 @@ import org.springframework.cloud.openfeign.EnableFeignClients;
 
 @SpringBootApplication
 @EnableEurekaClient
+@EnableFeignClients(
+        basePackages = "ripoff.facebook.clients"
+)
 public class UserApplication {
 
     public static void main(String[] args) {

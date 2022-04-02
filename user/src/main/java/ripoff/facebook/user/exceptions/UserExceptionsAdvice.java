@@ -19,4 +19,9 @@ public class UserExceptionsAdvice {
         return new ResponseEntity<>(e.getMessage(), HttpStatus.CONFLICT);
     }
 
+    @ExceptionHandler(ActivationLinkNotFound.class)
+    public ResponseEntity<String> handleActivationLinkNotFoundException(ActivationLinkNotFound e) {
+        return new ResponseEntity<>(e.getMessage(), HttpStatus.NOT_FOUND);
+    }
+
 }
