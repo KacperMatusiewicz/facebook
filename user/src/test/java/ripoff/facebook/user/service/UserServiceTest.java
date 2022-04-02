@@ -7,8 +7,8 @@ import org.mockito.ArgumentCaptor;
 import org.mockito.Mock;
 import org.mockito.Mockito;
 import org.mockito.junit.jupiter.MockitoExtension;
-import ripoff.facebook.user.mail.ConfirmationEmail;
-import ripoff.facebook.user.mail.MailingService;
+import ripoff.facebook.user.mail.ActivationEmail;
+import ripoff.facebook.user.mail.EmailAccountActivationService;
 import ripoff.facebook.user.repository.ActivationRepository;
 import ripoff.facebook.user.repository.UserRepository;
 import ripoff.facebook.user.UserRequest;
@@ -33,7 +33,7 @@ class UserServiceTest {
     @Mock
     ActivationRepository activationRepository;
     @Mock
-    MailingService mailingService;
+    EmailAccountActivationService emailAccountActivationService;
     @Mock
     UserValidationService validationService;
 
@@ -41,7 +41,7 @@ class UserServiceTest {
 
     @BeforeEach
     void setUp() {
-        service = new UserService(userRepository, activationRepository, mailingService, validationService);
+        service = new UserService(userRepository, activationRepository, emailAccountActivationService, validationService);
     }
 
     @Test
@@ -102,9 +102,9 @@ class UserServiceTest {
         //when
         service.registerUser(userRequest);
         //then
-        ArgumentCaptor<ConfirmationEmail> emailCaptor = ArgumentCaptor.forClass(ConfirmationEmail.class);
-        Mockito.verify(mailingService).sendConfirmationEmail(emailCaptor.capture());
-        ConfirmationEmail capturedEmail = emailCaptor.getValue();
+        ArgumentCaptor<ActivationEmail> emailCaptor = ArgumentCaptor.forClass(ActivationEmail.class);
+        Mockito.verify(emailAccountActivationService).sendActivationEmail(emailCaptor.capture());
+        ActivationEmail capturedEmail = emailCaptor.getValue();
         //TODO:
         // assertThat(capturedEmail).isEqualTo(ne);
     }
@@ -145,7 +145,7 @@ class UserServiceTest {
         //then
         assertThatThrownBy(() -> service.registerUser(userRequest)).isInstanceOf(EmailExistsException.class);
         verify(userRepository, never()).save(any(User.class));
-        verify(mailingService, never()).sendConfirmationEmail(any());
+        verify(emailAccountActivationService, never()).sendActivationEmail(any());
     }
 
     @Test
@@ -163,7 +163,7 @@ class UserServiceTest {
         //then
         assertThatThrownBy(()-> service.registerUser(userRequest)).isInstanceOf(BadUserDataException.class);
         verify(userRepository, never()).save(any(User.class));
-        verify(mailingService, never()).sendConfirmationEmail(any());
+        verify(emailAccountActivationService, never()).sendActivationEmail(any());
     }
 
     @Test

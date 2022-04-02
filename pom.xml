@@ -20,6 +20,7 @@
         <module>clients</module>
         <module>amqp-general-feed</module>
         <module>feed</module>
+        <module>mailing</module>
     </modules>
 
     <properties>

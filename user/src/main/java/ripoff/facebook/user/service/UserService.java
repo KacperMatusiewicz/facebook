@@ -5,8 +5,9 @@ import org.springframework.stereotype.Service;
 import ripoff.facebook.user.entity.ActivationLink;
 import ripoff.facebook.user.exceptions.BadUserDataException;
 import ripoff.facebook.user.exceptions.EmailExistsException;
-import ripoff.facebook.user.mail.ConfirmationEmail;
-import ripoff.facebook.user.mail.MailingService;
+import ripoff.facebook.user.mail.ActivationEmail;
+import ripoff.facebook.user.mail.EmailAccountActivation;
+import ripoff.facebook.user.mail.EmailAccountActivationService;
 import ripoff.facebook.user.UserRequest;
 import ripoff.facebook.user.entity.User;
 import ripoff.facebook.user.entity.UserStatus;
@@ -19,7 +20,7 @@ public class UserService {
 
     private UserRepository userRepository;
     private ActivationRepository activationRepository;
-    private MailingService mailingService;
+    private EmailAccountActivation emailAccountActivationService;
     private UserValidationService userValidationService;
 
     public void registerUser(UserRequest userRequest) {
@@ -41,12 +42,12 @@ public class UserService {
                         .build()
         );
         ActivationLink activationLink = activationRepository.save(ActivationLink.builder().user(user).build());
-        ConfirmationEmail confirmationEmail = ConfirmationEmail.builder()
+        ActivationEmail activationEmail = ActivationEmail.builder()
                 .key(Long.toString(activationLink.getKey()))
                 .recipientAddress(user.getEmail())
                 .name(user.getName())
                 .build();
-        mailingService.sendConfirmationEmail(confirmationEmail);
+        emailAccountActivationService.sendActivationEmail(activationEmail);
     }
 
     public boolean checkIfUserExistsById(Long userId) {
