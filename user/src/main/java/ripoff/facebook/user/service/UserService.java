@@ -2,19 +2,23 @@ package ripoff.facebook.user.service;
 
 import lombok.AllArgsConstructor;
 import org.springframework.stereotype.Service;
+import ripoff.facebook.user.entity.ActivationLink;
 import ripoff.facebook.user.exceptions.BadUserDataException;
 import ripoff.facebook.user.exceptions.EmailExistsException;
+import ripoff.facebook.user.mail.ConfirmationEmail;
 import ripoff.facebook.user.mail.MailingService;
 import ripoff.facebook.user.UserRequest;
 import ripoff.facebook.user.entity.User;
 import ripoff.facebook.user.entity.UserStatus;
-import ripoff.facebook.user.UserRepository;
+import ripoff.facebook.user.repository.UserRepository;
+import ripoff.facebook.user.repository.ActivationRepository;
 
 @Service
 @AllArgsConstructor
 public class UserService {
 
-    private UserRepository repository;
+    private UserRepository userRepository;
+    private ActivationRepository activationRepository;
     private MailingService mailingService;
     private UserValidationService userValidationService;
 
@@ -23,11 +27,11 @@ public class UserService {
         if (!userValidationService.validateUserInputData(userRequest)) {
             throw new BadUserDataException("Error validating user data.");
         }
-        if(repository.checkIfMailExists(userRequest.getEmail())) {
+        if(userRepository.checkIfMailExists(userRequest.getEmail())) {
             throw new EmailExistsException("Email exists.");
         }
 
-        repository.save(
+        User user = userRepository.save(
                 User.builder()
                         .name(userRequest.getName())
                         .lastName(userRequest.getLastName())
@@ -36,10 +40,16 @@ public class UserService {
                         .userStatus(UserStatus.INACTIVE)
                         .build()
         );
-        mailingService.sendConfirmationEmail(userRequest.getEmail(), userRequest.getName());
+        ActivationLink activationLink = activationRepository.save(ActivationLink.builder().user(user).build());
+        ConfirmationEmail confirmationEmail = ConfirmationEmail.builder()
+                .key(Long.toString(activationLink.getKey()))
+                .recipientAddress(user.getEmail())
+                .name(user.getName())
+                .build();
+        mailingService.sendConfirmationEmail(confirmationEmail);
     }
 
     public boolean checkIfUserExistsById(Long userId) {
-        return repository.existsById(userId);
+        return userRepository.existsById(userId);
     }
 }

@@ -4,11 +4,9 @@ import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.orm.jpa.DataJpaTest;
-import org.springframework.boot.test.context.SpringBootTest;
 import ripoff.facebook.user.entity.User;
 import ripoff.facebook.user.entity.UserStatus;
-
-import static org.junit.jupiter.api.Assertions.*;
+import ripoff.facebook.user.repository.UserRepository;
 
 @DataJpaTest
 class UserRepositoryTest {

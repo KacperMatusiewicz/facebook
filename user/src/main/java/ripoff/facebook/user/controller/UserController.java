@@ -1,8 +1,9 @@
-package ripoff.facebook.user;
+package ripoff.facebook.user.controller;
 
 import lombok.AllArgsConstructor;
 import org.springframework.web.bind.annotation.*;
 import ripoff.facebook.clients.user.UserExistsResponse;
+import ripoff.facebook.user.UserRequest;
 import ripoff.facebook.user.service.UserService;
 
 @RestController
