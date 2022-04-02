@@ -23,4 +23,9 @@ public class PostController {
         return postService.getAllPostsByUser(userId);
     }
 
+    @DeleteMapping("{userId}")
+    public void deleteAllPostsByUserId(@PathVariable Long userId) {
+        postService.deleteAllPostsByUserId(userId);
+    }
+
 }

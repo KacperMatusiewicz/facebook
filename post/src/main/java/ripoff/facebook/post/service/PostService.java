@@ -4,6 +4,7 @@ import lombok.AllArgsConstructor;
 import org.springframework.amqp.core.AmqpTemplate;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 import ripoff.facebook.amqp.FeedPostInformation;
 import ripoff.facebook.post.*;
 import ripoff.facebook.post.dto.PostCreationRequest;
@@ -65,4 +66,8 @@ public class PostService {
         return repository.findAllByUserId(userId);
     }
 
+    @Transactional
+    public void deleteAllPostsByUserId(Long userId) {
+        repository.deleteAllByUserId(userId);
+    }
 }

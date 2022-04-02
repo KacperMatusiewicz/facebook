@@ -1,10 +1,7 @@
 package ripoff.facebook.feed;
 
 import lombok.AllArgsConstructor;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 @RestController
 @RequestMapping("api/v1/feed/user")
@@ -16,5 +13,10 @@ public class UserFeedQueueController {
     @PostMapping("{userId}")
     public void createUserQueue(@PathVariable Long userId) {
         service.createQueue(userId);
+    }
+
+    @DeleteMapping("{userId}")
+    public void deleteUserQueue(@PathVariable Long userId) {
+        service.deleteQueue(userId);
     }
 }

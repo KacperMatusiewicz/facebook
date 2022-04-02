@@ -15,4 +15,8 @@ public class UserCreationService {
     public void createUser(Long id) {
         repository.save(User.builder().id(id).build());
     }
+
+    public void deleteUser(Long id) {
+        repository.deleteById(id);
+    }
 }

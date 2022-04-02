@@ -7,6 +7,9 @@ import org.mockito.ArgumentCaptor;
 import org.mockito.Mock;
 import org.mockito.Mockito;
 import org.mockito.junit.jupiter.MockitoExtension;
+import ripoff.facebook.clients.feed.FeedUserClient;
+import ripoff.facebook.clients.post.PostClient;
+import ripoff.facebook.clients.relation.RelationClient;
 import ripoff.facebook.user.mail.ActivationEmail;
 import ripoff.facebook.user.mail.EmailAccountActivationService;
 import ripoff.facebook.user.repository.ActivationRepository;
@@ -36,12 +39,26 @@ class UserServiceTest {
     EmailAccountActivationService emailAccountActivationService;
     @Mock
     UserValidationService validationService;
+    @Mock
+    RelationClient relationClient;
+    @Mock
+    FeedUserClient feedUserClient;
+    @Mock
+    PostClient postClient;
+
 
     UserService service;
 
     @BeforeEach
     void setUp() {
-        service = new UserService(userRepository, activationRepository, emailAccountActivationService, validationService);
+        service = new UserService(
+                userRepository,
+                activationRepository,
+                emailAccountActivationService,
+                validationService,
+                relationClient,
+                feedUserClient,
+                postClient);
     }
 
     @Test
