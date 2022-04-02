@@ -42,7 +42,7 @@ public class UserValidationService {
     }
 
     public boolean validatePassword(String password){
-        String passwordRegex = "[^\\;]{6,}";
+        String passwordRegex = "^(?=.*?[A-Z])(?=.*?[a-z])(?=.*?[#?!@$%^&*-]).{8,}$";
         if(password == null) {
             return false;
         }
