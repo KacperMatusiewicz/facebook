@@ -21,6 +21,7 @@
         <module>amqp-general-feed</module>
         <module>feed</module>
         <module>mailing</module>
+        <module>api-gateway</module>
     </modules>
 
     <properties>
