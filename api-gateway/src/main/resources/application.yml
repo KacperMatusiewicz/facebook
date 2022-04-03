@@ -1,13 +1,8 @@
 server:
-  port: 8090
+  port: 8080
 spring:
   application:
-    name: relation
-  neo4j:
-    uri: bolt://localhost:7687
-    authentication:
-      username: neo4j
-      password: password
+    name: apigw
 eureka:
   client:
     service-url:
