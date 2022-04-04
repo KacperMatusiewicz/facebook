@@ -1,20 +1,12 @@
-package ripoff.facebook.feed;
+package ripoff.facebook.notification.config;
 
-import lombok.AllArgsConstructor;
-import org.aspectj.bridge.Message;
 import org.springframework.amqp.rabbit.annotation.MultiRabbitListenerAnnotationBeanPostProcessor;
 import org.springframework.amqp.rabbit.annotation.RabbitListenerAnnotationBeanPostProcessor;
-import org.springframework.amqp.rabbit.config.SimpleRabbitListenerContainerFactory;
-import org.springframework.amqp.rabbit.connection.CachingConnectionFactory;
 import org.springframework.amqp.rabbit.connection.ConnectionFactory;
 import org.springframework.amqp.rabbit.connection.ConnectionFactoryContextWrapper;
 import org.springframework.amqp.rabbit.connection.SimpleRoutingConnectionFactory;
 import org.springframework.amqp.rabbit.core.RabbitAdmin;
-import org.springframework.amqp.rabbit.core.RabbitTemplate;
 import org.springframework.amqp.rabbit.listener.RabbitListenerEndpointRegistry;
-import org.springframework.amqp.support.converter.MessageConverter;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.context.annotation.Primary;
@@ -22,17 +14,17 @@ import org.springframework.context.annotation.Primary;
 import java.util.Map;
 
 @Configuration
-public class MultipleRabbitConfig {
+public class MultipleRabbitConfiguration {
 
     @Bean
     SimpleRoutingConnectionFactory routingConnectionFactory(
-            ConnectionFactory generalConnectionFactory,
+            ConnectionFactory generalBusConnectionFactory,
             ConnectionFactory userConnectionFactory
     ) {
         SimpleRoutingConnectionFactory factory = new SimpleRoutingConnectionFactory();
-        factory.setDefaultTargetConnectionFactory(generalConnectionFactory);
+        factory.setDefaultTargetConnectionFactory(generalBusConnectionFactory);
         factory.setTargetConnectionFactories(
-                Map.of("general", generalConnectionFactory, "user", userConnectionFactory)
+                Map.of("general", generalBusConnectionFactory, "user", userConnectionFactory)
         );
         return factory;
     }
@@ -43,8 +35,8 @@ public class MultipleRabbitConfig {
     }
 
     @Bean("generalContainerFactory-admin")
-    public RabbitAdmin generalRabbitAdmin(ConnectionFactory generalConnectionFactory){
-        return new RabbitAdmin(generalConnectionFactory);
+    public RabbitAdmin generalRabbitAdmin(ConnectionFactory generalBusConnectionFactory){
+        return new RabbitAdmin(generalBusConnectionFactory);
     }
 
     @Bean
@@ -67,4 +59,3 @@ public class MultipleRabbitConfig {
     }
 
 }
-

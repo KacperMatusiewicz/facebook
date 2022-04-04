@@ -1,8 +1,8 @@
-package ripoff.facebook.notification;
+package ripoff.facebook.notification.entity;
 
-import ripoff.facebook.notification.dto.NotificationParameters;
+import ripoff.facebook.amqp.NotificationParameters;
 
-public class MailNotification implements Notification{
+public class MailNotification implements Notification {
 
     private String email;
 

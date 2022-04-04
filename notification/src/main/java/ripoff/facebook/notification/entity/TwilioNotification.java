@@ -1,8 +1,8 @@
-package ripoff.facebook.notification;
+package ripoff.facebook.notification.entity;
 
-import ripoff.facebook.notification.dto.NotificationParameters;
+import ripoff.facebook.amqp.NotificationParameters;
 
-public class TwilioNotification implements Notification{
+public class TwilioNotification implements Notification {
 
     private String phoneNumber;
 

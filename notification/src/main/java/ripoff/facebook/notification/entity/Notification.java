@@ -1,6 +1,6 @@
-package ripoff.facebook.notification;
+package ripoff.facebook.notification.entity;
 
-import ripoff.facebook.notification.dto.NotificationParameters;
+import ripoff.facebook.amqp.NotificationParameters;
 
 public interface Notification {
     void notify(NotificationParameters parameters);

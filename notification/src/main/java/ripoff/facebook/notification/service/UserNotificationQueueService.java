@@ -1,4 +1,4 @@
-package ripoff.facebook.feed;
+package ripoff.facebook.notification.service;
 
 import lombok.AllArgsConstructor;
 import org.springframework.amqp.core.Binding;
@@ -8,11 +8,11 @@ import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.stereotype.Service;
 
 @Service
-public class UserFeedQueueCreationService {
+public class UserNotificationQueueService {
 
     private final RabbitAdmin userRabbitAdmin;
 
-    public UserFeedQueueCreationService(@Qualifier("userContainerFactory-admin") RabbitAdmin userRabbitAdmin) {
+    public UserNotificationQueueService(@Qualifier("userContainerFactory-admin") RabbitAdmin userRabbitAdmin) {
         this.userRabbitAdmin = userRabbitAdmin;
     }
 

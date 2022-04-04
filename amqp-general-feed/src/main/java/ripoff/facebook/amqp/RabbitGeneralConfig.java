@@ -1,28 +1,20 @@
 package ripoff.facebook.amqp;
 
-import lombok.AllArgsConstructor;
-import org.springframework.amqp.core.Message;
-import org.springframework.amqp.core.MessageListener;
 import org.springframework.amqp.core.Queue;
 import org.springframework.amqp.rabbit.config.SimpleRabbitListenerContainerFactory;
 import org.springframework.amqp.rabbit.connection.CachingConnectionFactory;
 import org.springframework.amqp.rabbit.connection.ConnectionFactory;
-import org.springframework.amqp.rabbit.core.RabbitAdmin;
 import org.springframework.amqp.rabbit.core.RabbitTemplate;
-import org.springframework.amqp.rabbit.listener.SimpleMessageListenerContainer;
-import org.springframework.amqp.rabbit.listener.adapter.MessageListenerAdapter;
 import org.springframework.amqp.support.converter.Jackson2JsonMessageConverter;
 import org.springframework.amqp.support.converter.MessageConverter;
-import org.springframework.beans.factory.annotation.Qualifier;
-import org.springframework.beans.factory.annotation.Value;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 
 @Configuration
-public class RabbitGeneralFeedConfig {
+public class RabbitGeneralConfig {
 
     @Bean
-    public ConnectionFactory generalConnectionFactory(){
+    public ConnectionFactory generalBusConnectionFactory(){
         CachingConnectionFactory connectionFactory = new CachingConnectionFactory();
         connectionFactory.setHost("localhost");
         connectionFactory.setPort(5672);
@@ -31,14 +23,14 @@ public class RabbitGeneralFeedConfig {
         return connectionFactory;
     }
 
-    @Bean("general-feed-template")
+    @Bean("general-template")
     public RabbitTemplate amqpTemplate() {
-        RabbitTemplate rabbitTemplate = new RabbitTemplate(generalConnectionFactory());
+        RabbitTemplate rabbitTemplate = new RabbitTemplate(generalBusConnectionFactory());
         rabbitTemplate.setMessageConverter(generalJacksonConverter());
         return rabbitTemplate;
     }
 
-    @Bean("general-feed-converter")
+    @Bean("general-converter")
     public MessageConverter generalJacksonConverter() {
         return new Jackson2JsonMessageConverter();
     }
@@ -48,10 +40,15 @@ public class RabbitGeneralFeedConfig {
         return new Queue("general-feed-queue", true);
     }
 
+    @Bean("general-notification-queue")
+    public Queue generalNotificationQueue() {
+        return new Queue("general-notification-queue", true);
+    }
+
     @Bean
-    public SimpleRabbitListenerContainerFactory generalContainerFactory(ConnectionFactory generalConnectionFactory) {
+    public SimpleRabbitListenerContainerFactory generalContainerFactory(ConnectionFactory generalBusConnectionFactory) {
         SimpleRabbitListenerContainerFactory factory = new SimpleRabbitListenerContainerFactory();
-        factory.setConnectionFactory(generalConnectionFactory);
+        factory.setConnectionFactory(generalBusConnectionFactory);
         factory.setMessageConverter(generalJacksonConverter());
         return factory;
     }

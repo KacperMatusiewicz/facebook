@@ -87,16 +87,16 @@ services:
       - NEO4J_dbms_default__database=neo4j
       - NEO4J_AUTH=neo4j/password
 
-  rabbitmq_general_feed:
+  rabbitmq_general:
     image: rabbitmq:3.9.11-management-alpine
-    container_name: rabbitmq_general_feed
+    container_name: rabbitmq_general
     ports:
       - "5672:5672"
       - "15672:15672"
 
-  rabbitmq_user_feed:
+  rabbitmq_user_notification:
     image: rabbitmq:3.9.11-management-alpine
-    container_name: rabbitmq_user_feed
+    container_name: rabbitmq_user_notification
     ports:
       - "5673:5672"
       - "15673:15672"

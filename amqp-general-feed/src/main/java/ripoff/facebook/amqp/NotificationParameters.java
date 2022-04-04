@@ -1,4 +1,4 @@
-package ripoff.facebook.notification.dto;
+package ripoff.facebook.amqp;
 
 import lombok.Data;
 

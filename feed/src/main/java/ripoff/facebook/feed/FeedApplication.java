@@ -14,8 +14,7 @@ import org.springframework.context.annotation.Bean;
         scanBasePackages = {
                 "ripoff.facebook.feed",
                 "ripoff.facebook.amqp"
-        },
-        exclude = RabbitAutoConfiguration.class
+        }
 )
 @EnableEurekaClient
 public class FeedApplication {
