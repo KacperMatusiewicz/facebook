@@ -1,4 +1,4 @@
-package ripoff.facebook.notification.service;
+package ripoff.facebook.notification.exception;
 
 public class UserPreferencesNotFoundException extends RuntimeException{
     public UserPreferencesNotFoundException(String msg) {

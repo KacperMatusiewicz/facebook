@@ -1,4 +1,4 @@
-package ripoff.facebook.notification;
+package ripoff.facebook.notification.entity;
 
 import org.springframework.stereotype.Component;
 import ripoff.facebook.notification.preferences.NotificationMethod;

@@ -1,4 +1,4 @@
-package ripoff.facebook.notification.service;
+package ripoff.facebook.notification.exception;
 
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;

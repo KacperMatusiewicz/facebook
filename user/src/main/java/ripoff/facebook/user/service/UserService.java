@@ -2,7 +2,7 @@ package ripoff.facebook.user.service;
 
 import lombok.AllArgsConstructor;
 import org.springframework.stereotype.Service;
-import ripoff.facebook.clients.feed.FeedUserClient;
+import ripoff.facebook.clients.notification.UserNotificationQueueClient;
 import ripoff.facebook.clients.post.PostClient;
 import ripoff.facebook.clients.relation.RelationClient;
 import ripoff.facebook.user.entity.ActivationLink;
@@ -26,7 +26,7 @@ public class UserService {
     private EmailAccountActivation emailAccountActivationService;
     private UserValidationService userValidationService;
     private RelationClient relationClient;
-    private FeedUserClient feedUserClient;
+    private UserNotificationQueueClient userNotificationQueueClient;
     private PostClient postClient;
 
     public void registerUser(UserRequest userRequest) {
@@ -57,7 +57,7 @@ public class UserService {
     }
 
     public void deleteUser(Long userId) {
-        feedUserClient.deleteUserQueue(userId);
+        userNotificationQueueClient.deleteQueue(userId);
         relationClient.deleteUser(userId);
         postClient.deleteAllPostsByUserId(userId);
         userRepository.deleteById(userId);

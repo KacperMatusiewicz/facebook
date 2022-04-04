@@ -1,4 +1,4 @@
-package ripoff.facebook.notification;
+package ripoff.facebook.notification.preferences.dto;
 
 import lombok.*;
 import ripoff.facebook.notification.preferences.NotificationEntry;
