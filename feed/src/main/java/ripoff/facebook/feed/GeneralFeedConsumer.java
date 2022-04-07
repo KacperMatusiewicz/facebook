@@ -9,9 +9,11 @@ import ripoff.facebook.amqp.FeedPostInformation;
 @AllArgsConstructor
 public class GeneralFeedConsumer {
 
-
+    UserFeedService service;
 
     @RabbitListener(queues ="general-feed-queue", containerFactory = "generalContainerFactory")
     public void listen(FeedPostInformation message) {
+        System.out.println(message);
+        service.addNewUserFeedPost(message);
     }
 }

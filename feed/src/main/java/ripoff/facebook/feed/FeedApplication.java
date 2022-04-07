@@ -9,6 +9,7 @@ import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.boot.autoconfigure.amqp.RabbitAutoConfiguration;
 import org.springframework.cloud.netflix.eureka.EnableEurekaClient;
 import org.springframework.context.annotation.Bean;
+import org.springframework.data.redis.repository.configuration.EnableRedisRepositories;
 
 @SpringBootApplication(
         scanBasePackages = {
@@ -17,15 +18,15 @@ import org.springframework.context.annotation.Bean;
         }
 )
 @EnableEurekaClient
+@EnableRedisRepositories
 public class FeedApplication {
     public static void main(String[] args) {
         SpringApplication.run(FeedApplication.class, args);
     }
 
     //TODO:
-    //  ✔ 1.rabbit container na kolejki userow
-    //  ✔ 2.rabbit client do odbierania z kolejki rzeczy
-    //  ✔ 3.tworzenie kolejek dla kazdego uzytkownika
-    //  ✔ 4.wstawianie postow do odpowiednich kolejek
-    //  ✔ 5.pobieranie postow z kolejki przez usera
+    //  1. store key-value post user in database
+    //  2. create in memory queue to store feed posts for each active user
+    //  3.
+    //  4.
 }
