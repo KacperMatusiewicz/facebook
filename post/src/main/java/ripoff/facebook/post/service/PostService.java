@@ -27,13 +27,28 @@ public class PostService {
     AmqpTemplate template;
 
     public void createPost(PostCreationRequest request){
+        validatePost(request);
+        Long postId = savePost(request);
+        Set<Long> visibilityUserIds = getVisibilityUserIds(request);
+        visibilityUserIds.forEach(
+                userId -> template.convertAndSend(
+                        "general-feed-queue",
+                        new FeedPostInformation(userId, postId)
+                )
+        );
+    }
 
+    private Set<Long> getVisibilityUserIds(PostCreationRequest request) {
         Set<Long> visibilityUserIds;
-
-        if(!postDataValidationService.validatePost(request)){
-            throw new BadPostDataException("Post data is not correct.");
+        if (request.getVisibilityGroupType()== VisibilityGroupType.FOLLOWERS) {
+            visibilityUserIds = relationService.getFollowers(request.getVisibilityGroupId());
+        } else {
+            visibilityUserIds = request.getVisibilityUsersId();
         }
+        return visibilityUserIds;
+    }
 
+    private Long savePost(PostCreationRequest request) {
         Post post = Post.builder()
                 .userId(request.getUserId())
                 .content(request.getContent())
@@ -42,24 +57,16 @@ public class PostService {
                 .build();
 
         Long postId = repository.save(post).getId();
+        return postId;
+    }
 
+    private void validatePost(PostCreationRequest request) {
+        if(!postDataValidationService.validatePost(request)){
+            throw new BadPostDataException("Post data is not correct.");
+        }
         if(request.getVisibilityGroupId() == null && request.getVisibilityUsersId() == null) {
             throw new BadPostDataException("Recipient group not defined");
         }
-
-        if (request.getVisibilityGroupType()== VisibilityGroupType.FOLLOWERS) {
-            visibilityUserIds = relationService.getFollowers(request.getVisibilityGroupId());
-        } else {
-            visibilityUserIds = request.getVisibilityUsersId();
-        }
-
-        visibilityUserIds.forEach(
-                (userId) -> template.convertAndSend(
-                        "general-feed-queue",
-                        new FeedPostInformation(userId, postId)
-                )
-        );
-
     }
 
     public List<Post> getAllPostsByUser(Long userId) {
@@ -70,4 +77,5 @@ public class PostService {
     public void deleteAllPostsByUserId(Long userId) {
         repository.deleteAllByUserId(userId);
     }
+
 }
