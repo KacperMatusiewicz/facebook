@@ -9,12 +9,3 @@ public class NotificationParameters {
     private String text;
 
 }
-/*
-{
-"userId": 1,
-"notificationParameters": {
-"notificationType": "ALL_LEVEL",
-"text": "i am notification"
-}
-}
- */
