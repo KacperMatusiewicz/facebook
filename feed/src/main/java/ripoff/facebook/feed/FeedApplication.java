@@ -23,10 +23,4 @@ public class FeedApplication {
     public static void main(String[] args) {
         SpringApplication.run(FeedApplication.class, args);
     }
-
-    //TODO:
-    //  1. store key-value post user in database
-    //  2. create in memory queue to store feed posts for each active user
-    //  3.
-    //  4.
 }

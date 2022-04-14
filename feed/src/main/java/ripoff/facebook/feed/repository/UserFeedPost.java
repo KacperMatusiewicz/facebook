@@ -1,4 +1,4 @@
-package ripoff.facebook.feed;
+package ripoff.facebook.feed.repository;
 
 import lombok.*;
 import org.springframework.data.annotation.Id;

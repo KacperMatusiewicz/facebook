@@ -1,4 +1,4 @@
-package ripoff.facebook.feed;
+package ripoff.facebook.feed.config;
 
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
