@@ -7,7 +7,7 @@ import org.mockito.ArgumentCaptor;
 import org.mockito.Mock;
 import org.mockito.Mockito;
 import org.mockito.junit.jupiter.MockitoExtension;
-import ripoff.facebook.clients.feed.FeedUserClient;
+import ripoff.facebook.clients.notification.UserNotificationQueueClient;
 import ripoff.facebook.clients.post.PostClient;
 import ripoff.facebook.clients.relation.RelationClient;
 import ripoff.facebook.user.mail.ActivationEmail;
@@ -42,7 +42,7 @@ class UserServiceTest {
     @Mock
     RelationClient relationClient;
     @Mock
-    FeedUserClient feedUserClient;
+    UserNotificationQueueClient userNotificationQueueClient;
     @Mock
     PostClient postClient;
 
@@ -57,7 +57,7 @@ class UserServiceTest {
                 emailAccountActivationService,
                 validationService,
                 relationClient,
-                feedUserClient,
+                userNotificationQueueClient,
                 postClient);
     }
 
