@@ -21,43 +21,7 @@ import java.util.Arrays;
 )
 @EnableEurekaClient
 public class NotificationApplication {
-    @Autowired
-    UserInternalNotificationPreferencesRepository internalNotificationPreferencesRepository;
-    @Autowired
-    UserExternalNotificationPreferencesRepository externalNotificationPreferencesRepository;
-
     public static void main(String[] args) {
         SpringApplication.run(NotificationApplication.class, args);
-    }
-    
-    @Bean
-    public ApplicationRunner applicationRunner() {
-        return args -> {
-
-            InternalNotificationPreferenceEntry internalEntry = InternalNotificationPreferenceEntry
-                    .builder()
-                    .notificationMethod(NotificationMethod.MOBILE_APP)
-                    .destination("xd")
-                    .build();
-            InternalNotificationPreference internalNotificationPreference = InternalNotificationPreference
-                    .builder()
-                    .userId(1L)
-                    .preferences(Arrays.asList(internalEntry))
-                    .build();
-
-            ExternalNotificationPreferenceEntry externalEntry = ExternalNotificationPreferenceEntry
-                    .builder()
-                    .notificationMethod(NotificationMethod.MAIL)
-                    .destination("xd@xd.pl")
-                    .build();
-            ExternalNotificationPreference externalNotificationPreference = ExternalNotificationPreference
-                    .builder()
-                    .userId(1L)
-                    .preferences(Arrays.asList(externalEntry))
-                    .build();
-            internalNotificationPreferencesRepository.save(internalNotificationPreference);
-            externalNotificationPreferencesRepository.save(externalNotificationPreference);
-        };
-
     }
 }

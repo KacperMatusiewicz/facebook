@@ -98,11 +98,11 @@ flowchart LR
     id15{{notification queue}}
     id16{{user intialization topic}}
     
-    id16 ---> id8
-    id6 ---> id10
-    id16 ---> id11
-    id2 --- id6
+    id16 ----> id8
+    id16 ----> id11
     id16 ---> id9
+    id6 ---> id10
+    id2 ---- id6
     id6 ---> id16
   
     id7 ---> id11

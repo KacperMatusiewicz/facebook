@@ -3,6 +3,7 @@ package ripoff.facebook.notification.preference;
 import lombok.AllArgsConstructor;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
+import ripoff.facebook.notification.preference.dto.CreatePreferenceRequest;
 import ripoff.facebook.notification.preference.repository.*;
 
 import java.util.Arrays;
