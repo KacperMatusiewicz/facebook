@@ -8,7 +8,6 @@ import ripoff.facebook.relation.getRelations.service.GroupNotFoundException;
 
 @ControllerAdvice
 public class RelationExceptionsAdvice {
-
     @ExceptionHandler(GroupNotFoundException.class)
     public ResponseEntity<String> handleBadUserDataException(GroupNotFoundException e) {
         return new ResponseEntity<>(e.getMessage(), HttpStatus.NOT_FOUND);

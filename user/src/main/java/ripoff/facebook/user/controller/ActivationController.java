@@ -8,7 +8,7 @@ import org.springframework.web.bind.annotation.RestController;
 import ripoff.facebook.user.service.UserActivationService;
 
 @RestController
-@RequestMapping("api/v1/activate")
+@RequestMapping("api/v1/user/activate")
 @AllArgsConstructor
 public class ActivationController {
 
