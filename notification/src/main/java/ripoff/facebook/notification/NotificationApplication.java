@@ -1,9 +1,16 @@
 package ripoff.facebook.notification;
 
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.boot.ApplicationRunner;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.boot.autoconfigure.amqp.RabbitAutoConfiguration;
 import org.springframework.cloud.netflix.eureka.EnableEurekaClient;
+import org.springframework.context.annotation.Bean;
+import ripoff.facebook.notification.commons.NotificationMethod;
+import ripoff.facebook.notification.preference.repository.*;
+
+import java.util.Arrays;
 
 @SpringBootApplication(
         scanBasePackages = {
