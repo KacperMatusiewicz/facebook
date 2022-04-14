@@ -4,6 +4,8 @@ import org.assertj.core.api.Assertions;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.orm.jpa.DataJpaTest;
+import ripoff.facebook.post.commons.repository.Post;
+import ripoff.facebook.post.commons.repository.PostRepository;
 
 import java.time.LocalDateTime;
 import java.time.Month;
@@ -52,16 +54,14 @@ class PostRepositoryTest {
         List<Post> result = postRepository.findAllByUserId(userId);
         //then
         Assertions
-                .assertThat(new HashSet<Post>(result))
+                .assertThat(new HashSet<>(result))
                 .usingRecursiveComparison()
-                .isEqualTo(new HashSet<Post>(expectedResultPosts));
+                .isEqualTo(new HashSet<>(expectedResultPosts));
     }
 
     @Test
     void shouldNotFindAnyPosts() {
         //given
-        List<Post> expectedResultPosts = new ArrayList<>();
-
         List<Post> posts = Arrays.asList(
                 Post.builder()
                         .userId(10L)
@@ -76,14 +76,13 @@ class PostRepositoryTest {
                         .attachmentPath(null)
                         .build()
         );
-
         postRepository.saveAll(posts);
         //when
         List<Post> result = postRepository.findAllByUserId(22L);
         //then
         Assertions
-                .assertThat(new HashSet<Post>(result))
+                .assertThat(new HashSet<>(result))
                 .usingRecursiveComparison()
-                .isEqualTo(new HashSet<Post>(expectedResultPosts));
+                .isEqualTo(new HashSet<>(new ArrayList<>()));
     }
 }

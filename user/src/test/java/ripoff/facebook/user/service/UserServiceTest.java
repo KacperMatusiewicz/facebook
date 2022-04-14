@@ -10,15 +10,15 @@ import org.mockito.junit.jupiter.MockitoExtension;
 import ripoff.facebook.clients.notification.UserNotificationQueueClient;
 import ripoff.facebook.clients.post.PostClient;
 import ripoff.facebook.clients.relation.RelationClient;
-import ripoff.facebook.user.mail.ActivationEmail;
-import ripoff.facebook.user.mail.EmailAccountActivationService;
-import ripoff.facebook.user.repository.ActivationRepository;
-import ripoff.facebook.user.repository.UserRepository;
 import ripoff.facebook.user.UserRequest;
 import ripoff.facebook.user.entity.User;
 import ripoff.facebook.user.entity.UserStatus;
 import ripoff.facebook.user.exceptions.BadUserDataException;
 import ripoff.facebook.user.exceptions.EmailExistsException;
+import ripoff.facebook.user.mail.ActivationEmail;
+import ripoff.facebook.user.mail.EmailAccountActivationService;
+import ripoff.facebook.user.repository.ActivationRepository;
+import ripoff.facebook.user.repository.UserRepository;
 
 import static org.assertj.core.api.AssertionsForClassTypes.assertThat;
 import static org.assertj.core.api.AssertionsForClassTypes.assertThatThrownBy;
@@ -178,13 +178,13 @@ class UserServiceTest {
         given(validationService.validateUserInputData(any(UserRequest.class))).willReturn(false);
         //when
         //then
-        assertThatThrownBy(()-> service.registerUser(userRequest)).isInstanceOf(BadUserDataException.class);
+        assertThatThrownBy(() -> service.registerUser(userRequest)).isInstanceOf(BadUserDataException.class);
         verify(userRepository, never()).save(any(User.class));
         verify(emailAccountActivationService, never()).sendActivationEmail(any());
     }
 
     @Test
-    void shouldCallUserExistsById(){
+    void shouldCallUserExistsById() {
         //given
         Long givenUserId = 123L;
         //when
@@ -197,7 +197,7 @@ class UserServiceTest {
 
     }
 
-    void shoudNotValidateThatUserExistsById(){
+    void shoudNotValidateThatUserExistsById() {
 
     }
 
