@@ -20,15 +20,27 @@ public class UserActivationService {
     RelationClient relationClient;
 
     public void activateUserAccount(Long activationKey) {
-
-        if(activationRepository.existsById(activationKey)) {
-            User user = activationRepository.getById(activationKey).getUser();
-            user.setUserStatus(UserStatus.ACTIVE);
-            relationClient.createUser(user.getId());
-            userNotificationQueueClient.createQueue(user.getId());
-            userRepository.save(user);
+        if (activationLinkExists(activationKey)) {
+            User user = changeUserAccountStatusToActive(activationKey);
+            initializeUser(user);
         } else {
             throw new ActivationLinkNotFound("Activation key does not exist.");
         }
+    }
+
+    private void initializeUser(User user) {
+        relationClient.createUser(user.getId());
+        userNotificationQueueClient.createQueue(user.getId());
+    }
+
+    private User changeUserAccountStatusToActive(Long activationKey) {
+        User user = activationRepository.getById(activationKey).getUser();
+        user.setUserStatus(UserStatus.ACTIVE);
+        userRepository.save(user);
+        return user;
+    }
+
+    private boolean activationLinkExists(Long activationKey) {
+        return activationRepository.existsById(activationKey);
     }
 }

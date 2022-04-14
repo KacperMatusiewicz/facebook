@@ -9,10 +9,11 @@ import org.mockito.junit.jupiter.MockitoExtension;
 import org.springframework.web.client.RestTemplate;
 import org.springframework.web.server.ResponseStatusException;
 import ripoff.facebook.clients.user.UserClient;
-import ripoff.facebook.post.service.PostDataValidationService;
+import ripoff.facebook.post.createPost.service.PostDataValidationService;
 
 import static org.assertj.core.api.AssertionsForClassTypes.assertThatThrownBy;
-import static org.junit.jupiter.api.Assertions.*;
+import static org.junit.jupiter.api.Assertions.assertFalse;
+import static org.junit.jupiter.api.Assertions.assertTrue;
 
 @ExtendWith(MockitoExtension.class)
 class PostDataValidationServiceTest {
@@ -25,7 +26,7 @@ class PostDataValidationServiceTest {
 
     @BeforeEach
     void setUp() {
-        service = new PostDataValidationService(userClient,restTemplate);
+        service = new PostDataValidationService(userClient, restTemplate);
     }
 
     @Test
@@ -55,20 +56,21 @@ class PostDataValidationServiceTest {
         //given
         Long userId = 123L;
         Mockito
-                .when(restTemplate.getForObject("localhost:8080/api/v1/user/"+userId, Boolean.class))
+                .when(restTemplate.getForObject("localhost:8080/api/v1/user/" + userId, Boolean.class))
                 .thenReturn(true);
         //when
         boolean result = service.validateUserId(userId);
         //then
         assertTrue(result);
     }
+
     @Test
     void shouldNotValidateUserId() {
         //given
         Long userId = 123L;
         Mockito
                 .when(
-                        restTemplate.getForObject("localhost:8080/api/v1/user/"+userId, Boolean.class)
+                        restTemplate.getForObject("localhost:8080/api/v1/user/" + userId, Boolean.class)
                 )
                 .thenReturn(Boolean.FALSE);
 
@@ -77,17 +79,18 @@ class PostDataValidationServiceTest {
         //then
         assertFalse(result);
     }
+
     @Test
     void shouldThrowResponseStatusException() {
         //given
         Long userId = 123L;
         Mockito
-                .when(restTemplate.getForObject("localhost:8080/api/v1/user/"+userId, Boolean.class))
+                .when(restTemplate.getForObject("localhost:8080/api/v1/user/" + userId, Boolean.class))
                 .thenReturn(null);
         //when
         //then
         assertThatThrownBy(
-                ()-> service.validateUserId(userId))
+                () -> service.validateUserId(userId))
                 .isInstanceOf(ResponseStatusException.class)
                 .hasMessageContaining("Could not connect to the User service");
     }

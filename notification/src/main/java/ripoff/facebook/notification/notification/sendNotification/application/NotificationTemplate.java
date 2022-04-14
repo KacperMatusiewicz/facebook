@@ -1,8 +1,8 @@
 package ripoff.facebook.notification.notification.sendNotification.application;
 
-import ripoff.facebook.notification.notification.sendNotification.application.details.notificationType.notificationChannel.NotificationFactory;
 import ripoff.facebook.notification.notification.sendNotification.application.details.NotificationParameters;
 import ripoff.facebook.notification.notification.sendNotification.application.details.NotificationPreference;
+import ripoff.facebook.notification.notification.sendNotification.application.details.notificationType.notificationChannel.NotificationFactory;
 import ripoff.facebook.notification.preference.repository.NotificationPreferenceEntry;
 import ripoff.facebook.notification.utils.Collection;
 import ripoff.facebook.notification.utils.Iterator;

@@ -26,6 +26,7 @@ public class ActivationLink {
     Long key;
 
     @OneToOne(cascade = CascadeType.REMOVE)
+    @JoinColumn(name = "user_id", referencedColumnName = "id")
     User user;
 
 }

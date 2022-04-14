@@ -3,8 +3,8 @@ package ripoff.facebook.notification.notification.sendNotification.application.d
 import lombok.AllArgsConstructor;
 import lombok.Setter;
 import ripoff.facebook.notification.notification.sendNotification.application.NotificationDTO;
-import ripoff.facebook.notification.notification.sendNotification.application.details.NotificationPreference;
 import ripoff.facebook.notification.notification.sendNotification.application.NotificationTemplate;
+import ripoff.facebook.notification.notification.sendNotification.application.details.NotificationPreference;
 import ripoff.facebook.notification.notification.sendNotification.application.details.NotificationPreferenceEntryCollection;
 import ripoff.facebook.notification.preference.NotificationPreferenceService;
 import ripoff.facebook.notification.preference.repository.NotificationPreferenceEntry;
