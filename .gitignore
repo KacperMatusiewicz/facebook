@@ -9,3 +9,4 @@ target/
 /dataSources/
 /dataSources.local.xml
 *.iml
+web-server/src/main/resources/static/*

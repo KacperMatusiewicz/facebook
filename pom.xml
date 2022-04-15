@@ -22,6 +22,8 @@
         <module>feed</module>
         <module>mailing</module>
         <module>api-gateway</module>
+        <module>frontend</module>
+        <module>web-server</module>
     </modules>
 
     <properties>

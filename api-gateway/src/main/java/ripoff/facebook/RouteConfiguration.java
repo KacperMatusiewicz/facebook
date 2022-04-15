@@ -41,6 +41,12 @@ public class RouteConfiguration {
                         .path("/api/v1/notification/**")
                         .uri("lb://NOTIFICATION")
                 )
+                .route(r -> r
+                        .host("localhost:8080")
+                        .and()
+                        .path("/**")
+                        .uri("http://localhost:8115/") //TODO: on production it should be "lb://WEB-SERVER" so it uses SD.
+                )
                 .build();
     }
 }
