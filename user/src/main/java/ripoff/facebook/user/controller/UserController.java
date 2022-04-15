@@ -15,6 +15,7 @@ public class UserController {
 
     @PostMapping
     public void createUser(@RequestBody UserRequest userRequest) {
+        System.out.println("dziala");
         userService.registerUser(userRequest);
     }
 
