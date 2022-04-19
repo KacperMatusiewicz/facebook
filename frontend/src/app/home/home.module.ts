@@ -9,6 +9,7 @@ import {FormsModule, ReactiveFormsModule} from "@angular/forms";
 import {RegistrationService} from "./registration.service";
 import {HttpClient, HttpClientModule} from "@angular/common/http";
 import { RegistrationResponseComponent } from './ui/registration-response/registration-response.component';
+import {GraphicComponentsModule} from "../graphic-components/graphic-components.module";
 
 
 @NgModule({
@@ -18,13 +19,14 @@ import { RegistrationResponseComponent } from './ui/registration-response/regist
     RegistrationFormComponent,
     RegistrationResponseComponent
   ],
-  imports: [
-    CommonModule,
-    HomeRoutingModule,
-    FormsModule,
-    ReactiveFormsModule,
-    HttpClientModule
-  ],
+    imports: [
+        CommonModule,
+        HomeRoutingModule,
+        FormsModule,
+        ReactiveFormsModule,
+        HttpClientModule,
+        GraphicComponentsModule
+    ],
   providers: [
     RegistrationService
   ]
