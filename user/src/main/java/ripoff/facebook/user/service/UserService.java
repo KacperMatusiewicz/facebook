@@ -84,7 +84,7 @@ public class UserService {
 
     private void validateUserData(UserRequest userRequest) {
         if (!userValidationService.validateUserInputData(userRequest)) {
-            throw new BadUserDataException("Error validating user data.");
+            throw new BadUserDataException("Error validating user data." + userRequest.toString());
         }
     }
 }

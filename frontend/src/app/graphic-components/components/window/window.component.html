@@ -13,17 +13,17 @@
     <div class="window-border">
       <div class="title-bar">
         <div class="title-bar-content">
-          <div class="window-icon"></div>
+          <div class="window-icon" ngDefaultControl ngModel #windowIcon></div>
           <div class="window-title">{{windowName}}</div>
         </div>
         <div class="window-title-bar-buttons">
-          <div class="title-bar-button title-bar-button-minimize"><div class="title-bar-button-inner"></div></div>
-          <div class="title-bar-button title-bar-button-maximize"><div class="title-bar-button-inner"></div></div>
-          <div class="title-bar-button title-bar-button-close"><div class="title-bar-button-inner"></div></div>
+          <div class="title-bar-button title-bar-button-minimize" ngDefaultControl ngModel #buttonMinimize><div class="title-bar-button-inner"></div></div>
+          <div class="title-bar-button title-bar-button-maximize" ngDefaultControl ngModel #buttonMaximize><div class="title-bar-button-inner"></div></div>
+          <div class="title-bar-button title-bar-button-close" ngDefaultControl ngModel #buttonClose><div class="title-bar-button-inner"></div></div>
         </div>
       </div>
       <div class="content">
-        <textarea style="border: transparent;"></textarea>
+        <ng-content></ng-content>
       </div>
     </div>
   </div>

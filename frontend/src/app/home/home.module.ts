@@ -20,12 +20,12 @@ import {GraphicComponentsModule} from "../graphic-components/graphic-components.
     RegistrationResponseComponent
   ],
     imports: [
-        CommonModule,
-        HomeRoutingModule,
-        FormsModule,
-        ReactiveFormsModule,
-        HttpClientModule,
-        GraphicComponentsModule
+      CommonModule,
+      GraphicComponentsModule,
+      HomeRoutingModule,
+      FormsModule,
+      ReactiveFormsModule,
+      HttpClientModule
     ],
   providers: [
     RegistrationService

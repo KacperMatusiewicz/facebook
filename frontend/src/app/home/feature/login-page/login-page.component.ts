@@ -1,4 +1,5 @@
-import { Component, OnInit } from '@angular/core';
+import {AfterViewInit, Component, OnInit} from '@angular/core';
+import {Form, FormBuilder, FormControl, FormGroup, Validators} from "@angular/forms";
 
 @Component({
   selector: 'app-login-page',
@@ -7,10 +8,11 @@ import { Component, OnInit } from '@angular/core';
 })
 export class LoginPageComponent implements OnInit {
 
-  xd : boolean = true;
-  constructor() { }
+
+  constructor(private fb :FormBuilder) {
+}
 
   ngOnInit(): void {
-  }
 
+  }
 }

@@ -45,7 +45,7 @@ public class RouteConfiguration {
                         .host("localhost:8080")
                         .and()
                         .path("/**")
-                        .uri("http://localhost:8115/") //TODO: on production it should be "lb://WEB-SERVER" so it uses SD.
+                        .uri("http://localhost:8115") //TODO: on production it should be "lb://WEB-SERVER" so it uses SD.
                 )
                 .build();
     }

@@ -1,0 +1,9 @@
+<ng-container [formGroup]="formGroup">
+  <div class="input-field">
+    <div class="input-wrapper">
+      <input type="email" [formControlName]="formControlName"/>
+    </div>
+    <label><ng-content></ng-content></label>
+  </div>
+</ng-container>
+

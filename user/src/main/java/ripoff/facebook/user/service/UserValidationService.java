@@ -41,7 +41,8 @@ public class UserValidationService {
     }
 
     private boolean validatePassword(String password) {
-        String passwordRegex = "^(?=.*?[A-Z])(?=.*?[a-z])(?=.*?[#?!@$%^&*-]).{8,}$";
+        String passwordRegex = "^(?=.*?[A-Z])(?=.*?[a-z]).{8,}$";
+        //special character: (?=.*?[#?!@$%^&*-])
         if (password == null) {
             return false;
         }
