@@ -1,0 +1,9 @@
+<ng-container [formGroup]="formGroup">
+<div class="box">
+  <div class="wrapper">
+    <input type="checkbox" [formControlName]="formControlName">
+  </div>
+
+  <label><ng-content></ng-content></label>
+</div>
+</ng-container>

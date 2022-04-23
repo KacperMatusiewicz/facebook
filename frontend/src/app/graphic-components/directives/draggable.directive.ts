@@ -38,7 +38,7 @@ export class DraggableDirective implements AfterViewInit, OnDestroy{
     const drag$ = fromEvent<MouseEvent>(this.document, "mousemove").pipe(
       takeUntil(dragEnd$)
     );
-    console.log(this.element.style.top);
+
     let initialX: number,
       initialY: number,
       currentX = Number.parseInt(this.element.style.left.substring(0, this.element.style.left.length-2)),

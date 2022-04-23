@@ -1,4 +1,4 @@
-import {Component, EventEmitter, Input, OnInit, Output} from '@angular/core';
+import {AfterViewInit, Component, ElementRef, EventEmitter, Input, OnInit, Output, ViewChild} from '@angular/core';
 import {TitleBarClick} from "./title-bar-click";
 
 @Component({
@@ -6,7 +6,7 @@ import {TitleBarClick} from "./title-bar-click";
   templateUrl: './window.component.html',
   styleUrls: ['./window.component.scss']
 })
-export class WindowComponent implements OnInit {
+export class WindowComponent implements OnInit, AfterViewInit {
 
   @Input()
   windowName: string | undefined;
@@ -31,11 +31,43 @@ export class WindowComponent implements OnInit {
   @Output()
   onTitleBarButtonClick: EventEmitter<TitleBarClick> = new EventEmitter<TitleBarClick>();
 
+  @ViewChild(`buttonMinimize`)
+  minimizeButton!: ElementRef<HTMLElement>;
+  @ViewChild(`buttonMaximize`)
+  maximizeButton!: ElementRef<HTMLElement>;
+  @ViewChild(`buttonClose`)
+  closeButton!: ElementRef<HTMLElement>;
+  @ViewChild(`windowIcon`)
+  windowIcon!: ElementRef<HTMLElement>;
+
   constructor() {
   }
 
-  ngOnInit(): void {
+  ngAfterViewInit(): void {
+    if (this.maximizeBtnShow === 'false') {
+      this.maximizeButton.nativeElement.style.display = "none";
+    }
+    if (this.minimizeBtnShow === 'false') {
+      this.minimizeButton.nativeElement.style.display = "none";
+    }
+    if (this.closeBtnShow === 'false') {
+      this.closeButton.nativeElement.style.display = "none";
+    }
+    if (this.icon !== undefined || this.icon === "") {
+      this.windowIcon.nativeElement.style.backgroundImage = `url(${this.icon})`;
+    } else {
+      this.windowIcon.nativeElement.style.display = "none";
+    }
   }
+
+  ngOnInit(): void {
+    /*if(this.maximizeBtnShow==='false') {
+
+    }
+    if(!this.minimizeBtnShow) {}
+    if(!this.closeBtnShow) {}*/
+  }
+
 
   emitClosingEvent(): void {
     this.onClose.emit();

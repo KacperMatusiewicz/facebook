@@ -1,0 +1,9 @@
+<ng-container [formGroup]="formGroup">
+  <div class="input-field">
+    <label><ng-content></ng-content></label>
+    <div class="input-wrapper">
+      <input type="text" [formControlName]="formControlName" [autocomplete]="autocompleteType"/>
+    </div>
+  </div>
+</ng-container>
+

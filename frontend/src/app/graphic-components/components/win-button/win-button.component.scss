@@ -1,0 +1,42 @@
+div.wrapper{
+  border-top: white 1px solid;
+  border-left: white 1px solid;
+  border-bottom: #404040 1px solid;
+  border-right:  #404040 1px solid;
+  min-width: 75px;
+  width: fit-content;
+  height: 23px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+div.wrapper:active {
+  border: black 1px solid;
+}
+
+button{
+  box-sizing: border-box;
+  border-radius: 0;
+  width: 100%;
+  height: 100%;
+  background-color: #d4d0c8;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  font-size: 12px;
+  padding: 0 10px;
+
+  border-top: transparent 1px solid;
+  border-left: transparent 1px solid;
+  border-right: #808080 1px solid;
+  border-bottom: #808080 1px solid;
+}
+
+button:active{
+  border: #808080 1px solid;
+}
+
+button:disabled {
+  text-shadow: 1px 1px 0px white;
+  color: #808080;
+}

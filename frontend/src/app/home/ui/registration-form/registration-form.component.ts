@@ -11,7 +11,7 @@ export class RegistrationFormComponent implements OnInit {
   @Output()
   userRegistrationDataEmitter = new EventEmitter<User>();
 
-  registrationForm: FormGroup;
+  form: FormGroup;
 
   name = new FormControl('', Validators.required);
   lastName = new FormControl('', Validators.required);
@@ -19,28 +19,30 @@ export class RegistrationFormComponent implements OnInit {
   password = new FormControl('', Validators.required);
   confirmPassword = new FormControl('', Validators.required)
   userAgreement = new FormControl('', Validators.required);
+  gender = new FormControl('', Validators.required);
 
   constructor(fb: FormBuilder) {
-    this.registrationForm = fb.group(
+    this.form = fb.group(
       {
         name: this.name,
         lastName: this.lastName,
         email: this.email,
         password: this.password,
-        confirmPassword: this.confirmPassword,
+        passwordConfirmation: this.confirmPassword,
         userAgreement: this.userAgreement,
+        gender: this.gender
       }
     );
 
-    this.registrationForm.valueChanges.subscribe(
+    this.form.valueChanges.subscribe(
       (f) => {
         const password = f.password;
         const confirm = f.confirmPassword;
         if(password !== confirm) {
-          this.registrationForm.get('confirmPassword')?.setErrors({notMatched: true});
+          this.form.get('confirmPassword')?.setErrors({notMatched: true});
         }
         else{
-          this.registrationForm.get('confirmPassword')?.setErrors(null)
+          this.form.get('confirmPassword')?.setErrors(null)
         }
       }
     );
@@ -53,6 +55,7 @@ export class RegistrationFormComponent implements OnInit {
       this.name.value,
       this.lastName.value,
       this.email.value,
+      this.gender.value,
       this.password.value
     ));
   }

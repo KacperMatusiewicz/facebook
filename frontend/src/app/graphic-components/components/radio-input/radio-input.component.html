@@ -1,0 +1,9 @@
+<ng-container [formGroup]="formGroup">
+  <div class="box">
+    <div class="wrapper">
+      <input type="radio" [value]="value" [formControlName]="formControlName" [attr.name]="formControlName">
+    </div>
+
+    <label><ng-content></ng-content></label>
+  </div>
+</ng-container>

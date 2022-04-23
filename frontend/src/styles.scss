@@ -1,12 +1,24 @@
 /* You can add global styles to this file, and also import other style files */
 @font-face {
   font-family: "DOS";
-  src: url('./assets/dos.ttf') format('truetype');
+  src: url('assets/fonts/dos.ttf') format('truetype');
+}
+
+@font-face {
+  font-family: "Tahoma";
+  src: url('assets/fonts/tahoma.ttf') format('truetype');
+}
+
+@font-face {
+  font-family: "Tahoma Bold";
+  src: url('assets/fonts/tahomabd.ttf') format('truetype');
 }
 
 *{
-  font-family: "DOS";
-  cursor: url('./assets/CursorsXP.cur'), pointer;
+  font-family: "Tahoma";
+  cursor: url('assets/cursors/CursorsXP.cur'), pointer;
+
+  outline: none;
 }
 
 textarea:focus{
@@ -27,6 +39,9 @@ body{
   font-size: 12px;
   position: relative;
 }
+
+
+
 /*
 -webkit-appearance:none;
 input:-webkit-autofill{

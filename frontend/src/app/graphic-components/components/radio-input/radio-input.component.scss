@@ -1,0 +1,59 @@
+div.wrapper{
+  border-top: #808080 1px solid;
+  border-left: #808080 1px solid;
+  border-bottom: white 1px solid;
+  border-right: white 1px solid;
+  box-sizing: border-box;
+  width: 13px;
+  height: 13px;
+  position: relative;
+  border-radius: 50%;
+}
+
+input[type=radio] {
+  width: 0;
+  height: 0;
+  position: absolute;
+  box-sizing: border-box;
+}
+
+input[type=radio]::before{
+  box-sizing: border-box;
+  display: block;
+  background-color: white;
+  content: ' ';
+  width: 11px;
+  height: 11px;
+  border-top: #404040 1px solid;
+  border-left: #404040 1px solid;
+  border-bottom: #d4d0c8 1px solid;
+  border-right: #d4d0c8 1px solid;
+  position: relative;
+  top: -3px;
+  left: -5px;
+  border-radius: 50%;
+}
+
+input[type=radio]:checked::after,
+{
+  display: block;
+  background-color: black;
+  width: 4px;
+  height: 4px;
+  position: absolute;
+  top: 0.5px;
+  left: -1.5px;
+  content: '';
+  border-radius: 50%;
+}
+
+div.box{
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 6px;
+}
+
+label{
+
+}

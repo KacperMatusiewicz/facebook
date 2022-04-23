@@ -1,47 +1,28 @@
-  <div class="window">
-    <div class="window-border-separator">
-      <div class="window-border">
-        <div class="title-bar">
-          <span>New Object - User</span>
-          <div class="button-close"><span>x</span></div>
-        </div>
-        <span class="content">
-          <form [formGroup]="registrationForm" (ngSubmit)="registerClient()">
-            <p>
-              <label for="name">First Name</label>
-              <input type="text" id="name" name="name" formControlName="name" required/>
-            </p>
-            <p>
-              <label for="lastName">Last Name</label>
-              <input type="text" id="lastName" name="lastName" formControlName="lastName" required/>
-            </p>
-            <p>
-              <label for="email">E-mail</label>
-              <input type="email" id="email" name="email" formControlName="email" required/>
-            </p>
+<window style="top: 100px; left: 20px; " draggable windowName="Create a New Account" maximizeBtnShow="false" minimizeBtnShow="false" icon="assets/icons/user.png">
+  <p>Please enter your data:</p>
+  <hr style="width: 95%;margin: 15px 0;">
+  <form [formGroup]="form" (ngSubmit)="registerClient()">
 
-            <p>
-              <label for="password">Password</label>
-              <input type="password" id="password" name="password" formControlName="password" required/>
-            </p>
+    <text-input formControlName="name" [formGroup]="form" ngDefaultControl required autocompleteType="first-name">Name</text-input>
+    <text-input formControlName="lastName" [formGroup]="form" ngDefaultControl required autocompleteType="family-name">Last name</text-input>
+    <mail-input formControlName="email" [formGroup]="form" ngDefaultControl required>E-mail</mail-input>
+    <password-input formControlName="password" [formGroup]="form" ngDefaultControl required>Password</password-input>
+    <password-input formControlName="passwordConfirmation" [formGroup]="form" ngDefaultControl required>Confirm password</password-input>
 
-            <p>
-              <label for="confirmPassword">Confirm password</label>
-              <input type="password" id="confirmPassword" name="confirmPassword" formControlName="confirmPassword" required/>
-            </p>
 
-            <p>
-              <input type="checkbox" id="userAgreement" name="userAgreement" formControlName="userAgreement" required/>
-              <label for="userAgreement">I have read and accept the terms and conditions.</label>
-            </p>
-
-            <p>
-              <button type="submit" [disabled]="!registrationForm.valid"><span>Register</span></button>
-            </p>
-          </form>
-        </span>
+    <div style="width: 100%; margin: 24px 0; display: flex; justify-content: center; align-items: center; gap: 28px; position: relative;">
+      <p style="position: absolute; left: 5%;">Gender:</p>
+      <div style="display: flex; justify-content: center; align-items: center; position: absolute; gap: 24px; right: 15%;">
+        <radio-input formControlName="gender" [formGroup]="form" value="female" ngDefaultControl required>Female</radio-input>
+        <radio-input formControlName="gender" [formGroup]="form" value="male" ngDefaultControl required>Male</radio-input>
       </div>
-      <textarea disabled>
-      </textarea>
     </div>
-  </div>
+
+    <hr style="width: 95%; margin: 15px 0;">
+
+    <div style="position: absolute; display: flex; justify-content: center; align-items: center; width: 100%; margin: 10px 0;">
+      <checkbox-input style="left: 4%; position: absolute;" formControlName="userAgreement" [formGroup]="form" ngDefaultControl>I accept the <a href="https://www.google.com/search?q=make+terms+and+conditions+component+and+provide+routing+in+here&sxsrf=APq-WBtg6NtXoz7I772VC9jQj7KHfe69tw%3A1650737621729&source=hp&ei=1UFkYovTKbOO9u8P4PK9aA&iflsig=AHkkrS4AAAAAYmRP5XYbJGNqBhcDyzesA-mJ71zbmAIc&ved=0ahUKEwjLkbvs5Kr3AhUzh_0HHWB5Dw0Q4dUDCAc&uact=5&oq=make+terms+and+conditions+component+and+provide+routing+in+here&gs_lcp=Cgdnd3Mtd2l6EAM6BwgjEOoCECc6BggjECcQEzoECCMQJzoFCAAQgAQ6CwguEIAEEMcBENEDOgsILhCABBDHARCjAjoFCC4QgAQ6CAguEIAEENQCOgUILhDLAToFCAAQywE6CwguEMcBEK8BEMsBOg4ILhDHARCvARDUAhDLAToHCAAQChDLAToKCAAQgAQQhwIQFDoGCAAQFhAeOggIABAWEAoQHjoFCCEQoAE6CAghEBYQHRAeOgQIIRAVOgcIIRAKEKABUJgGWPSNAWDImgFoBHAAeACAAa4CiAGzRJIBCTEyLjQ3LjYuMZgBAKABAbABCg&sclient=gws-wiz">terms and conditions</a>.</checkbox-input>
+      <win-button style="position:absolute; right: 8%;" [formGroup]="form" [disabled]="!form.valid" ngDefaultControl>Register</win-button>
+    </div>
+  </form>
+</window>
