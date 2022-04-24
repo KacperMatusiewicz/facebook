@@ -1,4 +1,4 @@
-<window style="top: 100px; left: 20px; " draggable windowName="Create a New Account" maximizeBtnShow="false" minimizeBtnShow="false" icon="assets/icons/user.png">
+<window style="top: 450px; left: 700px; " draggable windowName="Create a New Account" maximizeBtnShow="false" minimizeBtnShow="false" icon="assets/icons/user.png" (onClose)="emitWindowCloseEvent()">
   <p>Please enter your data:</p>
   <hr style="width: 95%;margin: 15px 0;">
   <form [formGroup]="form" (ngSubmit)="registerClient()">
