@@ -17,9 +17,9 @@
           <div class="window-title">{{windowName}}</div>
         </div>
         <div class="window-title-bar-buttons">
-          <div class="title-bar-button title-bar-button-minimize" ngDefaultControl ngModel #buttonMinimize><div class="title-bar-button-inner"></div></div>
-          <div class="title-bar-button title-bar-button-maximize" ngDefaultControl ngModel #buttonMaximize><div class="title-bar-button-inner"></div></div>
-          <div class="title-bar-button title-bar-button-close" ngDefaultControl ngModel #buttonClose><div class="title-bar-button-inner"></div></div>
+          <div class="title-bar-button title-bar-button-minimize" (click)="emitMinimizingEvent()" ngDefaultControl ngModel #buttonMinimize><div class="title-bar-button-inner"></div></div>
+          <div class="title-bar-button title-bar-button-maximize" (click)="emitMaximizingEvent()" ngDefaultControl ngModel #buttonMaximize><div class="title-bar-button-inner"></div></div>
+          <div class="title-bar-button title-bar-button-close" (click)="emitClosingEvent()" ngDefaultControl ngModel #buttonClose><div class="title-bar-button-inner"></div></div>
         </div>
       </div>
       <div class="content">

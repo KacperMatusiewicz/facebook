@@ -1,0 +1,16 @@
+<window windowName="Log On to System" closeBtnShow="false" maximizeBtnShow="false" minimizeBtnShow="false">
+ <div class="banner"></div>
+  <form [formGroup]="loginForm">
+    <div class="inputFields">
+      <text-input [formGroup]="loginForm" formControlName="email" ngDefaultControl required>Email</text-input>
+      <password-input [formGroup]="loginForm" formControlName="password" ngDefaultControl required>Password</password-input>
+    </div>
+
+    <hr style="width: 95%;">
+
+    <div class="buttons">
+      <win-button [formGroup]="loginForm" (click)="onSubmit()" [disabled]="!loginForm.valid">OK</win-button>
+      <win-button [formGroup]="loginForm" (click)="onCreateNewAccount()">Create a new account >></win-button>
+    </div>
+  </form>
+</window>

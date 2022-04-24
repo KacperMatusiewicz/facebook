@@ -1,6 +1,6 @@
 import {Component, EventEmitter, OnInit, Output} from '@angular/core';
 import {FormBuilder, FormControl, FormGroup, ValidatorFn, Validators} from "@angular/forms";
-import { User } from '../../user';
+import { User } from '../../service/user';
 
 @Component({
   selector: 'app-registration-form',
@@ -10,6 +10,9 @@ import { User } from '../../user';
 export class RegistrationFormComponent implements OnInit {
   @Output()
   userRegistrationDataEmitter = new EventEmitter<User>();
+
+  @Output()
+  closeWindowEvent = new EventEmitter<any>();
 
   form: FormGroup;
 
@@ -58,5 +61,9 @@ export class RegistrationFormComponent implements OnInit {
       this.gender.value,
       this.password.value
     ));
+  }
+
+  emitWindowCloseEvent() {
+    this.closeWindowEvent.emit();
   }
 }
