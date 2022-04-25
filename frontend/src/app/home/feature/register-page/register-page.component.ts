@@ -1,6 +1,6 @@
 import {Component, EventEmitter, OnInit, Output} from '@angular/core';
-import {User} from "../../service/user";
-import {RegistrationService} from "../../service/registration.service";
+import {User} from "../../../core/model/user";
+import {RegistrationService} from "../../../core/register/registration.service";
 import {Router} from "@angular/router";
 import {state} from "@angular/animations";
 import {catchError} from "rxjs/operators";
@@ -14,6 +14,8 @@ export class RegisterPageComponent implements OnInit {
 
   @Output()
   closeWindowEvent = new EventEmitter<any>();
+  @Output()
+  registrationMailSendEvent = new EventEmitter<any>();
 
   constructor(public registrationService: RegistrationService, public router: Router) { }
 
@@ -21,9 +23,11 @@ export class RegisterPageComponent implements OnInit {
   }
 
   receiveRegistrationDataAndSend($event: User) {
-    console.log($event);
     this.registrationService.registerUser($event).subscribe(
-      (data) => this.router.navigate(['home/confirmation-send']),
+      (data) => {
+        this.emitCloseWindowEvent();
+        this.emitRegistrationMailSendEvent()
+      },
       (error) => this.showErrorMessage(error.error)
       );
   }
@@ -34,5 +38,9 @@ export class RegisterPageComponent implements OnInit {
 
   emitCloseWindowEvent() {
     this.closeWindowEvent.emit();
+  }
+
+  private emitRegistrationMailSendEvent() {
+    this.registrationMailSendEvent.emit();
   }
 }

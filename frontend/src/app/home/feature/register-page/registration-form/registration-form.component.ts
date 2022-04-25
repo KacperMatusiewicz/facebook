@@ -1,6 +1,6 @@
 import {Component, EventEmitter, OnInit, Output} from '@angular/core';
 import {FormBuilder, FormControl, FormGroup, ValidatorFn, Validators} from "@angular/forms";
-import { User } from '../../service/user';
+import {User} from "../../../../core/model/user";
 
 @Component({
   selector: 'app-registration-form',

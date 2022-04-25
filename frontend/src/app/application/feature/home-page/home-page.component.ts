@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { LogoutService } from 'src/app/core/logout/logout.service';
 
 @Component({
   selector: 'app-home-page',
@@ -7,9 +8,12 @@ import { Component, OnInit } from '@angular/core';
 })
 export class HomePageComponent implements OnInit {
 
-  constructor() { }
+  constructor(private logoutService : LogoutService) { }
 
   ngOnInit(): void {
   }
 
+  logout() {
+    this.logoutService.logout();
+  }
 }

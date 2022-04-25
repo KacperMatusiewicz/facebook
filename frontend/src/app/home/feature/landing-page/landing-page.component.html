@@ -1,2 +1,14 @@
 <app-login-page (newAccountRequestEvent)="showRegistrationPage()"></app-login-page>
-<app-register-page [hidden]="!registerVisibility" (closeWindowEvent)="closeRegistrationPage()"></app-register-page>
+<app-register-page [hidden]="!registerVisibility" (closeWindowEvent)="closeRegistrationPage()" (registrationMailSendEvent)="showMailAlertWindow()"></app-register-page>
+<window
+  style="position: absolute; top: 10px; left: 10px;"
+  draggable
+  [hidden]="!mailAlertVisibility"
+  (onClose)="closeMailAlertWindow()"
+  minimizeBtnShow="false"
+  maximizeBtnShow="false"
+>
+  <div style="padding: 30px;">
+    Activation E-mail sent! <br> Please, check your inbox.
+  </div>
+</window>

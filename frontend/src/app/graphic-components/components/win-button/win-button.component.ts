@@ -1,4 +1,4 @@
-import {Component, EventEmitter, Input, OnInit, Output} from '@angular/core';
+import {Component, ElementRef, EventEmitter, Input, OnInit, Output, ViewChild} from '@angular/core';
 import {FormGroup} from "@angular/forms";
 
 @Component({
@@ -9,12 +9,19 @@ import {FormGroup} from "@angular/forms";
 export class WinButtonComponent implements OnInit {
 
   @Input()
-  formGroup!: FormGroup;
+  formGroup: FormGroup | undefined;
 
   @Input()
   disabled: boolean | undefined;
 
-  constructor() { }
+  @ViewChild("formWrapper")
+  formWrapper!: ElementRef<HTMLElement>;
+
+  constructor() {
+    if (this.formGroup !== undefined) {
+        this.formWrapper.nativeElement.setAttribute("formGroup", this.formGroup.value);
+    }
+  }
 
   ngOnInit(): void {
   }
