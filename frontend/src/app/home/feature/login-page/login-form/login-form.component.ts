@@ -1,6 +1,6 @@
 import {Component, EventEmitter, OnInit, Output} from '@angular/core';
 import {FormBuilder, FormControl, FormGroup, Validators} from "@angular/forms";
-import {UserLoginData} from "../../service/user-login-data";
+import {UserLoginData} from "../../../../core/model/user-login-data";
 
 @Component({
   selector: 'app-login-form',
@@ -30,12 +30,10 @@ export class LoginFormComponent implements OnInit {
   }
 
   onSubmit() {
-    console.log("on submit");
     this.userLoginData.emit(new UserLoginData(this.email.value, this.password.value));
   }
 
   onCreateNewAccount() {
-    console.log("on create new account");
     this.createNewAccountRequestEvent.emit();
   }
 }

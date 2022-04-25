@@ -9,8 +9,6 @@ import {Router} from "@angular/router";
 export class RegistrationResponseComponent implements OnInit {
 
   constructor(private router: Router) {
-    console.log(history.state)
-    console.log(history.state.message);
   }
 
   ngOnInit(): void {

@@ -24,6 +24,7 @@
         <module>api-gateway</module>
         <module>frontend</module>
         <module>web-server</module>
+        <module>authentication</module>
     </modules>
 
     <properties>

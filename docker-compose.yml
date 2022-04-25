@@ -60,6 +60,20 @@ services:
       - "5435:5432"
     restart: unless-stopped
 
+  postgres_authentication:
+    container_name: postgres_authentication
+    image: postgres
+    environment:
+      POSTGRES_USER: user
+      POSTGRES_PASSWORD: password
+      POSTGRES_DB: authentication
+      PGDATA: /data/postgres
+    volumes:
+      - postgres-authentication:/data/postgres
+    ports:
+      - "5436:5432"
+    restart: unless-stopped
+
   pgadmin:
     container_name: pgadmin1
     image: dpage/pgadmin4
@@ -119,6 +133,7 @@ volumes:
   postgres-post:
   postgres-relation:
   postgres-notification:
+  postgres-authentication:
   pgadmin:
   neo4j_relation_data:
   redis:

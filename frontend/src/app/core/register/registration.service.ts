@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
 import {HttpClient} from "@angular/common/http";
-import {User} from "./user";
+import {User} from "../model/user";
 import {Observable} from "rxjs";
 
 @Injectable({
@@ -13,7 +13,6 @@ export class RegistrationService {
   constructor(public httpClient: HttpClient) { }
 
   registerUser(user: User): Observable<any> {
-    console.log("strzał")
     return this.httpClient.post(this.registrationUrl, user);
   }
 }

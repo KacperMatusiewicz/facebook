@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import {UserLoginData} from "./user-login-data";
+import {UserLoginData} from "../model/user-login-data";
 import {HttpClient} from "@angular/common/http";
 
 @Injectable({
@@ -7,7 +7,7 @@ import {HttpClient} from "@angular/common/http";
 })
 export class LoginService {
 
-  loginUrl : string = "http://localhost:8080/api/v1/login"
+  loginUrl : string = "http://localhost:8080/api/v1/auth/login"
 
   constructor(private httpClient : HttpClient) { }
 

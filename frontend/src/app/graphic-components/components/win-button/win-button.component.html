@@ -1,4 +1,4 @@
-<ng-container [formGroup]="formGroup">
+<ng-container ngModel #formWrapper ngDefaultControl>
   <div class="wrapper">
         <button type="submit" [disabled]="disabled">
           <ng-content></ng-content>
