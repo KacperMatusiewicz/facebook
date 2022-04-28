@@ -5,11 +5,11 @@ spring:
     name: notification
   rabbitmq:
     port: 5672
-    host: localhost
+    host: rabbitmq_general
   datasource:
     username: user
     password: password
-    url: jdbc:postgresql://localhost:5435/notifications
+    url: jdbc:postgresql://postgres_notification:5432/notifications
   jpa:
     hibernate:
       ddl-auto: create
@@ -21,13 +21,12 @@ spring:
 eureka:
   client:
     service-url:
-      defaultZone: "http://localhost:8761/eureka"
+      defaultZone: "http://eureka:8761/eureka"
     fetch-registry: true
     register-with-eureka: true
-
 user-rabbit-queues:
-  host: localhost
-  port: 5673
+  host: rabbit_mq_user_notification
+  port: 5672
 rabbit-queue-definition:
-  host: localhost
+  host: rabbitmq_general
   port: 5672

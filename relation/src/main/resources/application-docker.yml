@@ -1,0 +1,16 @@
+server:
+  port: 8090
+spring:
+  application:
+    name: relation
+  neo4j:
+    uri: ${ORG_NEO4J_DRIVER_URI}
+    authentication:
+      username: neo4j
+      password: password
+eureka:
+  client:
+    service-url:
+      defaultZone: "http://eureka:8761/eureka"
+    fetch-registry: true
+    register-with-eureka: true

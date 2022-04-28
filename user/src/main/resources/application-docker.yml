@@ -6,7 +6,7 @@ spring:
   datasource:
     username: user
     password: password
-    url: jdbc:postgresql://localhost:5432/users
+    url: jdbc:postgresql://postgres_user:5432/users
   jpa:
     hibernate:
       ddl-auto: update
@@ -33,6 +33,6 @@ spring:
 eureka:
   client:
     service-url:
-      defaultZone: "http://localhost:8761/eureka"
+      defaultZone: "http://eureka:8761/eureka"
     fetch-registry: true
     register-with-eureka: true

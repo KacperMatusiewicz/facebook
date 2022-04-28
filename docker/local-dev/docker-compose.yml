@@ -60,8 +60,8 @@ services:
       - "5435:5432"
     restart: unless-stopped
 
-  postgres_authentication:
-    container_name: postgres_authentication
+  postgres-authentication:
+    container_name: postgres-authentication
     image: postgres
     environment:
       POSTGRES_USER: user
@@ -72,6 +72,8 @@ services:
       - postgres-authentication:/data/postgres
     ports:
       - "5436:5432"
+    networks:
+      - general
     restart: unless-stopped
 
   pgadmin:
@@ -124,8 +126,23 @@ services:
     volumes:
       - redis:/data
 
+  authentication:
+    image: authentication:latest
+    container_name: authentication
+    environment:
+      - SPRING_PROFILES_ACTIVE=docker
+    ports:
+      - "8120:8120"
+    networks:
+      - general
+    depends_on:
+      - eureka
+      - postgres-authentication
+
 networks:
   postgres:
+    driver: bridge
+  general:
     driver: bridge
 
 volumes:
