@@ -21,13 +21,7 @@ public class GetPostController {
 
     @GetMapping
     public List<Post> getPostsForLoggedUser(@RequestHeader("user-id") Long userId) {
-        //return service.getAllPostsByUser(userId);
-
-        return List.of(
-                new Post(1L , 2L, "jakis to jest post", "", LocalDateTime.now()),
-                new Post(2L , 2L, "jakis to jest inny post", "", LocalDateTime.now()),
-                new Post(3L , 2L, "jakis to jest post jeszcze innny i dłuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuu   uuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuu uuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuu uuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuu uuuuuuuuuuuuuuuu uuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuugi post", "", LocalDateTime.now())
-        );
+        return service.getAllPostsByUser(userId);
     }
 
 }
