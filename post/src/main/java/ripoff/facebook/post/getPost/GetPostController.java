@@ -1,12 +1,10 @@
 package ripoff.facebook.post.getPost;
 
 import lombok.RequiredArgsConstructor;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 import ripoff.facebook.post.commons.repository.Post;
 
+import java.time.LocalDateTime;
 import java.util.List;
 
 @RestController
@@ -20,4 +18,10 @@ public class GetPostController {
     public List<Post> getPostsByUserId(@PathVariable Long userId) {
         return service.getAllPostsByUser(userId);
     }
+
+    @GetMapping
+    public List<Post> getPostsForLoggedUser(@RequestHeader("user-id") Long userId) {
+        return service.getAllPostsByUser(userId);
+    }
+
 }

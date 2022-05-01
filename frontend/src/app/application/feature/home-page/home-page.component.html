@@ -1,5 +1,16 @@
-<window style="position: absolute; top: 10px; left: 10px; width: 200px; height: 200px;" resizable draggable windowName="Logout">
-  <div style="width: 100%; height: 100%; display: flex; justify-content: center; align-items: center">
-    <win-button (click)="logout()">Logout</win-button>
-  </div>
-</window>
+<div class="screen">
+  <desktop>
+    <app-user-profile-page
+      [hidden]="!userProfileWindowVisibility"
+      (closeWindowEvent)="userProfileWindowVisibility=false"
+    >
+
+    </app-user-profile-page>
+  </desktop>
+  <taskbar
+    (logOffEvent)="logout()"
+    (userProfileClickEvent)="userDetailsWindow()"
+  >
+  </taskbar>
+</div>
+

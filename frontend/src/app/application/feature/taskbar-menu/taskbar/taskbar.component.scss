@@ -1,0 +1,75 @@
+div.taskbar-outer{
+  box-sizing: border-box;
+  width: 100%;
+  height: 28px;
+  border-top: #d4d0c8 1px solid;
+}
+
+div.taskbar{
+  box-sizing: border-box;
+  width: 100%;
+  height: 100%;
+  background-color: #d4d0c8;
+  border-top: white 1px solid;
+  display: grid;
+  position: relative;
+  //justify-content: space-between;
+  grid-template-rows: 1fr;
+  grid-template-columns: 59px 100px auto 112px;
+}
+
+div.start-button{
+  box-sizing: border-box;
+  width: 100%;
+  //background-color: red;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+div.start-button win-button{
+  background-color: red;
+  height: 10px;
+}
+
+div.quick-buttons{
+  box-sizing: border-box;
+  width: 100%;
+  //background-color: blue;
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: space-between;
+}
+
+div.quick-buttons::before,
+div.quick-buttons::after{
+  display: block;
+  content: "";
+  border-left: 1px solid #808080;
+  border-right: 1px solid white ;
+  width: 0px;
+  height: 22px;
+}
+
+
+div.running-tasks{
+  box-sizing: border-box;
+  width: 100%;
+  //background-color: green;
+  display: flex;
+
+}
+
+div.tray{
+  box-sizing: border-box;
+  width: 100%;
+  display: flex;
+  justify-content: flex-end;
+  align-items: center;
+}
+
+div.tray-clock{
+  color: black;
+  font-size: 12px;
+}

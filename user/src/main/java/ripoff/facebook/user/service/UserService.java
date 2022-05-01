@@ -6,6 +6,7 @@ import ripoff.facebook.clients.notification.UserNotificationQueueClient;
 import ripoff.facebook.clients.post.PostClient;
 import ripoff.facebook.clients.relation.RelationClient;
 import ripoff.facebook.user.UserRequest;
+import ripoff.facebook.user.controller.UserDetailsDto;
 import ripoff.facebook.user.entity.ActivationLink;
 import ripoff.facebook.user.entity.User;
 import ripoff.facebook.user.entity.UserStatus;
@@ -86,5 +87,14 @@ public class UserService {
         if (!userValidationService.validateUserInputData(userRequest)) {
             throw new BadUserDataException("Error validating user data." + userRequest.toString());
         }
+    }
+
+    public UserDetailsDto getUserDetails(Long userId) {
+        User user = userRepository.getById(userId);
+        return new UserDetailsDto(
+                user.getName(),
+                user.getLastName(),
+                user.getEmail()
+        );
     }
 }

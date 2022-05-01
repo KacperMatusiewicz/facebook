@@ -1,0 +1,24 @@
+<window
+  style="top: 10px; left: 10px; position: absolute; width: 400px; height: 400px; min-width: 250px; min-height: 300px;"
+  resizable draggable windowName="{{userDetails.name}}'s profile."
+  icon="assets/icons/user.png"
+  (onClose)="emitCloseWindowEvent()"
+>
+  <div class="user-profile">
+    <div class="user-profile-frame">
+      <div class="user-profile-icon"></div>
+    </div>
+    <div class="user-posts">
+
+      <div class="post" *ngFor="let post of posts">
+        <div class="post-header">
+          <div class="post-author">{{userDetails.name + " " + userDetails.lastName}}</div>
+          <div class="post-creation-date">{{getFormattedDate(post.creationDate)}}</div>
+        </div>
+        <div class="post-content">{{post.content}}</div>
+        <div class="post-attachments"></div>
+      </div>
+
+    </div>
+  </div>
+</window>

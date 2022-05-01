@@ -1,0 +1,97 @@
+div.wrapper{
+  box-sizing: border-box;
+  width: 100%;
+  height: 32px;
+  background-color: transparent;
+  color: #000;
+  display: flex;
+  align-items: center;
+  gap: 13px;
+  position: relative;
+}
+
+div.wrapper:hover{
+  background-color: #0a246a;
+  color: #fff;
+}
+
+div.wrapper:hover > div.submenu-arrow{
+  background-image: url("/assets/icons/arrow-hover.png");
+}
+
+div.icon{
+  width: 24px;
+  height: 24px;
+  margin-left: 6px;
+  image-rendering: pixelated;
+  background-position: center;
+  background-size: cover;
+}
+
+div.text{
+  overflow: hidden;
+}
+
+div.submenu-arrow{
+  width: 4px;
+  height: 7px;
+  background-image: url("/assets/icons/arrow-idle.png");
+  position: absolute;
+  right: 5px;
+}
+
+div.wrapper:hover > div.submenu{
+  visibility: visible;
+  box-sizing: border-box;
+}
+
+div.wrapper:hover > div.submenu div.icon{
+  width: 16px;
+  height: 16px;
+  box-sizing: border-box;
+}
+div.wrapper:hover > div.submenu {
+  height: fit-content;
+  width: 200px;
+  box-sizing: border-box;
+}
+div.wrapper:hover > div.submenu .wrapper{
+  height: 20px;
+  width: 100%;
+  box-sizing: border-box;
+}
+
+div.submenu{
+  box-sizing: border-box;
+  width: 100%;
+  //height: 200px;
+  background-color: #d4d0c8;
+  position: absolute;
+  right: -197px;
+  top: 0;
+
+  border-top: #d4d0c8 1px solid;
+  border-left: #d4d0c8 1px solid;
+  border-bottom: #404040 1px solid;
+  border-right: #404040 1px solid;
+  box-sizing: border-box;
+}
+
+div.submenu-wrapper{
+  box-sizing: border-box;
+  width: 100%;
+  height: 100%;
+  border-top: #fff 1px solid;
+  border-left: #fff 1px solid;
+  border-bottom: #808080 1px solid;
+  border-right: #808080 1px solid;
+  box-sizing: border-box;
+}
+
+div.submenu div.text{
+  width: 150px;
+  overflow: hidden;
+  text-wrap: none;
+  white-space: nowrap;
+}
+
