@@ -8,12 +8,26 @@ import { LogoutService } from 'src/app/core/logout/logout.service';
 })
 export class HomePageComponent implements OnInit {
 
-  constructor(private logoutService : LogoutService) { }
+  userProfileWindowVisibility: boolean;
+
+  constructor(private logoutService : LogoutService) {
+    this.userProfileWindowVisibility = false;
+  }
 
   ngOnInit(): void {
   }
 
   logout() {
     this.logoutService.logout();
+  }
+
+  userDetailsWindow() {
+    if(!this.userProfileWindowVisibility){
+      this.userProfileWindowVisibility = true;
+    }
+  }
+
+  settingsWindow() {
+
   }
 }

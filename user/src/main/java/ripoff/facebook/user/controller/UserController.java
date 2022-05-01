@@ -19,6 +19,16 @@ public class UserController {
         userService.registerUser(userRequest);
     }
 
+    @GetMapping("details")
+    public UserDetailsDto getUserDetails(@RequestHeader("user-id") Long userId) {
+        return userService.getUserDetails(userId);
+    }
+
+    @GetMapping("details/{userId}")
+    public UserDetailsDto getUserDetailsById(@PathVariable Long userId) {
+        return userService.getUserDetails(userId);
+    }
+
     @GetMapping("{userId}")
     public UserExistsResponse checkIfUserExistsById(@PathVariable Long userId) {
         return new UserExistsResponse(userService.checkIfUserExistsById(userId));

@@ -3,7 +3,7 @@
   <div class="taskbar">
     <div class="start-button">
 
-      <menu [hidden]="!menuVisibility">
+      <menu [hidden]="!menuVisibility" (userProfileClickEvent)="emitUserProfileClickEvent()">
         <menu-item displayValue="Programs" [hasChildren]="true">
           <menu-item displayValue="Dune 2"></menu-item>
           <menu-item displayValue="Accessories" [hasChildren]="true">
@@ -38,7 +38,7 @@
       <ng-content></ng-content>
     </div>
     <div class="tray">
-      <div class="tray-clock">21:37</div>
+      <app-system-tray></app-system-tray>
     </div>
   </div>
 </div>

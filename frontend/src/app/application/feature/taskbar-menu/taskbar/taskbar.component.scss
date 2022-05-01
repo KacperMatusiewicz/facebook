@@ -64,9 +64,9 @@ div.running-tasks{
 div.tray{
   box-sizing: border-box;
   width: 100%;
-  min-width: 71px;
-  background-color: purple;
   display: flex;
+  justify-content: flex-end;
+  align-items: center;
 }
 
 div.tray-clock{

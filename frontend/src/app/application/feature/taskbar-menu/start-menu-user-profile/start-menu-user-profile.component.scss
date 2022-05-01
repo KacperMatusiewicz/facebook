@@ -1,0 +1,49 @@
+.wrapper{
+  box-sizing: border-box;
+  width: 100%;
+  height: 48px;
+  display: grid;
+  grid-template-columns: 48px auto;
+  grid-template-rows: 1fr;
+  place-items: center;
+  padding: 0 6px;
+  box-sizing: border-box;
+  border-bottom: 1px dotted black;
+  cursor: pointer;
+}
+
+.wrapper:hover{
+  color: white;
+  background-color: #0a246a;
+}
+
+.user-details{
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+  cursor: inherit;
+}
+
+.username{
+  font-size: 12px;
+  cursor: inherit;
+}
+
+.mail{
+  font-size: 7px;
+  cursor: inherit;
+}
+
+.profile-picture{
+  width: 38px;
+  height: 38px;
+  box-sizing: border-box;
+  border: 1px solid black;
+  border-radius: 50%;
+  background-image: url("/assets/icons/user-default-profile.png");
+  image-rendering: pixelated;
+  background-position: center center;
+  background-size: cover;
+  cursor: inherit;
+}

@@ -10,6 +10,8 @@ export class TaskbarComponent implements OnInit {
   menuVisibility: boolean;
 
   @Output()
+  userProfileClickEvent = new EventEmitter<any>();
+  @Output()
   logOffEvent = new EventEmitter<any>();
 
   constructor() {
@@ -46,5 +48,9 @@ export class TaskbarComponent implements OnInit {
 
   emitLogOffEvent() {
     this.logOffEvent.emit();
+  }
+
+  emitUserProfileClickEvent() {
+    this.userProfileClickEvent.emit();
   }
 }

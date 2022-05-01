@@ -1,0 +1,37 @@
+.wrapper{
+  min-width: 71px;
+  height: 22px;
+  margin-right: 2px;
+  border-top: 1px solid #808080;
+  border-left: 1px solid #808080;
+  border-bottom: 1px solid #fff;
+  border-right:1px solid #fff;
+  box-sizing: border-box;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 8px;
+  padding: 0 8px;
+}
+
+.tray-icons{
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 4px;
+}
+
+.tray-icon{
+
+  width: 16px;
+  height: 16px;
+  background-color: red;
+
+}
+
+.clock{
+  color: black;
+  font-size: 10px;
+  min-width: 43px;
+  text-align: center;
+}
