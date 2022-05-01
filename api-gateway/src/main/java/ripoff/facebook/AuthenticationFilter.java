@@ -42,7 +42,7 @@ public class AuthenticationFilter implements GatewayFilter {
         }
         return builder.build()
                 .post()
-                .uri("http://localhost:8120/api/v1/auth/session?session=" + sessionCookie)
+                .uri("http://AUTHENTICATION/api/v1/auth/session?session=" + sessionCookie)
                 .retrieve()
                 .onStatus(HttpStatus::is4xxClientError, clientResponse -> Mono.error(new InvalidCredentialsException("Authorization unsuccessful")))
                 .bodyToMono(Long.class)

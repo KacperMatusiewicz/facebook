@@ -7,17 +7,22 @@ import org.springframework.amqp.rabbit.connection.ConnectionFactory;
 import org.springframework.amqp.rabbit.core.RabbitTemplate;
 import org.springframework.amqp.support.converter.Jackson2JsonMessageConverter;
 import org.springframework.amqp.support.converter.MessageConverter;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 
 @Configuration
 public class RabbitGeneralConfig {
 
+    @Value("${rabbit-queue-definition.host}")
+    private String host;
+    @Value("${rabbit-queue-definition.port}")
+    private int port;
     @Bean
     public ConnectionFactory generalBusConnectionFactory(){
         CachingConnectionFactory connectionFactory = new CachingConnectionFactory();
-        connectionFactory.setHost("localhost");
-        connectionFactory.setPort(5672);
+        connectionFactory.setHost(host);
+        connectionFactory.setPort(port);
         connectionFactory.setUsername("guest");
         connectionFactory.setPassword("guest");
         return connectionFactory;

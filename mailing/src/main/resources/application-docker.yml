@@ -1,0 +1,11 @@
+server:
+  port: 8105
+spring:
+  application:
+    name: mailing
+eureka:
+  client:
+    service-url:
+      defaultZone: "http://eureka:8761/eureka"
+    fetch-registry: true
+    register-with-eureka: true

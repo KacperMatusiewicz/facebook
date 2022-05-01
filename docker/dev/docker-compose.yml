@@ -1,0 +1,100 @@
+services:
+  postgres-user-dev:
+    container_name: postgres-user-dev
+    image: postgres
+    environment:
+      POSTGRES_USER: user
+      POSTGRES_PASSWORD: password
+      POSTGRES_DB: users
+      PGDATA: /data/postgres
+    volumes:
+      - postgres-user-dev:/data/postgres
+    ports:
+      - "5432:5432"
+    restart: unless-stopped
+
+  postgres-post-dev:
+    container_name: postgres-post-dev
+    image: postgres
+    environment:
+      POSTGRES_USER: user
+      POSTGRES_PASSWORD: password
+      POSTGRES_DB: posts
+      PGDATA: /data/postgres
+    volumes:
+      - postgres-post-dev:/data/postgres
+    ports:
+      - "5433:5432"
+    restart: unless-stopped
+
+  postgres-notification-dev:
+    container_name: postgres-notification-dev
+    image: postgres
+    environment:
+      POSTGRES_USER: user
+      POSTGRES_PASSWORD: password
+      POSTGRES_DB: notifications
+      PGDATA: /data/postgres
+    volumes:
+      - postgres-notification-dev:/data/postgres
+    ports:
+      - "5435:5432"
+    restart: unless-stopped
+
+  postgres-authentication-dev:
+    container_name: postgres-authentication-dev
+    image: postgres
+    environment:
+      POSTGRES_USER: user
+      POSTGRES_PASSWORD: password
+      POSTGRES_DB: authentication
+      PGDATA: /data/postgres
+    volumes:
+      - postgres-authentication-dev:/data/postgres
+    ports:
+      - "5436:5432"
+    restart: unless-stopped
+
+  neo4j-relation-dev:
+    image: neo4j
+    restart: unless-stopped
+    ports:
+      - "7474:7474"
+      - "7687:7687"
+    volumes:
+      - neo4j-relation-data-dev:/data/
+    environment:
+      - NEO4J_dbms_default__database=neo4j
+      - NEO4J_AUTH=neo4j/password
+
+  rabbitmq-general:
+    image: rabbitmq:3.9.11-management-alpine
+    container_name: rabbitmq-general-dev
+    ports:
+      - "5672:5672"
+      - "15672:15672"
+
+  rabbitmq-user-notification-dev:
+    image: rabbitmq:3.9.11-management-alpine
+    container_name: rabbitmq-user-notification-dev
+    ports:
+      - "5673:5672"
+      - "15673:15672"
+
+  redis-dev:
+    image: redis:6.2-alpine
+    restart: always
+    ports:
+      - '6379:6379'
+    command: redis-server --save 20 1 --loglevel warning --requirepass eYVX7EwVmmxKPCDmwMtyKVge8oLd2t81
+    volumes:
+      - redis-dev:/data
+
+volumes:
+  postgres-user-dev:
+  postgres-post-dev:
+  postgres-notification-dev:
+  postgres-authentication-dev:
+  neo4j-relation-data-dev:
+  redis-dev:
+    driver: local

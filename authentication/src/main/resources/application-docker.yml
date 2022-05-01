@@ -1,18 +1,15 @@
 server:
-  port: 8100
+  port: 8120
 spring:
   application:
-    name: notification
-  rabbitmq:
-    port: 5672
-    host: localhost
+    name: authentication
   datasource:
     username: user
     password: password
-    url: jdbc:postgresql://localhost:5435/notifications
+    url: jdbc:postgresql://postgres-authentication:5432/authentication
   jpa:
     hibernate:
-      ddl-auto: create
+      ddl-auto: update
     properties:
       hibernate:
         dialect: org.hibernate.dialect.PostgreSQLDialect
@@ -21,13 +18,8 @@ spring:
 eureka:
   client:
     service-url:
-      defaultZone: "http://localhost:8761/eureka"
+      defaultZone: "http://eureka:8761/eureka"
     fetch-registry: true
     register-with-eureka: true
-
-user-rabbit-queues:
-  host: localhost
-  port: 5673
-rabbit-queue-definition:
-  host: localhost
-  port: 5672
+  instance:
+    prefer-ip-address: true

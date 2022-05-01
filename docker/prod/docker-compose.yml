@@ -1,0 +1,263 @@
+#version: '3.5'
+
+services:
+  postgres_user:
+    container_name: postgres_user
+    image: postgres
+    environment:
+      POSTGRES_USER: user
+      POSTGRES_PASSWORD: password
+      POSTGRES_DB: users
+      PGDATA: /data/postgres
+    volumes:
+      - postgres-user:/data/postgres
+    ports:
+      - "5432:5432"
+    networks:
+      - general
+    restart: unless-stopped
+
+  postgres_post:
+    container_name: postgres_post
+    image: postgres
+    environment:
+      POSTGRES_HOST: postgres-post
+      POSTGRES_USER: user
+      POSTGRES_PASSWORD: password
+      POSTGRES_DB: posts
+      PGDATA: /data/postgres
+    volumes:
+      - postgres-post:/data/postgres
+    ports:
+      - "5433:5432"
+    networks:
+      - general
+    restart: unless-stopped
+
+  postgres_notification:
+    container_name: postgres_notification
+    image: postgres
+    environment:
+      POSTGRES_USER: user
+      POSTGRES_PASSWORD: password
+      POSTGRES_DB: notifications
+      PGDATA: /data/postgres
+    volumes:
+      - postgres-notification:/data/postgres
+    ports:
+      - "5435:5432"
+    networks:
+      - general
+    restart: unless-stopped
+
+  postgres-authentication:
+    container_name: postgres-authentication
+    image: postgres
+    environment:
+      POSTGRES_USER: user
+      POSTGRES_PASSWORD: password
+      POSTGRES_DB: authentication
+      PGDATA: /data/postgres
+    volumes:
+      - postgres-authentication:/data/postgres
+    ports:
+      - "5436:5432"
+    networks:
+      - general
+    restart: unless-stopped
+
+  neo4jrelation:
+    image: neo4j
+    hostname: neo4jrelation
+    container_name: neo4jrelation
+    restart: unless-stopped
+    ports:
+      - "7474:7474"
+      - "7687:7687"
+    networks:
+      - general
+    volumes:
+      - neo4j_relation_data:/data/
+    environment:
+      - NEO4J_dbms_default__database=neo4j
+      - NEO4J_AUTH=neo4j/password
+      - dbms_connector_bolt_listen_address=neo4j_relation:7687
+      - dbms_connector_bolt_advertised_address=neo4j_relation:7687
+    healthcheck:
+      test: cypher-shell --username neo4j --password password 'MATCH (n) RETURN COUNT(n);'
+      interval: 10s
+      timeout: 10s
+      retries: 5
+      start_period: 30s
+
+  rabbitmq_general:
+    image: rabbitmq:3.9.11-management-alpine
+    container_name: rabbitmq_general
+    ports:
+      - "5672:5672"
+      - "15672:15672"
+    networks:
+      - general
+
+  rabbitmq_user_notification:
+    image: rabbitmq:3.9.11-management-alpine
+    container_name: rabbitmq_user_notification
+    ports:
+      - "5673:5672"
+      - "15673:15672"
+    networks:
+      - general
+
+  redis:
+    image: redis:6.2-alpine
+    restart: always
+    ports:
+      - '6379:6379'
+    networks:
+      - general
+    command: redis-server --save 20 1 --loglevel warning --requirepass eYVX7EwVmmxKPCDmwMtyKVge8oLd2t81
+    volumes:
+      - redis:/data
+
+  eureka:
+    image: eureka:latest
+    container_name: eureka
+    ports:
+      - "8761:8761"
+    networks:
+      - general
+
+  api-gateway:
+    image: api-gateway:latest
+    container_name: api-gateway
+    environment:
+      - SPRING_PROFILES_ACTIVE=docker
+    ports:
+      - "8080:8080"
+    networks:
+      - general
+    depends_on:
+      - eureka
+
+  authentication:
+    image: authentication:latest
+    container_name: authentication
+    environment:
+      - SPRING_PROFILES_ACTIVE=docker
+    ports:
+      - "8120:8120"
+    networks:
+      - general
+    depends_on:
+      - eureka
+      - postgres-authentication
+
+  feed:
+    image: feed:latest
+    container_name: feed
+    environment:
+      - SPRING_PROFILES_ACTIVE=docker
+    ports:
+      - "8110:8110"
+    networks:
+      - general
+    depends_on:
+      - eureka
+      - redis
+      - rabbitmq_general
+
+  mailing:
+    image: mailing:latest
+    container_name: mailing
+    environment:
+      - SPRING_PROFILES_ACTIVE=docker
+    ports:
+      - "8105:8105"
+    networks:
+      - general
+    depends_on:
+      - eureka
+
+  notification:
+    image: notification:latest
+    container_name: notification
+    environment:
+      - SPRING_PROFILES_ACTIVE=docker
+    ports:
+      - "8100:8100"
+    networks:
+      - general
+    depends_on:
+      - eureka
+      - rabbitmq_user_notification
+      - rabbitmq_general
+      - postgres_notification
+
+  post:
+    image: post:latest
+    container_name: post
+    environment:
+      - SPRING_PROFILES_ACTIVE=docker
+    ports:
+      - "8095:8095"
+    networks:
+      - general
+    depends_on:
+      - eureka
+      - postgres_post
+      - rabbitmq_general
+
+  relation:
+    image: relation:latest
+    container_name: relation
+    environment:
+      - SPRING_PROFILES_ACTIVE=docker
+    ports:
+      - "8090:8090"
+    networks:
+      - general
+    depends_on:
+      eureka:
+        condition: service_started
+      neo4jrelation:
+        condition: service_healthy
+
+  user:
+    image: user:latest
+    container_name: user
+    environment:
+      - SPRING_PROFILES_ACTIVE=docker
+    ports:
+      - "8085:8085"
+    networks:
+      - general
+    depends_on:
+      - eureka
+      - postgres_user
+
+  web-server:
+    image: web-server:latest
+    container_name: web-server
+    environment:
+      - SPRING_PROFILES_ACTIVE=docker
+    ports:
+      - "8115:8115"
+    networks:
+      - general
+    depends_on:
+      - eureka
+
+networks:
+  general:
+    driver: bridge
+
+volumes:
+  postgres-user:
+  postgres-post:
+  postgres-relation:
+  postgres-notification:
+  postgres-authentication:
+  pgadmin:
+  neo4j_relation_data:
+  redis:
+    driver: local
