@@ -1,0 +1,10 @@
+<div class="wrapper" (mouseenter)="onElementHover()" (mouseleave)="onElementStopHover()">
+  <div class="icon" ngModel #icon ngDefaultControl></div>
+  <div class="text">{{displayValue}}</div>
+  <div class="submenu-arrow" [hidden]="!hasChildren"></div>
+  <div class="submenu" [hidden]="!expanded">
+    <div class="submenu-wrapper">
+      <ng-content></ng-content>
+    </div>
+  </div>
+</div>

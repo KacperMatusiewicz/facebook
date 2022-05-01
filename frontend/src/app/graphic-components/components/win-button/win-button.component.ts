@@ -16,7 +16,6 @@ export class WinButtonComponent implements OnInit {
 
   @ViewChild("formWrapper")
   formWrapper!: ElementRef<HTMLElement>;
-
   constructor() {
     if (this.formGroup !== undefined) {
         this.formWrapper.nativeElement.setAttribute("formGroup", this.formGroup.value);
