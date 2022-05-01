@@ -4,7 +4,7 @@ spring:
   application:
     name: relation
   neo4j:
-    uri: ${ORG_NEO4J_DRIVER_URI}
+    uri: bolt://neo4jrelation:7687
     authentication:
       username: neo4j
       password: password

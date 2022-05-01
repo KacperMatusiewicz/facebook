@@ -36,15 +36,6 @@
                   <goal>install-node-and-npm</goal>
                 </goals>
               </execution>
-              <!--execution>
-                <id>npm install</id>
-                <goals>
-                  <goal>npm</goal>
-                </goals>
-                <configuration>
-                  <arguments>-force</arguments>
-                </configuration>
-              </execution-->
               <execution>
                 <id>npm run build</id>
                 <goals>

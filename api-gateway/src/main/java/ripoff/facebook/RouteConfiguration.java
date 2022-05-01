@@ -1,6 +1,7 @@
 package ripoff.facebook;
 
 import lombok.RequiredArgsConstructor;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.boot.SpringApplication;
 import org.springframework.cloud.gateway.route.RouteLocator;
 import org.springframework.cloud.gateway.route.builder.RouteLocatorBuilder;
@@ -14,8 +15,10 @@ import ripoff.facebook.clients.authentication.AuthClient;
 import java.beans.beancontext.BeanContext;
 
 @Configuration
-@RequiredArgsConstructor
 public class RouteConfiguration {
+
+    @Value("${frontend.url}")
+    private String frontendUrl;
 
     @Bean
     public RouteLocator customRouteLocator(RouteLocatorBuilder builder, AuthenticationFilter authenticationFilter, LoggingFilter loggingFilter) {
@@ -86,7 +89,7 @@ public class RouteConfiguration {
                         .host("localhost:8080")
                         .and()
                         .path("/**")
-                        .uri("lb://WEB-SERVER") //TODO: on production it should be "lb://WEB-SERVER" so it uses SD.
+                        .uri(frontendUrl)
                 )
                 .build();
     }

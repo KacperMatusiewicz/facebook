@@ -9,3 +9,5 @@ eureka:
       defaultZone: "http://eureka:8761/eureka"
     fetch-registry: true
     register-with-eureka: true
+frontend:
+  url: "lb://WEB-SERVER"
