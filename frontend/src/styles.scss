@@ -21,6 +21,10 @@
   outline: none;
 }
 
+*, *::before, *::after{
+  box-sizing: border-box;
+}
+
 textarea:focus{
   outline: none;
 }
@@ -30,12 +34,13 @@ body, html{
   height: 100%;
   padding: 0;
   margin: 0;
+  overflow: hidden;
+  background-color: #3B6EA5;
 }
 
 body{
   width: 100%;
   height: 100%;
-  background-color: #3B6EA5;
   font-size: 12px;
   position: relative;
 }

@@ -67,10 +67,6 @@ export class DraggableDirective implements AfterViewInit, OnDestroy{
         this.element.style.left = currentX + "px";
         this.element.style.top  = currentY + "px";
 
-        if(currentX < 0 ){
-          this.element.style.left = 0 + "px";
-        }
-
         if (currentY < 0){
           this.element.style.top  = 0 + "px";
         }

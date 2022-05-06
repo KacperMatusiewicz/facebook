@@ -30,6 +30,7 @@ export class ResizableDirective implements AfterViewInit, OnDestroy{
     @Inject(DOCUMENT) private document: any
   ) {
     this.element = this.elementReference.nativeElement as HTMLElement;
+    //this.element.getElementsByClassName("")
     this.htmlCollection = this.elementReference.nativeElement.getElementsByClassName('window-resize-anchor');
   }
 
@@ -193,7 +194,8 @@ export class ResizableDirective implements AfterViewInit, OnDestroy{
   resizeLeft(initialX: number, initialY: number, initialWidth: number, initialHeight: number) {
     return (event: MouseEvent)=>{
       let currentX = event.clientX - initialX;
-      if(event.clientX < initialX + initialWidth - 100){
+      let minSize = Number.parseInt(this.element.style.minWidth);
+      if(event.clientX < initialX + initialWidth - minSize){
         this.element.style.left = event.clientX + 'px';
         this.element.style.width = initialWidth - (event.clientX - initialX) + "px";
       }
@@ -210,7 +212,8 @@ export class ResizableDirective implements AfterViewInit, OnDestroy{
   resizeTop(initialX: number, initialY: number, initialWidth: number, initialHeight: number) {
     return (event: MouseEvent)=>{
       //let currentX = event.clientX - initialX;
-      if(event.clientY < initialY + initialHeight - 100){
+      let minSize = Number.parseInt(this.element.style.minHeight);
+      if(event.clientY < initialY + initialHeight - minSize){
         this.element.style.top = event.clientY + 'px';
         this.element.style.height = initialHeight - (event.clientY - initialY) + "px";
       }
@@ -220,11 +223,13 @@ export class ResizableDirective implements AfterViewInit, OnDestroy{
   resizeLeftTop(initialX: number, initialY: number, initialWidth: number, initialHeight: number) {
     return (event: MouseEvent)=>{
       let currentX = event.clientX - initialX;
-      if(event.clientX < initialX + initialWidth - 100){
+      let minSizeX = Number.parseInt(this.element.style.minWidth);
+      if(event.clientX < initialX + initialWidth - minSizeX){
         this.element.style.left = event.clientX + 'px';
         this.element.style.width = initialWidth - (event.clientX - initialX) + "px";
       }
-      if(event.clientY < initialY + initialHeight - 100){
+      let minSizeY = Number.parseInt(this.element.style.minHeight);
+      if(event.clientY < initialY + initialHeight - minSizeY){
         this.element.style.top = event.clientY + 'px';
         this.element.style.height = initialHeight - (event.clientY - initialY) + "px";
       }
@@ -235,7 +240,8 @@ export class ResizableDirective implements AfterViewInit, OnDestroy{
     return (event: MouseEvent)=>{
       let currentX = event.clientX - initialX;
       this.element.style.width = currentX + initialWidth + "px";
-      if(event.clientY < initialY + initialHeight - 100){
+      let minSize = Number.parseInt(this.element.style.minHeight);
+      if(event.clientY < initialY + initialHeight - minSize){
         this.element.style.top = event.clientY + 'px';
         this.element.style.height = initialHeight - (event.clientY - initialY) + "px";
       }
@@ -247,7 +253,8 @@ export class ResizableDirective implements AfterViewInit, OnDestroy{
       let currentX = event.clientX - initialX;
       let currentY = event.clientY - initialY;
       this.element.style.height = currentY + initialHeight + "px";
-      if(event.clientX < initialX + initialWidth - 100){
+      let minSize = Number.parseInt(this.element.style.minWidth);
+      if(event.clientX < initialX + initialWidth - minSize){
         this.element.style.left = event.clientX + 'px';
         this.element.style.width = initialWidth - (event.clientX - initialX) + "px";
       }
