@@ -13,6 +13,8 @@ import { SystemTrayComponent } from './feature/taskbar-menu/system-tray/system-t
 import { StartMenuUserProfileComponent } from './feature/taskbar-menu/start-menu-user-profile/start-menu-user-profile.component';
 import {UserDetailsService} from "./service/user-details.service";
 import { UserProfilePageComponent } from './feature/user-profile-page/user-profile-page.component';
+import {DesktopComponent} from "./feature/home-page/desktop/desktop.component";
+import {DesktopIconComponent} from "./feature/home-page/desktop-icon/desktop-icon.component";
 
 
 @NgModule({
@@ -25,6 +27,8 @@ import { UserProfilePageComponent } from './feature/user-profile-page/user-profi
     SystemTrayComponent,
     StartMenuUserProfileComponent,
     UserProfilePageComponent,
+    DesktopComponent,
+    DesktopIconComponent
   ],
     imports: [
         CommonModule,
