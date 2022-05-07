@@ -35,10 +35,12 @@
     <div class="quick-buttons">
     </div>
     <div class="running-tasks">
-      <ng-content></ng-content>
+      <div ngModel #runningTasks style="display: none"></div>
     </div>
     <div class="tray">
-      <app-system-tray></app-system-tray>
+      <app-system-tray>
+
+      </app-system-tray>
     </div>
   </div>
 </div>

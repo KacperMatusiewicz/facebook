@@ -1,11 +1,5 @@
 <div class="screen">
   <desktop>
-    <app-user-profile-page
-      [hidden]="!userProfileWindowVisibility"
-      (closeWindowEvent)="userProfileWindowVisibility=false"
-    >
-    </app-user-profile-page>
-
   </desktop>
   <taskbar
     (logOffEvent)="logout()"
@@ -13,4 +7,4 @@
   >
   </taskbar>
 </div>
-
+<div ngModel #desktopWindowOutlet></div>

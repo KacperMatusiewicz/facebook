@@ -71,11 +71,11 @@ export class DraggableDirective implements AfterViewInit, OnDestroy{
           this.element.style.top  = 0 + "px";
         }
 
-        for(let i = 0; i<document.body.getElementsByTagName("window").length;i++ ){
-          let x = document.body.getElementsByTagName('window').item(i) as HTMLElement;
-            x.style.zIndex = "1";
-        }
-        this.element.style.zIndex = "3";
+        //for(let i = 0; i<document.body.getElementsByTagName("window").length;i++ ){
+          //let x = document.body.getElementsByTagName('window').item(i) as HTMLElement;
+            //x.style.zIndex = "1";
+        //}
+       // this.element.style.zIndex = "3";
       });
     });
 

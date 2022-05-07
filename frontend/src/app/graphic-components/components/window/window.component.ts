@@ -30,6 +30,8 @@ export class WindowComponent implements OnInit, AfterViewInit {
   onMaximize : EventEmitter<any> = new EventEmitter<any>();
   @Output()
   onTitleBarButtonClick: EventEmitter<TitleBarClick> = new EventEmitter<TitleBarClick>();
+  @Output()
+  onWindowClick = new EventEmitter<any>();
 
   @ViewChild(`buttonMinimize`)
   minimizeButton!: ElementRef<HTMLElement>;
@@ -60,13 +62,7 @@ export class WindowComponent implements OnInit, AfterViewInit {
     }
   }
 
-  ngOnInit(): void {
-    /*if(this.maximizeBtnShow==='false') {
-
-    }
-    if(!this.minimizeBtnShow) {}
-    if(!this.closeBtnShow) {}*/
-  }
+  ngOnInit(): void {}
 
 
   emitClosingEvent(): void {
@@ -82,7 +78,13 @@ export class WindowComponent implements OnInit, AfterViewInit {
     this.onTitleBarButtonClick.emit(new TitleBarClick("minimize"));
   }
 
-  //TODO:
-  // resizable
-  // onToOnClick
+  emitOnWindowClickEvent($event : Event): void {
+    let eventElement: HTMLElement = $event.target as HTMLElement;
+    if(
+      !eventElement.classList.contains("title-bar-button-inner") &&
+      !eventElement.classList.contains("title-bar-button")
+    ){
+      this.onWindowClick.emit();
+    }
+  }
 }
