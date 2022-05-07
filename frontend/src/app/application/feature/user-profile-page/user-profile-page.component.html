@@ -1,15 +1,17 @@
 <window
-  style="top: 10px; left: 10px; position: absolute; width: 400px; height: 400px; min-width: 250px; min-height: 300px;"
+  style="top: 10px; left: 10px; position: absolute; width: 400px; height: 400px; min-width: 250px; min-height: 300px; z-index:0{{style.zIndex}};"
   resizable draggable windowName="{{userDetails.name}}'s profile."
-  icon="assets/icons/user.png"
+  [icon]="icon"
   (onClose)="emitCloseWindowEvent()"
+  (onMinimize)="minimize()"
+  (onMaximize)="maximize()"
+  (onWindowClick)="focus()"
 >
   <div class="user-profile">
     <div class="user-profile-frame">
       <div class="user-profile-icon"></div>
     </div>
     <div class="user-posts">
-
       <div class="post" *ngFor="let post of posts">
         <div class="post-header">
           <div class="post-author">{{userDetails.name + " " + userDetails.lastName}}</div>

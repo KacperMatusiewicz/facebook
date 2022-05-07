@@ -15,6 +15,8 @@ import {UserDetailsService} from "./service/user-details.service";
 import { UserProfilePageComponent } from './feature/user-profile-page/user-profile-page.component';
 import {DesktopComponent} from "./feature/home-page/desktop/desktop.component";
 import {DesktopIconComponent} from "./feature/home-page/desktop-icon/desktop-icon.component";
+import {WindowManagementService} from "./service/windowState/window-management.service";
+import { TaskbarItemComponent } from './feature/taskbar-menu/taskbar-item/taskbar-item.component';
 
 
 @NgModule({
@@ -28,7 +30,8 @@ import {DesktopIconComponent} from "./feature/home-page/desktop-icon/desktop-ico
     StartMenuUserProfileComponent,
     UserProfilePageComponent,
     DesktopComponent,
-    DesktopIconComponent
+    DesktopIconComponent,
+    TaskbarItemComponent
   ],
     imports: [
         CommonModule,
@@ -37,7 +40,8 @@ import {DesktopIconComponent} from "./feature/home-page/desktop-icon/desktop-ico
         CoreModule
     ],
   providers: [
-    UserDetailsService
+    UserDetailsService,
+    WindowManagementService
   ]
 })
 export class ApplicationModule { }

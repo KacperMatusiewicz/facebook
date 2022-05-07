@@ -1,11 +1,12 @@
-import {Component, EventEmitter, OnInit, Output} from '@angular/core';
+import {AfterViewInit, Component, EventEmitter, OnInit, Output, ViewChild, ViewContainerRef} from '@angular/core';
+import {WindowManagementService} from "../../../service/windowState/window-management.service";
 
 @Component({
   selector: 'taskbar',
   templateUrl: './taskbar.component.html',
   styleUrls: ['./taskbar.component.scss']
 })
-export class TaskbarComponent implements OnInit {
+export class TaskbarComponent implements OnInit, AfterViewInit{
 
   menuVisibility: boolean;
 
@@ -14,7 +15,10 @@ export class TaskbarComponent implements OnInit {
   @Output()
   logOffEvent = new EventEmitter<any>();
 
-  constructor() {
+  @ViewChild("runningTasks", { read: ViewContainerRef })
+  taskbar!: ViewContainerRef;
+
+  constructor(private windowManagementService: WindowManagementService) {
     this.menuVisibility = false;
   }
 
@@ -52,5 +56,9 @@ export class TaskbarComponent implements OnInit {
 
   emitUserProfileClickEvent() {
     this.userProfileClickEvent.emit();
+  }
+
+  ngAfterViewInit(){
+    this.windowManagementService.setTaskbarContainerRef(this.taskbar);
   }
 }
