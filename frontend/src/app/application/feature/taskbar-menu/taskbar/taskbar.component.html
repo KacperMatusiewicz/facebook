@@ -1,32 +1,23 @@
-
 <div class="taskbar-outer">
   <div class="taskbar">
     <div class="start-button">
 
       <menu [hidden]="!menuVisibility" (userProfileClickEvent)="emitUserProfileClickEvent()">
-        <menu-item displayValue="Programs" [hasChildren]="true">
-          <menu-item displayValue="Dune 2"></menu-item>
-          <menu-item displayValue="Accessories" [hasChildren]="true">
-            <menu-item displayValue="Paint"></menu-item>
-            <menu-item displayValue="Paint"></menu-item>
-            <menu-item displayValue="Paint"></menu-item>
-            <menu-item displayValue="Paint"></menu-item>
-            <menu-item [hasChildren]="true" displayValue="Accessibility">
-              <menu-item displayValue="1Keyboard"></menu-item>
-              <menu-item displayValue="2Keyboard"></menu-item>
-              <menu-item displayValue="3Keyboard"></menu-item>
-              <menu-item displayValue="4Keyboard"></menu-item>
-              <menu-item displayValue="5Keyboard"></menu-item>
-              <menu-item displayValue="6Keyboard"></menu-item>
-              <menu-item displayValue="7Keyboard"></menu-item>
-              <menu-item displayValue="8Keyboard"></menu-item>
-            </menu-item>
-          </menu-item>
-          <menu-item displayValue="Doom"></menu-item>
-          <menu-item displayValue="Heroes of Might and Magic III"></menu-item>
+
+        <menu-item [hasChildren]="true" displayValue="Settings" icon="assets/icons/settings-icon.png">
+          <menu-item
+            displayValue="Change Password"
+            icon="assets/icons/change-password-icon.png"
+            (click)="openChangePasswordPage()"
+          ></menu-item>
+          <menu-item
+            displayValue="Delete Account"
+            icon="assets/icons/trash-icon.png"
+            (click)="openDeleteAccountPage()"
+          ></menu-item>
         </menu-item>
-        <menu-item displayValue="Settings"></menu-item>
         <menu-item displayValue="Log off" icon="assets/icons/logout.png" (click)="emitLogOffEvent()" ></menu-item>
+
       </menu>
 
       <tray-button (click)="toggleMenuVisibility()" [active]="menuVisibility">

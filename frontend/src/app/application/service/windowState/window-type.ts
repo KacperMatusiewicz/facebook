@@ -1,4 +1,6 @@
 export enum WindowType {
-  ProfilePage,
-  MessageBox
+    ProfilePage,
+    MessageBox,
+    ChangePasswordPage,
+    DeleteAccountPage
 }

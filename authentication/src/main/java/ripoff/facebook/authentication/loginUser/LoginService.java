@@ -40,4 +40,8 @@ public class LoginService {
     public void logoutUser(String sessionId) {
         sessionRepository.deleteById(sessionId);
     }
+
+    public void logoutUserFromAllSessions(Long userId) {
+        sessionRepository.deleteAllByUserId(userId);
+    }
 }

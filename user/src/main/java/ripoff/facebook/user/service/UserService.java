@@ -2,6 +2,7 @@ package ripoff.facebook.user.service;
 
 import lombok.AllArgsConstructor;
 import org.springframework.stereotype.Service;
+import ripoff.facebook.clients.authentication.AuthClient;
 import ripoff.facebook.clients.notification.UserNotificationQueueClient;
 import ripoff.facebook.clients.post.PostClient;
 import ripoff.facebook.clients.relation.RelationClient;
@@ -17,6 +18,8 @@ import ripoff.facebook.user.mail.EmailAccountActivation;
 import ripoff.facebook.user.repository.ActivationRepository;
 import ripoff.facebook.user.repository.UserRepository;
 
+import javax.transaction.Transactional;
+
 @Service
 @AllArgsConstructor
 public class UserService {
@@ -25,6 +28,8 @@ public class UserService {
     private EmailAccountActivation emailAccountActivationService;
     private UserValidationService userValidationService;
     private RelationClient relationClient;
+
+    private AuthClient authenticationClient;
     private UserNotificationQueueClient userNotificationQueueClient;
     private PostClient postClient;
 
@@ -37,9 +42,11 @@ public class UserService {
     }
 
     public void deleteUser(Long userId) {
+        System.out.println("jestem metodem");
         userNotificationQueueClient.deleteQueue(userId);
         relationClient.deleteUser(userId);
         postClient.deleteAllPostsByUserId(userId);
+        authenticationClient.deleteUserAuthenticationData(userId);
         userRepository.deleteById(userId);
     }
 

@@ -10,4 +10,6 @@ public interface UserAuthenticationDataRepository extends JpaRepository<UserAuth
 
     @Query("select u from UserAuthenticationData u where u.login=?1")
     Optional<UserAuthenticationData> getByLogin(String login);
+
+
 }

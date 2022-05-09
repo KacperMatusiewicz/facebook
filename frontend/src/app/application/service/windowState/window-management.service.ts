@@ -3,6 +3,8 @@ import {WindowDto} from "./window-dto";
 import {WindowType} from "./window-type";
 import {UserProfilePageComponent} from "../../feature/user-profile-page/user-profile-page.component";
 import {TaskbarItemComponent} from "../../feature/taskbar-menu/taskbar-item/taskbar-item.component";
+import {ChangePasswordPageComponent} from "../../feature/settings/change-password-page/change-password-page.component";
+import {DeleteAccountPageComponent} from "../../feature/settings/delete-account-page/delete-account-page.component";
 
 @Injectable({
   providedIn: 'root'
@@ -38,15 +40,33 @@ export class WindowManagementService {
   openWindow(window: WindowDto) {
     let newDesktopPage! : ComponentRef<any>;
     switch (window.windowType) {
-      case WindowType.ProfilePage:
+      case WindowType.ProfilePage:{
         if(this.windowContainerRef != undefined){
           newDesktopPage = this.windowContainerRef.createComponent(UserProfilePageComponent);
           newDesktopPage.location.nativeElement.setAttribute("userId", window.content?.userId);
           this.windowList.set(this.idCounter, newDesktopPage.location.nativeElement);
         }
         break;
+      }
+
       case WindowType.MessageBox:
         break;
+
+      case WindowType.ChangePasswordPage:{
+        if(this.windowContainerRef != undefined){
+          newDesktopPage = this.windowContainerRef.createComponent(ChangePasswordPageComponent);
+          this.windowList.set(this.idCounter, newDesktopPage.location.nativeElement);
+        }
+        break;
+      }
+
+      case WindowType.DeleteAccountPage:{
+        if(this.windowContainerRef != undefined){
+          newDesktopPage = this.windowContainerRef.createComponent(DeleteAccountPageComponent);
+          this.windowList.set(this.idCounter, newDesktopPage.location.nativeElement);
+        }
+        break;
+      }
     }
     if (this.taskbarContainerRef){
       let newTaskBarItem = this.taskbarContainerRef.createComponent(TaskbarItemComponent);
