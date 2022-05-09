@@ -28,4 +28,7 @@ public class User {
     private String email;
     private String password;
     private UserStatus userStatus;
+
+    @OneToOne(mappedBy = "user", cascade = CascadeType.REMOVE)
+    ActivationLink activationLink;
 }

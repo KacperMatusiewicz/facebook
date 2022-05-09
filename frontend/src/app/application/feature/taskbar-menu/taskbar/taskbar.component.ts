@@ -1,5 +1,7 @@
 import {AfterViewInit, Component, EventEmitter, OnInit, Output, ViewChild, ViewContainerRef} from '@angular/core';
 import {WindowManagementService} from "../../../service/windowState/window-management.service";
+import {WindowDto} from "../../../service/windowState/window-dto";
+import {WindowType} from "../../../service/windowState/window-type";
 
 @Component({
   selector: 'taskbar',
@@ -18,7 +20,8 @@ export class TaskbarComponent implements OnInit, AfterViewInit{
   @ViewChild("runningTasks", { read: ViewContainerRef })
   taskbar!: ViewContainerRef;
 
-  constructor(private windowManagementService: WindowManagementService) {
+  constructor(
+    private windowManagementService: WindowManagementService) {
     this.menuVisibility = false;
   }
 
@@ -60,5 +63,16 @@ export class TaskbarComponent implements OnInit, AfterViewInit{
 
   ngAfterViewInit(){
     this.windowManagementService.setTaskbarContainerRef(this.taskbar);
+  }
+
+  openChangePasswordPage() {
+    this.windowManagementService.openWindow({
+      windowType: WindowType.ChangePasswordPage
+    });
+  }
+  openDeleteAccountPage() {
+    this.windowManagementService.openWindow({
+      windowType: WindowType.DeleteAccountPage
+    });
   }
 }

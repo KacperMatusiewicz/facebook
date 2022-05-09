@@ -5,4 +5,6 @@ import org.springframework.stereotype.Repository;
 
 @Repository
 public interface SessionRepository extends JpaRepository<SessionEntry, String> {
+
+    void deleteAllByUserId(Long id);
 }

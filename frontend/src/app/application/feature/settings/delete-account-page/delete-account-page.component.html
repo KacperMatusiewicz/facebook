@@ -1,0 +1,22 @@
+<window
+  style="position:absolute; top: 10px; left: 10px; width: 300px; height: 170px; z-index: 0{{style.zIndex}};"
+  (onClose)="close()"
+  (onMaximize)="maximize()"
+  (onMinimize)="minimize()"
+  (onWindowClick)="focus()"
+  [icon]="icon"
+  [windowName]="title"
+  maximizeBtnShow="false"
+  draggable
+
+>
+  <p style="margin: 10px;">This action will <span style="font-weight: bold;">PERMANENTLY</span> delete your account, this operation cannot be reversed.<br/> Are you sure?</p>
+  <hr style="width: 260px; margin: 4px auto;"/>
+  <form [formGroup]="form" (ngSubmit)="deleteAccount()">
+    <password-input formControlName="password" ngDefaultControl required>Confirm Password</password-input>
+    <div style="display: flex; justify-content: space-between; align-items: center; padding: 8px; width: 100%; flex-direction: row;">
+      <checkbox-input formControlName="confirmation" [formGroup]="form" ngDefaultControl required>I am sure.</checkbox-input>
+      <win-button [formGroup]="form" ngDefaultControl [disabled]="!form.valid">Delete my account</win-button>
+  </div>
+  </form>
+</window>

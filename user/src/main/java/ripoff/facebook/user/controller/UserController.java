@@ -15,7 +15,6 @@ public class UserController {
 
     @PostMapping
     public void createUser(@RequestBody UserRequest userRequest) {
-        System.out.println("dziala");
         userService.registerUser(userRequest);
     }
 
@@ -34,8 +33,8 @@ public class UserController {
         return new UserExistsResponse(userService.checkIfUserExistsById(userId));
     }
 
-    @DeleteMapping("{userId}")
-    public void deleteUser(@PathVariable Long userId) {
+    @DeleteMapping()
+    public void deleteUser(@RequestHeader("user-id") Long userId) {
         userService.deleteUser(userId);
     }
 

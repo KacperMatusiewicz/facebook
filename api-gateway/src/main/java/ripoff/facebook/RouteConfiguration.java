@@ -39,6 +39,20 @@ public class RouteConfiguration {
                 .route(r -> r
                         .host("localhost:8080")
                         .and()
+                        .path("/api/v1/auth/logoutAll")
+                        .filters(f -> f.filter(authenticationFilter).filter(loggingFilter))
+                        .uri("lb://AUTHENTICATION")
+                )
+                .route(r -> r
+                        .host("localhost:8080")
+                        .and()
+                        .path("/api/v1/auth/password")
+                        .filters(f -> f.filter(authenticationFilter).filter(loggingFilter))
+                        .uri("lb://AUTHENTICATION")
+                )
+                .route(r -> r
+                        .host("localhost:8080")
+                        .and()
                         .method(HttpMethod.POST)
                         .and()
                         .path("/api/v1/user/**")
