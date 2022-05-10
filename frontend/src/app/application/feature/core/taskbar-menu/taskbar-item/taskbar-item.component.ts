@@ -1,6 +1,6 @@
 import {AfterViewInit, Component, DoCheck, ElementRef, OnInit, ViewChild} from '@angular/core';
-import {TaskbarItem} from "../../../service/windowState/taskbar-item";
-import {WindowManagementService} from "../../../service/windowState/window-management.service";
+import {TaskbarItem} from "../../../../service/windowState/taskbar-item";
+import {WindowManagementService} from "../../../../service/windowState/window-management.service";
 import {Observable} from "rxjs";
 
 @Component({

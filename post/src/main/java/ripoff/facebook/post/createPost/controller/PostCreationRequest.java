@@ -1,6 +1,7 @@
-package ripoff.facebook.post.createPost.service.dto;
+package ripoff.facebook.post.createPost.controller;
 
 import lombok.*;
+import ripoff.facebook.post.createPost.service.dto.VisibilityGroupType;
 
 import java.util.Set;
 
@@ -11,9 +12,7 @@ import java.util.Set;
 @Builder
 public class PostCreationRequest {
 
-    private Long userId;
     private String content;
     private VisibilityGroupType visibilityGroupType;
-    private Long visibilityGroupId;
     private Set<Long> visibilityUsersId;
 }

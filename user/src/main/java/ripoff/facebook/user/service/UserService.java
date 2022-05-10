@@ -42,7 +42,7 @@ public class UserService {
     }
 
     public void deleteUser(Long userId) {
-        System.out.println("jestem metodem");
+        //TODO: Saga
         userNotificationQueueClient.deleteQueue(userId);
         relationClient.deleteUser(userId);
         postClient.deleteAllPostsByUserId(userId);

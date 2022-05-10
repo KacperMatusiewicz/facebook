@@ -15,4 +15,8 @@ public class RelationService {
     public Set<Long> getFollowers(Long visibilityGroupId) {
         return relationClient.getFollowers(visibilityGroupId).getGroupIds();
     }
+
+    public Set<Long> getFriends(Long visibilityGroupId) {
+        return relationClient.getFriends(visibilityGroupId).getGroupIds();
+    }
 }

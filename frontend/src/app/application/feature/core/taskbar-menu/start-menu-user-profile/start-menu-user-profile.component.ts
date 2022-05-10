@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
-import {UserDetailsService} from "../../../service/user-details.service";
-import {UserDetails} from "../../../service/user-details";
+import {UserDetailsService} from "../../../../service/user-details.service";
+import {UserDetails} from "../../../../service/user-details";
 
 @Component({
   selector: 'app-start-menu-user-profile',

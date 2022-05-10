@@ -10,12 +10,12 @@ import { PasswordInputComponent } from './components/password-input/password-inp
 import { WinButtonComponent } from './components/win-button/win-button.component';
 import { CheckboxInputComponent } from './components/checkbox-input/checkbox-input.component';
 import { RadioInputComponent } from './components/radio-input/radio-input.component';
-import { DesktopComponent } from '../application/feature/home-page/desktop/desktop.component';
-import { TaskbarComponent } from '../application/feature/taskbar-menu/taskbar/taskbar.component';
-import { DesktopIconComponent } from '../application/feature/home-page/desktop-icon/desktop-icon.component';
-import { MenuComponent } from '../application/feature/taskbar-menu/menu/menu.component';
-import { TrayButtonComponent } from '../application/feature/taskbar-menu/tray-button/tray-button.component';
-import { MenuItemComponent } from '../application/feature/taskbar-menu/menu-item/menu-item.component';
+import { DesktopComponent } from '../application/feature/core/desktop/desktop.component';
+import { TaskbarComponent } from '../application/feature/core/taskbar-menu/taskbar/taskbar.component';
+import { DesktopIconComponent } from '../application/feature/core/desktop-icon/desktop-icon.component';
+import { MenuComponent } from '../application/feature/core/taskbar-menu/menu/menu.component';
+import { TrayButtonComponent } from '../application/feature/core/taskbar-menu/tray-button/tray-button.component';
+import { MenuItemComponent } from '../application/feature/core/taskbar-menu/menu-item/menu-item.component';
 
 
 

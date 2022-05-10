@@ -18,7 +18,17 @@ public class GetRelationsService {
     public Set<Long> getFollowers(Long id) {
         return repository.getFollowersByUserId(id)
                 .orElseThrow(
-                        () -> new GroupNotFoundException("Group not found.")
+                        () -> new GroupNotFoundException("Followers not found.")
+                )
+                .stream()
+                .map(User::getId)
+                .collect(Collectors.toSet());
+    }
+
+    public Set<Long> getFriends(Long id) {
+        return repository.getFriendsByUserId(id)
+                .orElseThrow(
+                        () -> new GroupNotFoundException("Friends not found.")
                 )
                 .stream()
                 .map(User::getId)

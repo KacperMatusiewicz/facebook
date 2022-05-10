@@ -13,6 +13,10 @@ public interface GroupRepository extends Neo4jRepository<User, Long> {
     @Query("match (u:User)-[:Follows]->(:User{id: $0}) return u")
     Optional<Set<User>> getFollowersByUserId(Long id);
 
+    @Query("match (friend:User)-[:Follows]->(user:User)-[:Follows]->(u) where user.id=$0 return friend")
+    Optional<Set<User>> getFriendsByUserId(Long id);
+
+
     @Query("match (u1:User {id: $0}), (u2:User {id: $1}) merge (u1)-[:Follows]->(u2)")
     void createFollowRelation(Long followerId, Long targetId);
 
