@@ -1,27 +1,21 @@
-import {AfterViewInit, Component, OnInit} from '@angular/core';
+import {Component, OnInit} from '@angular/core';
+import {SoundService} from "../../../core/sound/sound.service";
+import {Sound} from "../../../core/sound/sound";
 
 @Component({
   selector: 'app-landing-page',
   templateUrl: './landing-page.component.html',
   styleUrls: ['./landing-page.component.scss']
 })
-export class LandingPageComponent implements OnInit, AfterViewInit {
+export class LandingPageComponent implements OnInit {
 
   registerVisibility: boolean;
   mailAlertVisibility: boolean;
 
-  constructor() {
+  constructor(private soundService: SoundService) {
     this.registerVisibility = false;
     this.mailAlertVisibility = false;
   }
-
-  ngAfterViewInit(): void {
-        /*let audio = document.createElement("audio");
-        audio.src = "assets/sounds/login.mp3";
-        audio.volume = 0.5;
-        audio.play();*/
-
-    }
 
   ngOnInit(): void {
   }
@@ -35,6 +29,8 @@ export class LandingPageComponent implements OnInit, AfterViewInit {
   showMailAlertWindow() {
     if(!this.mailAlertVisibility){
       this.mailAlertVisibility = true;
+      this.soundService.playSound(Sound.NOTIFICATION);
+
     }
   }
 

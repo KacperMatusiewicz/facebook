@@ -2,6 +2,8 @@ import {AfterViewInit, Component, EventEmitter, OnInit, Output, ViewChild, ViewC
 import {WindowManagementService} from "../../../../service/windowState/window-management.service";
 import {WindowDto} from "../../../../service/windowState/window-dto";
 import {WindowType} from "../../../../service/windowState/window-type";
+import {SoundService} from "../../../../../core/sound/sound.service";
+import {Sound} from "../../../../../core/sound/sound";
 
 @Component({
   selector: 'taskbar',
@@ -21,7 +23,9 @@ export class TaskbarComponent implements OnInit, AfterViewInit{
   taskbar!: ViewContainerRef;
 
   constructor(
-    private windowManagementService: WindowManagementService) {
+    private windowManagementService: WindowManagementService,
+    private soundService: SoundService
+  ) {
     this.menuVisibility = false;
   }
 
@@ -29,10 +33,9 @@ export class TaskbarComponent implements OnInit, AfterViewInit{
   }
 
   toggleMenuVisibility(){
-    let audio = document.createElement("audio");
-    audio.src = "assets/sounds/click.mp3";
-    audio.volume = 0.5;
-    audio.play();
+
+    this.soundService.playSound(Sound.CLICK);
+
     let listener = (ev: MouseEvent) => {
       if(!(
         ev.clientY > window.innerHeight - 28 &&
