@@ -5,6 +5,7 @@ import { CoreRoutingModule } from './core-routing.module';
 import {AuthService} from "./auth/auth.service";
 import {CookieService} from "ngx-cookie-service";
 import {HttpClientModule} from "@angular/common/http";
+import {SoundService} from "./sound/sound.service";
 
 
 @NgModule({
@@ -16,7 +17,8 @@ import {HttpClientModule} from "@angular/common/http";
   ],
   providers: [
     AuthService,
-    CookieService
+    CookieService,
+    SoundService
   ]
 })
 export class CoreModule { }
