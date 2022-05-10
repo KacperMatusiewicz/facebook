@@ -1,10 +1,11 @@
 import {ComponentFactoryResolver, ComponentRef, Inject, Injectable, ViewContainerRef} from '@angular/core';
 import {WindowDto} from "./window-dto";
 import {WindowType} from "./window-type";
-import {UserProfilePageComponent} from "../../feature/user-profile-page/user-profile-page.component";
-import {TaskbarItemComponent} from "../../feature/taskbar-menu/taskbar-item/taskbar-item.component";
+import {UserProfilePageComponent} from "../../feature/profile/user-profile-page/user-profile-page.component";
+import {TaskbarItemComponent} from "../../feature/core/taskbar-menu/taskbar-item/taskbar-item.component";
 import {ChangePasswordPageComponent} from "../../feature/settings/change-password-page/change-password-page.component";
 import {DeleteAccountPageComponent} from "../../feature/settings/delete-account-page/delete-account-page.component";
+import {CreatePostPageComponent} from "../../feature/post/create-post-page/create-post-page.component";
 
 @Injectable({
   providedIn: 'root'
@@ -63,6 +64,14 @@ export class WindowManagementService {
       case WindowType.DeleteAccountPage:{
         if(this.windowContainerRef != undefined){
           newDesktopPage = this.windowContainerRef.createComponent(DeleteAccountPageComponent);
+          this.windowList.set(this.idCounter, newDesktopPage.location.nativeElement);
+        }
+        break;
+      }
+
+      case WindowType.CreatePostPage:{
+        if(this.windowContainerRef != undefined){
+          newDesktopPage = this.windowContainerRef.createComponent(CreatePostPageComponent);
           this.windowList.set(this.idCounter, newDesktopPage.location.nativeElement);
         }
         break;

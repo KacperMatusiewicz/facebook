@@ -7,7 +7,7 @@ import ripoff.facebook.amqp.FeedPostInformation;
 import ripoff.facebook.post.commons.TimeService;
 import ripoff.facebook.post.commons.repository.Post;
 import ripoff.facebook.post.commons.repository.PostRepository;
-import ripoff.facebook.post.createPost.service.dto.PostCreationRequest;
+import ripoff.facebook.post.createPost.service.dto.PostCreationDto;
 import ripoff.facebook.post.createPost.service.dto.VisibilityGroupType;
 
 import java.util.Set;
@@ -22,7 +22,7 @@ public class CreatePostService {
     private final TimeService timeService;
     private final AmqpTemplate template;
 
-    public void createPost(PostCreationRequest request) {
+    public void createPost(PostCreationDto request) {
         validatePost(request);
         Long postId = savePost(request);
         Set<Long> visibilityUserIds = getVisibilityUserIds(request);
@@ -34,17 +34,26 @@ public class CreatePostService {
         );
     }
 
-    private Set<Long> getVisibilityUserIds(PostCreationRequest request) {
+    private Set<Long> getVisibilityUserIds(PostCreationDto request) {
         Set<Long> visibilityUserIds;
-        if (request.getVisibilityGroupType() == VisibilityGroupType.FOLLOWERS) {
-            visibilityUserIds = relationService.getFollowers(request.getVisibilityGroupId());
-        } else {
-            visibilityUserIds = request.getVisibilityUsersId();
+        switch(request.getVisibilityGroupType()) {
+            case FOLLOWERS:
+                visibilityUserIds = relationService.getFollowers(request.getUserId());
+                break;
+            case FRIENDS:
+                visibilityUserIds = relationService.getFriends(request.getUserId());
+                break;
+            case CUSTOM:
+                visibilityUserIds = request.getVisibilityUsersId();
+                break;
+            default:
+                throw new BadPostDataException("Couldn't resolve post visibility user group.");
+
         }
         return visibilityUserIds;
     }
 
-    private Long savePost(PostCreationRequest request) {
+    private Long savePost(PostCreationDto request) {
         Post post = Post.builder()
                 .userId(request.getUserId())
                 .content(request.getContent())
@@ -54,11 +63,11 @@ public class CreatePostService {
         return repository.save(post).getId();
     }
 
-    private void validatePost(PostCreationRequest request) {
+    private void validatePost(PostCreationDto request) {
         if (!dataValidationService.validatePost(request)) {
             throw new BadPostDataException("Post data is not correct.");
         }
-        if (request.getVisibilityGroupId() == null && request.getVisibilityUsersId() == null) {
+        if (request.getVisibilityUsersId() == null) {
             throw new BadPostDataException("Recipient group not defined");
         }
     }

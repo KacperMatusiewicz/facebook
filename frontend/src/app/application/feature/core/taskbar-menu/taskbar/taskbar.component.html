@@ -4,6 +4,11 @@
 
       <menu [hidden]="!menuVisibility" (userProfileClickEvent)="emitUserProfileClickEvent()">
 
+        <menu-item
+          displayValue="Create a New Post"
+          icon="assets/icons/create-post-page-icon.png"
+          (click)="openCreatePostPage()">
+        </menu-item>
         <menu-item [hasChildren]="true" displayValue="Settings" icon="assets/icons/settings-icon.png">
           <menu-item
             displayValue="Change Password"

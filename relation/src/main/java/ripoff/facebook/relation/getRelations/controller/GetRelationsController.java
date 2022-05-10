@@ -15,9 +15,13 @@ public class GetRelationsController {
 
     GetRelationsService service;
 
-    @GetMapping("/default/{id}")
+    @GetMapping("/followers/{id}")
     public GroupIdsResponse getFollowers(@PathVariable("id") Long id) {
         return new GroupIdsResponse(service.getFollowers(id));
+    }
+    @GetMapping("/friends/{id}")
+    public GroupIdsResponse getFriends(@PathVariable("id") Long id) {
+        return new GroupIdsResponse(service.getFriends(id));
     }
 
 }

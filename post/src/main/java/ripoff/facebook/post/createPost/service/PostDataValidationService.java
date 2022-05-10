@@ -5,7 +5,7 @@ import lombok.Getter;
 import org.springframework.stereotype.Service;
 import org.springframework.web.client.RestTemplate;
 import ripoff.facebook.clients.user.UserClient;
-import ripoff.facebook.post.createPost.service.dto.PostCreationRequest;
+import ripoff.facebook.post.createPost.service.dto.PostCreationDto;
 
 @Service
 @Getter
@@ -16,7 +16,7 @@ public class PostDataValidationService {
     private final int contentMaxLength = 512;
     private final RestTemplate restTemplate;
 
-    public boolean validatePost(PostCreationRequest postCreationRequest) {
+    public boolean validatePost(PostCreationDto postCreationRequest) {
         return validateContent(postCreationRequest.getContent())
                 && validateUserId(postCreationRequest.getUserId());
     }
@@ -26,6 +26,7 @@ public class PostDataValidationService {
     }
 
     public boolean validateUserId(Long userId) {
+        System.out.println(userId);
         return userClient.checkIfUserExistsById(userId).getUserExists();
     }
 

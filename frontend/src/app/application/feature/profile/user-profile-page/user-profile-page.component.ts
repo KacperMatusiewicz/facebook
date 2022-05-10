@@ -1,11 +1,11 @@
 import {Component, ElementRef, EventEmitter, Input, OnInit, Output} from '@angular/core';
-import {UserDetails} from "../../service/user-details";
-import {UserDetailsService} from "../../service/user-details.service";
-import {Post} from "../../service/post";
-import {DesktopWindow} from "../../service/windowState/desktop-window";
-import {WindowManagementService} from "../../service/windowState/window-management.service";
 import {Observable} from "rxjs";
 import {map} from "rxjs/operators";
+import {DesktopWindow} from "../../../service/windowState/desktop-window";
+import {UserDetails} from "../../../service/user-details";
+import {Post} from "../../../service/post";
+import {UserDetailsService} from "../../../service/user-details.service";
+import {WindowManagementService} from "../../../service/windowState/window-management.service";
 
 @Component({
   selector: 'app-user-profile-page',
@@ -36,7 +36,7 @@ export class UserProfilePageComponent implements OnInit, DesktopWindow {
   ) {
     this.style = elementRef.nativeElement.style;
     this.icon = "assets/icons/user.png";
-    this.userDetails = new UserDetails("", "", "")
+    this.userDetails = new UserDetails("", "", "");
     this.posts = [];
     this.setUserDetailsObservable();
     this.setUserDetail();

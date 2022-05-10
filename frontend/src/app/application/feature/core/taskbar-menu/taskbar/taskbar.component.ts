@@ -1,7 +1,7 @@
 import {AfterViewInit, Component, EventEmitter, OnInit, Output, ViewChild, ViewContainerRef} from '@angular/core';
-import {WindowManagementService} from "../../../service/windowState/window-management.service";
-import {WindowDto} from "../../../service/windowState/window-dto";
-import {WindowType} from "../../../service/windowState/window-type";
+import {WindowManagementService} from "../../../../service/windowState/window-management.service";
+import {WindowDto} from "../../../../service/windowState/window-dto";
+import {WindowType} from "../../../../service/windowState/window-type";
 
 @Component({
   selector: 'taskbar',
@@ -73,6 +73,11 @@ export class TaskbarComponent implements OnInit, AfterViewInit{
   openDeleteAccountPage() {
     this.windowManagementService.openWindow({
       windowType: WindowType.DeleteAccountPage
+    });
+  }
+  openCreatePostPage() {
+    this.windowManagementService.openWindow({
+      windowType: WindowType.CreatePostPage
     });
   }
 }

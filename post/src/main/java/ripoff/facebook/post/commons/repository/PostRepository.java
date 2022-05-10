@@ -9,7 +9,7 @@ import java.util.List;
 
 @Repository
 public interface PostRepository extends JpaRepository<Post, Long> {
-    @Query("select p from Post p where p.userId = ?1")
+    @Query("select p from Post p where p.userId = ?1 order by p.creationDate desc")
     List<Post> findAllByUserId(Long userId);
 
     @Modifying
