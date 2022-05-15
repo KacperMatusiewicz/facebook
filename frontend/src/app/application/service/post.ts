@@ -1,4 +1,5 @@
 export class Post {
+  id: number | undefined;
   content: string;
   creationDate: string;
 

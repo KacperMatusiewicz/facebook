@@ -7,6 +7,6 @@ import org.springframework.web.bind.annotation.PathVariable;
 @FeignClient("post")
 public interface PostClient {
 
-    @DeleteMapping(path = "api/v1/post/{userId}")
+    @DeleteMapping(path = "api/v1/post/all/{userId}")
     void deleteAllPostsByUserId(@PathVariable("userId") Long userId);
 }

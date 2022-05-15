@@ -2,9 +2,9 @@ import {Component, ElementRef, OnInit} from '@angular/core';
 import {DesktopWindow} from "../../../service/windowState/desktop-window";
 import {WindowManagementService} from "../../../service/windowState/window-management.service";
 import {PostCreationRequest} from "./post-creation-request";
-import { Observable } from 'rxjs';
-import {PostService} from "../post.service";
+import {from, Observable} from 'rxjs';
 import {FormBuilder, FormControl, FormGroup, Validators} from "@angular/forms";
+import {UserPostsControllerService} from "../user-posts-controller/user-posts-controller.service";
 
 
 @Component({
@@ -27,7 +27,7 @@ export class CreatePostPageComponent implements OnInit, DesktopWindow {
   constructor(
     private fb: FormBuilder,
     private windowManagementService: WindowManagementService,
-    private postService: PostService,
+    private userPostController: UserPostsControllerService,
     private elementRef: ElementRef
   ) {
 
@@ -63,24 +63,24 @@ export class CreatePostPageComponent implements OnInit, DesktopWindow {
 
   publishPost() {
     if(this.visibilityGroup.value !== "CUSTOM") {
-      this.postService.createPost(
+      from(this.userPostController.addPost(
         new PostCreationRequest(
           this.content.value,
           this.visibilityGroup.value
         )
-      ).subscribe(
-        response => this.content.reset(),
+      )).subscribe(
+        response => this.close(),
         error => window.alert(error.error())
       );
     } else {
-      this.postService.createPost(
+      from(this.userPostController.addPost(
         new PostCreationRequest(
           this.content.value,
           this.visibilityGroup.value,
           [1,2,3]
         )
-      ).subscribe(
-        response => this.content.reset(),
+      )).subscribe(
+        response => this.close(),
         error => window.alert(error.error())
       );
     }
