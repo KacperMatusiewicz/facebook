@@ -1,10 +1,9 @@
 import {Component, ElementRef, OnInit} from '@angular/core';
 import {DesktopWindow} from "../../../service/windowState/desktop-window";
-import {from, Observable} from "rxjs";
+import {Observable} from "rxjs";
 import {WindowManagementService} from "../../../service/windowState/window-management.service";
 import {DeleteAccountService} from "./delete-account.service";
 import {FormBuilder, FormControl, FormGroup, Validators} from "@angular/forms";
-import {LogoutService} from "../../../../core/logout/logout.service";
 
 @Component({
   selector: 'app-delete-account-page',
@@ -26,8 +25,7 @@ export class DeleteAccountPageComponent implements OnInit, DesktopWindow {
     private fb: FormBuilder,
     private windowManagementService: WindowManagementService,
     private elementRef: ElementRef,
-    private deleteAccountService: DeleteAccountService,
-    private logoutService : LogoutService
+    private deleteAccountService: DeleteAccountService
   ) {
     this.icon = "assets/icons/trash-icon.png"
     this.title = "Delete Account"

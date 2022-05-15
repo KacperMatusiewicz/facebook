@@ -1,4 +1,4 @@
-import {ComponentFactoryResolver, ComponentRef, Inject, Injectable, ViewContainerRef} from '@angular/core';
+import {ComponentRef, Injectable, ViewContainerRef} from '@angular/core';
 import {WindowDto} from "./window-dto";
 import {WindowType} from "./window-type";
 import {UserProfilePageComponent} from "../../feature/profile/user-profile-page/user-profile-page.component";
@@ -6,6 +6,12 @@ import {TaskbarItemComponent} from "../../feature/core/taskbar-menu/taskbar-item
 import {ChangePasswordPageComponent} from "../../feature/settings/change-password-page/change-password-page.component";
 import {DeleteAccountPageComponent} from "../../feature/settings/delete-account-page/delete-account-page.component";
 import {CreatePostPageComponent} from "../../feature/post/create-post-page/create-post-page.component";
+import {
+  ChangePersonalInfoPageComponent
+} from "../../feature/settings/change-personal-info-page/change-personal-info-page.component";
+import {
+  ChangeContactInfoPageComponent
+} from "../../feature/settings/change-contact-info-page/change-contact-info-page.component";
 
 @Injectable({
   providedIn: 'root'
@@ -72,6 +78,22 @@ export class WindowManagementService {
       case WindowType.CreatePostPage:{
         if(this.windowContainerRef != undefined){
           newDesktopPage = this.windowContainerRef.createComponent(CreatePostPageComponent);
+          this.windowList.set(this.idCounter, newDesktopPage.location.nativeElement);
+        }
+        break;
+      }
+
+      case WindowType.ChangePersonalInfoPage:{
+        if(this.windowContainerRef != undefined){
+          newDesktopPage = this.windowContainerRef.createComponent(ChangePersonalInfoPageComponent);
+          this.windowList.set(this.idCounter, newDesktopPage.location.nativeElement);
+        }
+        break;
+      }
+
+      case WindowType.ChangeContactInfoPage:{
+        if(this.windowContainerRef != undefined){
+          newDesktopPage = this.windowContainerRef.createComponent(ChangeContactInfoPageComponent);
           this.windowList.set(this.idCounter, newDesktopPage.location.nativeElement);
         }
         break;

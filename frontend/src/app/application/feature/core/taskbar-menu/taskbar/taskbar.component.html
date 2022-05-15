@@ -9,17 +9,35 @@
           icon="assets/icons/create-post-page-icon.png"
           (click)="openCreatePostPage()">
         </menu-item>
+
         <menu-item [hasChildren]="true" displayValue="Settings" icon="assets/icons/settings-icon.png">
+
+          <menu-item
+          displayValue="Change Personal Info"
+          icon="assets/icons/change-personal-icon.svg"
+          (click)="openChangePersonalInfoPage()">
+
+          </menu-item>
+
           <menu-item
             displayValue="Change Password"
             icon="assets/icons/change-password-icon.png"
-            (click)="openChangePasswordPage()"
-          ></menu-item>
+            (click)="openChangePasswordPage()">
+
+          </menu-item>
+
+          <menu-item
+          displayValue="Change Contact Info"
+          icon="assets/icons/change-contact-icon.png"
+          (click)="openChangeContactInfoPage()">
+          </menu-item>
+
           <menu-item
             displayValue="Delete Account"
             icon="assets/icons/trash-icon.png"
-            (click)="openDeleteAccountPage()"
-          ></menu-item>
+            (click)="openDeleteAccountPage()">
+
+          </menu-item>
         </menu-item>
         <menu-item displayValue="Log off" icon="assets/icons/logout.png" (click)="emitLogOffEvent()" ></menu-item>
 
@@ -29,6 +47,10 @@
       </tray-button>
     </div>
     <div class="quick-buttons">
+      <app-quick-button
+        icon="assets/icons/create-post-page-icon.png"
+        (click)="openCreatePostPage()"
+      ></app-quick-button>
     </div>
     <div class="running-tasks">
       <div ngModel #runningTasks style="display: none"></div>

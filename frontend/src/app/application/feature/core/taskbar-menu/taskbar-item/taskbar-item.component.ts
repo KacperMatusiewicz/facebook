@@ -8,7 +8,7 @@ import {Observable} from "rxjs";
   templateUrl: './taskbar-item.component.html',
   styleUrls: ['./taskbar-item.component.scss']
 })
-export class TaskbarItemComponent implements OnInit,DoCheck, AfterViewInit, TaskbarItem {
+export class TaskbarItemComponent implements OnInit, DoCheck, AfterViewInit, TaskbarItem {
 
   icon: string | undefined;
   windowId: number;
@@ -22,7 +22,7 @@ export class TaskbarItemComponent implements OnInit,DoCheck, AfterViewInit, Task
   container!: ElementRef<HTMLElement>;
   @ViewChild("wrapper")
   wrapper!: ElementRef<HTMLElement>;
-  private elementsReady: boolean =false;
+  private elementsReady: boolean = false;
 
 
   constructor(private windowManagementService: WindowManagementService, private elementRef: ElementRef) {
@@ -30,9 +30,7 @@ export class TaskbarItemComponent implements OnInit,DoCheck, AfterViewInit, Task
   }
 
   ngDoCheck(): void {
-
     this.checkWindowStateAttributes();
-
     if (this.focused && this.elementsReady) {
       this.container.nativeElement.classList.add("container-focused");
       this.wrapper.nativeElement.classList.add("wrapper-focused");
@@ -46,9 +44,11 @@ export class TaskbarItemComponent implements OnInit,DoCheck, AfterViewInit, Task
   ngOnInit(): void {
   }
 
+
   ngAfterViewInit(): void {
     this.iconPlaceholder.nativeElement.style.backgroundImage =`url("${this.icon}")`;
     this.elementsReady = true;
+    this.ngDoCheck();
   }
 
   onLeftClick() {

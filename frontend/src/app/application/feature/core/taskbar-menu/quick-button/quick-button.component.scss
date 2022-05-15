@@ -1,0 +1,23 @@
+.wrapper{
+  width: 23px;
+  height: 22px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.wrapper:hover{
+  border-top: 1px solid #fff;
+  border-left: 1px solid #fff;
+  border-bottom: 1px solid #808080;
+  border-right: 1px solid #808080;
+}
+
+.image{
+  width: 16px;
+  height: 16px;
+  background-size: cover;
+  background-repeat: no-repeat;
+  background-position: center;
+  image-rendering: pixelated;
+}

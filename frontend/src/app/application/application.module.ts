@@ -25,6 +25,9 @@ import {SettingsService} from "./feature/settings/settings.service";
 import { DeleteAccountPageComponent } from './feature/settings/delete-account-page/delete-account-page.component';
 import {DeleteAccountService} from "./feature/settings/delete-account-page/delete-account.service";
 import { CreatePostPageComponent } from './feature/post/create-post-page/create-post-page.component';
+import { ChangePersonalInfoPageComponent } from './feature/settings/change-personal-info-page/change-personal-info-page.component';
+import { ChangeContactInfoPageComponent } from './feature/settings/change-contact-info-page/change-contact-info-page.component';
+import { QuickButtonComponent } from './feature/core/taskbar-menu/quick-button/quick-button.component';
 
 
 @NgModule({
@@ -42,7 +45,10 @@ import { CreatePostPageComponent } from './feature/post/create-post-page/create-
     TaskbarItemComponent,
     ChangePasswordPageComponent,
     DeleteAccountPageComponent,
-    CreatePostPageComponent
+    CreatePostPageComponent,
+    ChangePersonalInfoPageComponent,
+    ChangeContactInfoPageComponent,
+    QuickButtonComponent,
   ],
     imports: [
         CommonModule,

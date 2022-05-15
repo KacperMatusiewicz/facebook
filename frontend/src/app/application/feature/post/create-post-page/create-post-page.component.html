@@ -1,16 +1,16 @@
 <window
-  [windowName]="title"
-  [icon]="icon"
+  style="position:absolute; top: 10px; left: 10px; min-width: 360px; min-height: 340px; height: 340px; z-index: 0{{style.zIndex}};"
+  windowName="{{title}}"
+  icon="{{icon}}"
   (onWindowClick)="focus()"
   (onMinimize)="minimize()"
   (onMaximize)="maximize()"
   (onClose)="close()"
-  style="position:absolute; top: 10px; left: 10px; min-width: 360px; min-height: 340px; height: 340px;z-index:0{{style.zIndex}};"
   draggable
   resizable
 >
   <div class="container">
-    <form [formGroup]="form" (ngSubmit)="publishPost()">
+    <form [formGroup]="form">
       <div class="top-part">
         <p>What's on your mind?</p>
         <div class="wrapper">
