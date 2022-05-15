@@ -7,6 +7,8 @@ import {Post} from "../../../service/post";
 import {UserDetailsService} from "../../../service/user-details.service";
 import {WindowManagementService} from "../../../service/windowState/window-management.service";
 import {UserPostsStoreService} from "../../post/user-posts-model/user-posts-store.service";
+import {WindowType} from "../../../service/windowState/window-type";
+import {UserPostsControllerService} from "../../post/user-posts-controller/user-posts-controller.service";
 
 @Component({
   selector: 'app-user-profile-page',
@@ -34,7 +36,8 @@ export class UserProfilePageComponent implements OnInit, DesktopWindow {
     private userDetailsService: UserDetailsService,
     private windowManagementService: WindowManagementService,
     private elementRef: ElementRef,
-    private userPostsStore: UserPostsStoreService
+    private userPostsStore: UserPostsStoreService,
+    private userPostsController: UserPostsControllerService
   ) {
     this.style = elementRef.nativeElement.style;
     this.icon = "assets/icons/user.png";
@@ -46,7 +49,6 @@ export class UserProfilePageComponent implements OnInit, DesktopWindow {
     this.windowId = windowManagementService.getId();
 
   }
-
 
   ngOnInit(): void {
   }
@@ -89,6 +91,19 @@ export class UserProfilePageComponent implements OnInit, DesktopWindow {
     let timeF = new Intl.DateTimeFormat('pl-PL', {hour: '2-digit', minute: '2-digit'});
     let dateF = new Intl.DateTimeFormat('pl-PL', {day: '2-digit', month: '2-digit', year: 'numeric'});
     return `${dateF.format(dateFormat)} ${timeF.format(dateFormat)}`;
+  }
+
+  editPost(id: number) {
+    this.windowManagementService.openWindow({
+      windowType: WindowType.EditPostPage,
+      content: {
+        postId: id
+      }
+    })
+  }
+
+  deletePost(id: number) {
+    this.userPostsController.removePost(id);
   }
 
   focus(): void {

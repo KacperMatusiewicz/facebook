@@ -24,7 +24,7 @@ public class DeletePostService {
 
     private void authorizeDeleteOperation(Long userId, Post post) {
         if(!post.getUserId().equals(userId)) {
-            throw new UnauthorizedPostDeletionException("There is no permission for deleting this post.");
+            throw new UnauthorizedPostOperationException("There is no permission for deleting this post.");
         }
     }
 

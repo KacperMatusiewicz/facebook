@@ -6,5 +6,6 @@ export enum WindowType {
     CreatePostPage,
     ChangeContactInfoPage,
     ChangePersonalInfoPage,
-    NormalPage
+    NormalPage,
+    EditPostPage
 }

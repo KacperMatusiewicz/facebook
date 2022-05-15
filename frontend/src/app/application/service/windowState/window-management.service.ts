@@ -12,6 +12,7 @@ import {
 import {
   ChangeContactInfoPageComponent
 } from "../../feature/settings/change-contact-info-page/change-contact-info-page.component";
+import {EditPostPageComponent} from "../../feature/post/edit-post-page/edit-post-page.component";
 
 @Injectable({
   providedIn: 'root'
@@ -78,6 +79,17 @@ export class WindowManagementService {
       case WindowType.CreatePostPage:{
         if(this.windowContainerRef != undefined){
           newDesktopPage = this.windowContainerRef.createComponent(CreatePostPageComponent);
+          this.windowList.set(this.idCounter, newDesktopPage.location.nativeElement);
+        }
+        break;
+      }
+
+      case WindowType.EditPostPage:{
+        if(this.windowContainerRef != undefined){
+          newDesktopPage = this.windowContainerRef.createComponent(EditPostPageComponent);
+          console.log("tutu")
+          console.log(window.content?.postId);
+          newDesktopPage.instance.setPostContent(window.content?.postId)
           this.windowList.set(this.idCounter, newDesktopPage.location.nativeElement);
         }
         break;

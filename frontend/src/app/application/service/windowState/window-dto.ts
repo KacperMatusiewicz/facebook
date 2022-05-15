@@ -8,6 +8,7 @@ export class WindowDto {
   isResizable?: boolean;
   isDraggable?: boolean;
   content?: {
+    postId?: number | undefined,
     userId?: number | undefined
   };
 

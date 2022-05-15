@@ -4,6 +4,7 @@ import {Post} from "../../../service/post";
 import {PostService} from "../post.service";
 import {PostCreationRequest} from "../create-post-page/post-creation-request";
 import {Observable} from "rxjs";
+import {UpdatePostRequest} from "../update-post-request";
 
 @Injectable({
   providedIn: 'root'
@@ -29,5 +30,23 @@ export class UserPostsControllerService {
       response => this.userPostsStore.removePost(id),
       (error) => window.alert(error.error)
     );
+  }
+
+  async editPost(postRequest: UpdatePostRequest): Promise<any>{
+    await this.postService.editPost(postRequest).subscribe(
+      (response: Post) => {
+        this.userPostsStore.updatePost(response);
+        return new Observable(subscriber => subscriber.complete()).toPromise();
+      },
+      error => {
+        return new Observable(subscriber => {subscriber.error()});
+      }
+    );
+  }
+
+  getPostById(postId: number) {
+    let post = this.userPostsStore.getPostById(postId);
+    console.log(post);
+    return post;
   }
 }
