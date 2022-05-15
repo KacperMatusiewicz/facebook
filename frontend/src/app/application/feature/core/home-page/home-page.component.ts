@@ -1,7 +1,8 @@
-import {AfterViewInit, Component, ElementRef, OnInit, ViewChild, ViewContainerRef} from '@angular/core';
+import {AfterViewInit, Component, OnInit, ViewChild, ViewContainerRef} from '@angular/core';
 import {LogoutService} from 'src/app/core/logout/logout.service';
 import {WindowManagementService} from "../../../service/windowState/window-management.service";
 import {WindowType} from "../../../service/windowState/window-type";
+
 @Component({
   selector: 'app-home-page',
   templateUrl: './home-page.component.html',
@@ -26,10 +27,6 @@ export class HomePageComponent implements OnInit, AfterViewInit {
   }
 
   userDetailsWindow() {
-    /*
-    if(!this.userProfileWindowVisibility){
-      this.userProfileWindowVisibility = true;
-    }*/
     this.windowManagementService.openWindow({
       windowType: WindowType.ProfilePage,
     });

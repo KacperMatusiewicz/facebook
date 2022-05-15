@@ -1,6 +1,5 @@
 import {AfterViewInit, Component, EventEmitter, OnInit, Output, ViewChild, ViewContainerRef} from '@angular/core';
 import {WindowManagementService} from "../../../../service/windowState/window-management.service";
-import {WindowDto} from "../../../../service/windowState/window-dto";
 import {WindowType} from "../../../../service/windowState/window-type";
 import {SoundService} from "../../../../../core/sound/sound.service";
 import {Sound} from "../../../../../core/sound/sound";
@@ -68,19 +67,29 @@ export class TaskbarComponent implements OnInit, AfterViewInit{
     this.windowManagementService.setTaskbarContainerRef(this.taskbar);
   }
 
+  openCreatePostPage() {
+    this.windowManagementService.openWindow({
+      windowType: WindowType.CreatePostPage
+    });
+  }
   openChangePasswordPage() {
     this.windowManagementService.openWindow({
       windowType: WindowType.ChangePasswordPage
     });
   }
+  openChangeContactInfoPage() {
+    this.windowManagementService.openWindow({
+      windowType: WindowType.ChangeContactInfoPage
+    });
+  }
+  openChangePersonalInfoPage() {
+    this.windowManagementService.openWindow({
+      windowType: WindowType.ChangePersonalInfoPage
+    });
+  }
   openDeleteAccountPage() {
     this.windowManagementService.openWindow({
       windowType: WindowType.DeleteAccountPage
-    });
-  }
-  openCreatePostPage() {
-    this.windowManagementService.openWindow({
-      windowType: WindowType.CreatePostPage
     });
   }
 }

@@ -1,8 +1,8 @@
 import {Component, ElementRef, OnInit} from '@angular/core';
-import { Observable } from 'rxjs';
 import {DesktopWindow} from "../../../service/windowState/desktop-window";
 import {WindowManagementService} from "../../../service/windowState/window-management.service";
 import {PostCreationRequest} from "./post-creation-request";
+import { Observable } from 'rxjs';
 import {PostService} from "../post.service";
 import {FormBuilder, FormControl, FormGroup, Validators} from "@angular/forms";
 
@@ -16,50 +16,52 @@ export class CreatePostPageComponent implements OnInit, DesktopWindow {
 
   icon: string;
   title: string;
-  private windowId: number;
+  windowId: number;
   style: CSSStyleDeclaration;
+
   form: FormGroup
+
   content = new FormControl('', Validators.required);
   visibilityGroup = new FormControl('FRIENDS', Validators.required);
 
   constructor(
+    private fb: FormBuilder,
     private windowManagementService: WindowManagementService,
     private postService: PostService,
-    private fb: FormBuilder,
     private elementRef: ElementRef
   ) {
+
+    this.title = "Create post";
+    this.icon = "assets/icons/create-post-page-icon.png";
+    this.windowId = this.windowManagementService.getId();
     this.style = elementRef.nativeElement.style;
+
     this.form = fb.group({
       content: this.content,
       visibilityGroup: this.visibilityGroup
-    })
-    this.windowId = this.windowManagementService.getId();
-    this.icon = "assets/icons/create-post-page-icon.png";
-    this.title = "Create post";
+    });
+    new Observable(
+      (subscriber) => {
+        setTimeout(()=>{
+          subscriber.complete();
+        }, 1);
+      }
+    ).subscribe();
+  }
+  ngOnInit(): void {
   }
 
-  getIcon(): string | null {
-    return this.icon;
-  }
-  getTitle(): string | Observable<string> {
-    return this.title;
-  }
-  close(): void {
-    this.windowManagementService.closeWindow(this.windowId);
-  }
-  focus(): void {
-    this.windowManagementService.focusWindow(this.windowId);
-  }
-  maximize(): void {
-    this.windowManagementService.maximizeWindow(this.windowId);
-  }
-  minimize(): void {
-    this.windowManagementService.minimizeWindow(this.windowId);
-
+  ngAfterViewInit(){
+    new Observable(
+      (subscriber) => {
+        setTimeout(()=>{
+          subscriber.complete();
+        }, 1);
+      }
+    ).subscribe();
   }
 
   publishPost() {
-    console.log(this.visibilityGroup.value);
     if(this.visibilityGroup.value !== "CUSTOM") {
       this.postService.createPost(
         new PostCreationRequest(
@@ -83,12 +85,28 @@ export class CreatePostPageComponent implements OnInit, DesktopWindow {
       );
     }
   }
-
-  setId(windowId: number): void {
-      this.windowId = windowId;
+  close(): void {
+    this.windowManagementService.closeWindow(this.windowId);
+  }
+  focus(): void {
+    this.windowManagementService.focusWindow(this.windowId);
+  }
+  getIcon(): string | null {
+    return this.icon;
+  }
+  getTitle(): string | Observable<string> {
+    return this.title;
   }
 
-  ngOnInit(): void {
+  maximize(): void {
+    this.windowManagementService.maximizeWindow(this.windowId);
+  }
+  minimize(): void {
+    this.windowManagementService.minimizeWindow(this.windowId);
+
+  }
+
+  setId(windowId: number): void {
   }
 
 }

@@ -42,7 +42,7 @@ div.quick-buttons{
   display: flex;
   flex-direction: row;
   align-items: center;
-  justify-content: space-between;
+  justify-content:flex-start;
 }
 
 div.quick-buttons::before,
@@ -51,8 +51,9 @@ div.quick-buttons::after{
   content: "";
   border-left: 1px solid #808080;
   border-right: 1px solid white ;
-  width: 0px;
+  width: 0;
   height: 22px;
+  margin: 0 4px;
 }
 
 

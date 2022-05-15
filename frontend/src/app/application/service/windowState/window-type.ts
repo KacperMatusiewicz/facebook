@@ -3,5 +3,8 @@ export enum WindowType {
     MessageBox,
     ChangePasswordPage,
     DeleteAccountPage,
-    CreatePostPage
+    CreatePostPage,
+    ChangeContactInfoPage,
+    ChangePersonalInfoPage,
+    NormalPage
 }

@@ -1,0 +1,32 @@
+<window
+  style="position: absolute; top: 10px; left: 10px; width: 300px; height: 210px; min-width: 300px; min-height: 210px; z-index:0{{style.zIndex}}"
+  windowName="{{title}}"
+  icon="{{icon}}"
+  draggable
+  resizable
+  (onClose)="close()"
+  (onMaximize)="maximize()"
+  (onMinimize)="minimize()"
+  (onWindowClick)="focus()"
+>
+  <div class="container">
+    <form [formGroup]="form" (ngSubmit)="updatePersonalInfo()">
+      <p>Change your personal info.</p>
+    <div class="text-input">
+      <text-input [formGroup]="form" formControlName="name" ngDefaultControl required>Name</text-input>
+    </div>
+    <div class="text-input">
+      <text-input [formGroup]="form" formControlName="lastName" ngDefaultControl required>Last Name</text-input>
+    </div>
+    <div class="gender">
+      <radio-input [formGroup]="form" formControlName="gender" value="male" ngDefaultControl>Male</radio-input>
+      <radio-input [formGroup]="form" formControlName="gender" value="female" ngDefaultControl>Female</radio-input>
+    </div>
+    <hr style="width: 90%;" />
+      <div class="buttons">
+        <win-button (click)="setCurrentPersonalInfo()" ngDefaultControl>Revert</win-button>
+        <win-button [formGroup]="form" [disabled]="!form.valid" ngDefaultControl>Update</win-button>
+      </div>
+    </form>
+  </div>
+</window>

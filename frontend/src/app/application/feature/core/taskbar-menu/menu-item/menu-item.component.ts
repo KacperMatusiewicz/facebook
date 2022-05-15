@@ -21,11 +21,7 @@ export class MenuItemComponent implements OnInit, AfterViewInit {
 
   constructor() {
     this.expanded = false;
-    if(this.hasChildren === undefined) {
-      this.hasChildren = false;
-    } else {
-      this.hasChildren = true;
-    }
+    this.hasChildren = this.hasChildren !== undefined;
   }
 
   ngAfterViewInit(): void {
@@ -40,7 +36,6 @@ export class MenuItemComponent implements OnInit, AfterViewInit {
   }
 
   onElementHover() {
-    console.log(this.hasChildren);
     if(this.hasChildren === true) {
       this.expanded = true;
     }
