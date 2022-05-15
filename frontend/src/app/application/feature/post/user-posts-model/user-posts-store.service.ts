@@ -45,5 +45,21 @@ export class UserPostsStoreService {
       post => post.id === id
     );
     this._posts.splice(index, 1);
+    this.userPostsObservable.next(this._posts);
+  }
+
+  getPostById(id:number) {
+    return this._posts.find(
+      post => post.id === id
+    );
+  }
+
+  updatePost(post: Post) {
+    let p = this._posts.find(
+      post => post.id === post.id
+    );
+    if(p !== undefined){
+      p.content = post.content;
+    }
   }
 }

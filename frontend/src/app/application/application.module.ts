@@ -28,6 +28,7 @@ import { CreatePostPageComponent } from './feature/post/create-post-page/create-
 import { ChangePersonalInfoPageComponent } from './feature/settings/change-personal-info-page/change-personal-info-page.component';
 import { ChangeContactInfoPageComponent } from './feature/settings/change-contact-info-page/change-contact-info-page.component';
 import { QuickButtonComponent } from './feature/core/taskbar-menu/quick-button/quick-button.component';
+import { EditPostPageComponent } from './feature/post/edit-post-page/edit-post-page.component';
 
 
 @NgModule({
@@ -49,6 +50,7 @@ import { QuickButtonComponent } from './feature/core/taskbar-menu/quick-button/q
     ChangePersonalInfoPageComponent,
     ChangeContactInfoPageComponent,
     QuickButtonComponent,
+    EditPostPageComponent,
   ],
     imports: [
         CommonModule,

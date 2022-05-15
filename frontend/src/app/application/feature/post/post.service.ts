@@ -3,6 +3,7 @@ import {HttpClient} from "@angular/common/http";
 import {PostCreationRequest} from "./create-post-page/post-creation-request";
 import {Post} from "../../service/post";
 import {Observable} from "rxjs";
+import {UpdatePostRequest} from "./update-post-request";
 
 @Injectable({
   providedIn: 'root'
@@ -11,6 +12,7 @@ export class PostService {
 
   postUrl = "http://localhost:8080/api/v1/post"
   deletePostUrl = "http://localhost:8080/api/v1/post/"
+  editPostUrl = "http://localhost:8080/api/v1/post/edit"
 
   constructor(private httpClient: HttpClient) { }
 
@@ -28,6 +30,9 @@ export class PostService {
 
   getPostsBy(userId: number): Observable<Post[]> {
     return this.httpClient.get<Post[]>(this.postUrl + "/" + userId);
+  }
 
+  editPost(updatePostRequest: UpdatePostRequest){
+    return this.httpClient.put<Post>(this.editPostUrl, updatePostRequest);
   }
 }
