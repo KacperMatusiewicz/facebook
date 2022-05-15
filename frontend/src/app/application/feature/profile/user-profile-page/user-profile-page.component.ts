@@ -6,6 +6,7 @@ import {UserDetails} from "../../../service/user-details";
 import {Post} from "../../../service/post";
 import {UserDetailsService} from "../../../service/user-details.service";
 import {WindowManagementService} from "../../../service/windowState/window-management.service";
+import {UserPostsStoreService} from "../../post/user-posts-model/user-posts-store.service";
 
 @Component({
   selector: 'app-user-profile-page',
@@ -32,7 +33,8 @@ export class UserProfilePageComponent implements OnInit, DesktopWindow {
   constructor(
     private userDetailsService: UserDetailsService,
     private windowManagementService: WindowManagementService,
-    private elementRef: ElementRef
+    private elementRef: ElementRef,
+    private userPostsStore: UserPostsStoreService
   ) {
     this.style = elementRef.nativeElement.style;
     this.icon = "assets/icons/user.png";
@@ -42,6 +44,7 @@ export class UserProfilePageComponent implements OnInit, DesktopWindow {
     this.setUserDetail();
     this.setPosts();
     this.windowId = windowManagementService.getId();
+
   }
 
 
@@ -69,11 +72,10 @@ export class UserProfilePageComponent implements OnInit, DesktopWindow {
   }
 
   private setPosts() {
-    if (this.userId === undefined) {
-      this.userDetailsService.getUserPosts().subscribe(
-        (response) => this.posts = response,
-        (error) => window.alert(error.error)
-      );
+    if(this.userId === undefined){
+      this.userPostsStore.userPostsObservable.subscribe({
+        next: value => {this.posts = value}
+      });
     } else {
       this.userDetailsService.getPostsBy(this.userId).subscribe(
         (response) => this.posts = response,

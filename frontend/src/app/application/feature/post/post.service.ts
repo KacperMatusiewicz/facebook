@@ -1,6 +1,8 @@
 import { Injectable } from '@angular/core';
 import {HttpClient} from "@angular/common/http";
 import {PostCreationRequest} from "./create-post-page/post-creation-request";
+import {Post} from "../../service/post";
+import {Observable} from "rxjs";
 
 @Injectable({
   providedIn: 'root'
@@ -8,10 +10,24 @@ import {PostCreationRequest} from "./create-post-page/post-creation-request";
 export class PostService {
 
   postUrl = "http://localhost:8080/api/v1/post"
+  deletePostUrl = "http://localhost:8080/api/v1/post/"
 
   constructor(private httpClient: HttpClient) { }
 
   createPost(postCreationRequest: PostCreationRequest) {
-    return this.httpClient.post(this.postUrl, postCreationRequest);
+    return this.httpClient.post<Post>(this.postUrl, postCreationRequest);
+  }
+
+  deletePost(id: number){
+    return this.httpClient.delete(this.deletePostUrl+id);
+  }
+
+  getUserPosts(): Observable<Post[]> {
+    return this.httpClient.get<Post[]>(this.postUrl);
+  }
+
+  getPostsBy(userId: number): Observable<Post[]> {
+    return this.httpClient.get<Post[]>(this.postUrl + "/" + userId);
+
   }
 }

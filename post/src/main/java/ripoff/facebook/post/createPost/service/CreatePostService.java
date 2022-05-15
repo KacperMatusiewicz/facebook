@@ -22,16 +22,17 @@ public class CreatePostService {
     private final TimeService timeService;
     private final AmqpTemplate template;
 
-    public void createPost(PostCreationDto request) {
+    public Post createPost(PostCreationDto request) {
         validatePost(request);
-        Long postId = savePost(request);
+        Post post = savePost(request);
         Set<Long> visibilityUserIds = getVisibilityUserIds(request);
         visibilityUserIds.forEach(
                 userId -> template.convertAndSend(
                         "general-feed-queue",
-                        new FeedPostInformation(userId, postId)
+                        new FeedPostInformation(userId, post.getId())
                 )
         );
+        return post;
     }
 
     private Set<Long> getVisibilityUserIds(PostCreationDto request) {
@@ -53,14 +54,14 @@ public class CreatePostService {
         return visibilityUserIds;
     }
 
-    private Long savePost(PostCreationDto request) {
+    private Post savePost(PostCreationDto request) {
         Post post = Post.builder()
                 .userId(request.getUserId())
                 .content(request.getContent())
                 .creationDate(timeService.getCurrentDateTime())
                 .attachmentPath(null)
                 .build();
-        return repository.save(post).getId();
+        return repository.save(post);
     }
 
     private void validatePost(PostCreationDto request) {
