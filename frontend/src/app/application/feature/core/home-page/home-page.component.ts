@@ -28,7 +28,7 @@ export class HomePageComponent implements OnInit, AfterViewInit {
 
   userDetailsWindow() {
     this.windowManagementService.openWindow({
-      windowType: WindowType.ProfilePage,
+      windowType: WindowType.SelftProfilePage,
     });
   }
 

@@ -1,0 +1,13 @@
+server:
+  port: 8125
+spring:
+  application:
+    name: search
+eureka:
+  client:
+    service-url:
+      defaultZone: "http://localhost:8761/eureka"
+    register-with-eureka: true
+    fetch-registry: true
+elasticsearch:
+  host: localhost:9200

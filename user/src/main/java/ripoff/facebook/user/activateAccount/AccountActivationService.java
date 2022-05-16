@@ -6,6 +6,8 @@ import ripoff.facebook.clients.authentication.AuthClient;
 import ripoff.facebook.clients.authentication.AuthenticationMethodDto;
 import ripoff.facebook.clients.notification.UserNotificationQueueClient;
 import ripoff.facebook.clients.relation.RelationClient;
+import ripoff.facebook.clients.search.UserRequest;
+import ripoff.facebook.clients.search.SearchClient;
 import ripoff.facebook.user.commons.ActivationRepository;
 import ripoff.facebook.user.commons.User;
 import ripoff.facebook.user.commons.UserRepository;
@@ -20,6 +22,7 @@ public class AccountActivationService {
     private final UserNotificationQueueClient userNotificationQueueClient;
     private final RelationClient relationClient;
     private final AuthClient authClient;
+    private final SearchClient searchClient;
 
     //TODO: SAGA?
     public void activateUserAccount(Long activationKey) {
@@ -52,5 +55,6 @@ public class AccountActivationService {
         );
         relationClient.createUser(user.getId());
         userNotificationQueueClient.createQueue(user.getId());
+        searchClient.addUser(new UserRequest(user.getId(), user.getName(), user.getLastName()));
     }
 }

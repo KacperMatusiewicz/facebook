@@ -13,6 +13,9 @@ import {
   ChangeContactInfoPageComponent
 } from "../../feature/settings/change-contact-info-page/change-contact-info-page.component";
 import {EditPostPageComponent} from "../../feature/post/edit-post-page/edit-post-page.component";
+import {UserSearchComponent} from "../../feature/search/user-search/user-search.component";
+import {SelfProfilePageComponent} from "../../feature/profile/self-profile-page/self-profile-page.component";
+import {Observable} from "rxjs";
 
 @Injectable({
   providedIn: 'root'
@@ -27,6 +30,7 @@ export class WindowManagementService {
   currentFocusedWindowElement: HTMLElement | undefined;
   windowContainerRef : ViewContainerRef | undefined;
   taskbarContainerRef : ViewContainerRef | undefined;
+  private lockedFocus: boolean;
 
   constructor() {
     this.currentZIndex = 10;
@@ -35,6 +39,7 @@ export class WindowManagementService {
     this.taskBarList= new Map<Number, HTMLElement>();
     this.currentFocusedTaskbarElement = undefined;
     this.currentFocusedWindowElement = undefined;
+    this.lockedFocus = false;
   }
 
   setWindowContainerRef(windowContainerRef: ViewContainerRef) {
@@ -48,10 +53,27 @@ export class WindowManagementService {
   openWindow(window: WindowDto) {
     let newDesktopPage! : ComponentRef<any>;
     switch (window.windowType) {
-      case WindowType.ProfilePage:{
+      case WindowType.SelftProfilePage:{
+        if(this.windowContainerRef != undefined){
+          newDesktopPage = this.windowContainerRef.createComponent(SelfProfilePageComponent);
+          this.windowList.set(this.idCounter, newDesktopPage.location.nativeElement);
+        }
+        break;
+      }
+
+      case WindowType.UserSearchPage:{
+        if(this.windowContainerRef != undefined){
+          newDesktopPage = this.windowContainerRef.createComponent(UserSearchComponent);
+          this.windowList.set(this.idCounter, newDesktopPage.location.nativeElement);
+        }
+        break;
+      }
+
+      case WindowType.UserProfilePage:{
         if(this.windowContainerRef != undefined){
           newDesktopPage = this.windowContainerRef.createComponent(UserProfilePageComponent);
-          newDesktopPage.location.nativeElement.setAttribute("userId", window.content?.userId);
+          newDesktopPage.instance.loadUserDetails(window.content?.userId);
+          newDesktopPage.instance.setPosts(window.content?.userId);
           this.windowList.set(this.idCounter, newDesktopPage.location.nativeElement);
         }
         break;
@@ -117,6 +139,21 @@ export class WindowManagementService {
       newTaskBarItem.instance.setTitle(newDesktopPage.instance.getTitle());
       this.taskBarList.set(this.idCounter, newTaskBarItem.location.nativeElement);
       this.focusWindow(this.idCounter);
+      this.lockedFocus = true;
+      new Observable(
+        (subscriber) => {
+          setTimeout(
+            () => {
+              subscriber.next();
+              subscriber.complete();
+            }, 5
+          )
+        }
+      ).subscribe(
+        (next) => {
+          this.lockedFocus = false;
+        }
+      );
     }
     this.idCounter++;
   }
@@ -145,12 +182,14 @@ export class WindowManagementService {
   }
 
   focusWindow(windowId: number) {
-    this.currentFocusedTaskbarElement?.setAttribute("focused", "false");
-    this.currentFocusedTaskbarElement = this.taskBarList.get(windowId);
-    this.currentFocusedWindowElement = this.windowList.get(windowId);
-    this.currentFocusedTaskbarElement?.setAttribute("focused","true");
-    if(this.currentFocusedWindowElement != undefined){
-      this.currentFocusedWindowElement.style.zIndex = `${this.currentZIndex++}`;
+    if(!this.lockedFocus) {
+      this.currentFocusedTaskbarElement?.setAttribute("focused", "false");
+      this.currentFocusedTaskbarElement = this.taskBarList.get(windowId);
+      this.currentFocusedWindowElement = this.windowList.get(windowId);
+      this.currentFocusedTaskbarElement?.setAttribute("focused","true");
+      if(this.currentFocusedWindowElement != undefined){
+        this.currentFocusedWindowElement.style.zIndex = `${this.currentZIndex++}`;
+      }
     }
   }
   unfocusWindow(windowId: number) {

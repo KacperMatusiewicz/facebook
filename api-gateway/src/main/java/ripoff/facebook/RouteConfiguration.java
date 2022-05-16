@@ -102,6 +102,15 @@ public class RouteConfiguration {
                 .route(r -> r
                         .host("localhost:8080")
                         .and()
+                        .path("/api/v1/search")
+                        .and()
+                        .method(HttpMethod.GET)
+                        .filters(f -> f.filter(authenticationFilter).filter(loggingFilter))
+                        .uri("lb://SEARCH")
+                )
+                .route(r -> r
+                        .host("localhost:8080")
+                        .and()
                         .path("/**")
                         .uri(frontendUrl)
                 )

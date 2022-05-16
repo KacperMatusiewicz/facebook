@@ -29,6 +29,8 @@ import { ChangePersonalInfoPageComponent } from './feature/settings/change-perso
 import { ChangeContactInfoPageComponent } from './feature/settings/change-contact-info-page/change-contact-info-page.component';
 import { QuickButtonComponent } from './feature/core/taskbar-menu/quick-button/quick-button.component';
 import { EditPostPageComponent } from './feature/post/edit-post-page/edit-post-page.component';
+import { UserSearchComponent } from './feature/search/user-search/user-search.component';
+import { SelfProfilePageComponent } from './feature/profile/self-profile-page/self-profile-page.component';
 
 
 @NgModule({
@@ -51,6 +53,8 @@ import { EditPostPageComponent } from './feature/post/edit-post-page/edit-post-p
     ChangeContactInfoPageComponent,
     QuickButtonComponent,
     EditPostPageComponent,
+    UserSearchComponent,
+    SelfProfilePageComponent,
   ],
     imports: [
         CommonModule,

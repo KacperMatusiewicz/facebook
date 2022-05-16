@@ -1,5 +1,5 @@
 export enum WindowType {
-    ProfilePage,
+    SelftProfilePage,
     MessageBox,
     ChangePasswordPage,
     DeleteAccountPage,
@@ -7,5 +7,7 @@ export enum WindowType {
     ChangeContactInfoPage,
     ChangePersonalInfoPage,
     NormalPage,
-    EditPostPage
+    EditPostPage,
+    UserSearchPage,
+    UserProfilePage
 }
