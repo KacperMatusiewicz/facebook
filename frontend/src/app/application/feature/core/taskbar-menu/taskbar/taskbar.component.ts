@@ -72,6 +72,11 @@ export class TaskbarComponent implements OnInit, AfterViewInit{
       windowType: WindowType.CreatePostPage
     });
   }
+  openUserSearchPage(){
+    this.windowManagementService.openWindow({
+      windowType: WindowType.UserSearchPage
+    })
+  }
   openChangePasswordPage() {
     this.windowManagementService.openWindow({
       windowType: WindowType.ChangePasswordPage

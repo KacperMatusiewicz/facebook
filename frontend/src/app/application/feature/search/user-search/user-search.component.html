@@ -1,0 +1,29 @@
+<window
+  resizable
+  draggable
+  [icon]="icon"
+  [windowName]="title"
+  (onClose)="close()"
+  (onMaximize)="maximize()"
+  (onMinimize)="minimize()"
+  (onWindowClick)="focus()"
+  style="position:absolute; top: 10px; left: 10px; min-width: 300px; min-height: 150px; width: 300px; height: 400px; z-index:0{{style.zIndex}}"
+>
+  <div class="container">
+
+  <div class="search-input">
+    <form [formGroup]="form">
+      <div class="text-input"><text-input [formGroup]="form" formControlName="searchInput" ngDefaultControl>Phrase</text-input></div>
+      <div class="search-button"><win-button>Search</win-button></div>
+    </form>
+  </div>
+  <div class="search-results">
+
+    <div *ngFor="let result of queryResults" class="search-result" (click)="openProfile(result.id)">
+      <div class="profile-image"></div>
+      <div class="user-data">{{result.name}} {{result.lastName}}</div>
+    </div>
+
+  </div>
+  </div>
+</window>

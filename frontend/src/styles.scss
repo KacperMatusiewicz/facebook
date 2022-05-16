@@ -25,6 +25,69 @@
   box-sizing: border-box;
 }
 
+::-webkit-scrollbar{
+  box-sizing: border-box;
+  width: 16px;
+}
+
+::-webkit-scrollbar-track{//, ::-webkit-scrollbar-track-piece{
+  background-color: #fff;
+  background-image: url("/assets/icons/bg-grid.png");
+  background-repeat: repeat;
+}
+
+::-webkit-scrollbar-thumb{
+  box-sizing: border-box;
+  width: 16px;
+  background-color: #d4d0c8;
+  border-top: 1px solid #d4d0c8;
+  border-left: 1px solid #d4d0c8;
+  border-bottom: 1px solid #404040;
+  border-right: 1px solid #404040;
+}
+
+::-webkit-scrollbar-button:start:increment,
+::-webkit-scrollbar-button:start:decrement,
+::-webkit-scrollbar-button:end:increment,
+::-webkit-scrollbar-button:end:decrement
+{
+  display: none;
+}
+
+::-webkit-scrollbar-button:start:decrement{
+  box-sizing: border-box;
+  display: block;
+  width: 16px;
+  height: 16px;
+  background-color: #d4d0c8;
+  border-top: 1px solid #d4d0c8;
+  border-left: 1px solid #d4d0c8;
+  border-bottom: 1px solid #404040;
+  border-right: 1px solid #404040;
+
+  background-image: url("/assets/icons/dropup-arrow.png");
+  background-repeat: no-repeat;
+  image-rendering: pixelated;
+  background-position: center;
+}
+
+::-webkit-scrollbar-button:end:increment{
+  box-sizing: border-box;
+  display: block;
+  width: 16px;
+  height: 16px;
+  background-color: #d4d0c8;
+  border-top: 1px solid #d4d0c8;
+  border-left: 1px solid #d4d0c8;
+  border-bottom: 1px solid #404040;
+  border-right: 1px solid #404040;
+
+  background-image: url("/assets/icons/dropdown-arrow.png");
+  background-repeat: no-repeat;
+  image-rendering: pixelated;
+  background-position: center;
+}
+
 textarea:focus{
   outline: none;
 }

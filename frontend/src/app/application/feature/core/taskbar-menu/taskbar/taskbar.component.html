@@ -10,6 +10,14 @@
           (click)="openCreatePostPage()">
         </menu-item>
 
+        <menu-item [hasChildren]="true" displayValue="Search" icon="assets/icons/search-category.svg">
+          <menu-item
+            displayValue="For People..."
+            icon="assets/icons/user-search.png"
+            (click)="openUserSearchPage()">
+          </menu-item>
+        </menu-item>
+
         <menu-item [hasChildren]="true" displayValue="Settings" icon="assets/icons/settings-icon.png">
 
           <menu-item

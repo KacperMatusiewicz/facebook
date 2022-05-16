@@ -2,6 +2,8 @@ package ripoff.facebook.user.updateUser;
 
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
+import ripoff.facebook.clients.search.SearchClient;
+import ripoff.facebook.clients.search.UserRequest;
 import ripoff.facebook.user.commons.BadUserDataException;
 import ripoff.facebook.user.commons.User;
 import ripoff.facebook.user.commons.UserRepository;
@@ -14,9 +16,19 @@ public class UpdateUserService {
     private final UserRepository repository;
     private final UserValidationService validationService;
 
+    private final SearchClient searchClient;
+
     public void changePersonalInfo(PersonalInfoDto personalInfoDto) {
         validatePersonalInfo(personalInfoDto);
         updateUser(personalInfoDto);
+        UserRequest userRequest = new UserRequest(
+                personalInfoDto.getUserId(),
+                personalInfoDto.getName(),
+                personalInfoDto.getLastName()
+        );
+        searchClient.updateUser(
+                userRequest
+        );
     }
 
     public void changeContactInfo(ContactInfoDto contactInfoDto) {

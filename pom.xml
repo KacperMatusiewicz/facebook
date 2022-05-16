@@ -25,6 +25,7 @@
         <module>frontend</module>
         <module>web-server</module>
         <module>authentication</module>
+        <module>search</module>
     </modules>
 
     <properties>
