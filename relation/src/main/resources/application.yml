@@ -8,6 +8,18 @@ spring:
     authentication:
       username: neo4j
       password: password
+  datasource:
+    username: user
+    password: password
+    url: jdbc:postgresql://localhost:5437/relation
+  jpa:
+    hibernate:
+      ddl-auto: update
+    properties:
+      hibernate:
+        dialect: org.hibernate.dialect.PostgreSQLDialect
+        format-sql: true
+      show-sql: true
 eureka:
   client:
     service-url:

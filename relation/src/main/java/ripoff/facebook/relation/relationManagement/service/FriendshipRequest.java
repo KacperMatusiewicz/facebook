@@ -8,6 +8,5 @@ import lombok.*;
 @NoArgsConstructor
 @Setter
 public class FriendshipRequest {
-    private Long friend1;
-    private Long friend2;
+    private Long targetId;
 }

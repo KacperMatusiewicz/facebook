@@ -1,8 +1,8 @@
 import { Injectable } from '@angular/core';
 import {UserPostsStoreService} from "../user-posts-model/user-posts-store.service";
-import {Post} from "../../../service/post";
+import {Post} from "../../post";
 import {PostService} from "../post.service";
-import {PostCreationRequest} from "../create-post-page/post-creation-request";
+import {PostCreationRequest} from "../../../feature/post/create-post-page/post-creation-request";
 import {Observable} from "rxjs";
 import {UpdatePostRequest} from "../update-post-request";
 

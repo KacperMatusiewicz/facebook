@@ -4,7 +4,7 @@ import {WindowManagementService} from "../../../service/windowState/window-manag
 import {PostCreationRequest} from "./post-creation-request";
 import {from, Observable} from 'rxjs';
 import {FormBuilder, FormControl, FormGroup, Validators} from "@angular/forms";
-import {UserPostsControllerService} from "../user-posts-controller/user-posts-controller.service";
+import {UserPostsControllerService} from "../../../service/post/user-posts-controller/user-posts-controller.service";
 
 
 @Component({

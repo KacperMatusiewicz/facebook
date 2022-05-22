@@ -1,11 +1,11 @@
 import {Component, ElementRef, Input, OnInit} from '@angular/core';
 import {FormBuilder, FormControl, FormGroup, Validators} from "@angular/forms";
 import {WindowManagementService} from "../../../service/windowState/window-management.service";
-import {UserPostsControllerService} from "../user-posts-controller/user-posts-controller.service";
+import {UserPostsControllerService} from "../../../service/post/user-posts-controller/user-posts-controller.service";
 import {from, Observable} from "rxjs";
 import {DesktopWindow} from "../../../service/windowState/desktop-window";
 import {Post} from "../../../service/post";
-import {UpdatePostRequest} from "../update-post-request";
+import {UpdatePostRequest} from "../../../service/post/update-post-request";
 
 @Component({
   selector: 'app-edit-post-page',

@@ -31,6 +31,7 @@ import { QuickButtonComponent } from './feature/core/taskbar-menu/quick-button/q
 import { EditPostPageComponent } from './feature/post/edit-post-page/edit-post-page.component';
 import { UserSearchComponent } from './feature/search/user-search/user-search.component';
 import { SelfProfilePageComponent } from './feature/profile/self-profile-page/self-profile-page.component';
+import { FriendsManagementPageComponent } from './feature/friends/friends-management-page/friends-management-page.component';
 
 
 @NgModule({
@@ -55,6 +56,7 @@ import { SelfProfilePageComponent } from './feature/profile/self-profile-page/se
     EditPostPageComponent,
     UserSearchComponent,
     SelfProfilePageComponent,
+    FriendsManagementPageComponent,
   ],
     imports: [
         CommonModule,

@@ -26,6 +26,7 @@
         <module>web-server</module>
         <module>authentication</module>
         <module>search</module>
+        <module>admin</module>
     </modules>
 
     <properties>

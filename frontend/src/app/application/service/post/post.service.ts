@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core';
 import {HttpClient} from "@angular/common/http";
-import {PostCreationRequest} from "./create-post-page/post-creation-request";
-import {Post} from "../../service/post";
+import {PostCreationRequest} from "../../feature/post/create-post-page/post-creation-request";
+import {Post} from "../post";
 import {Observable} from "rxjs";
 import {UpdatePostRequest} from "./update-post-request";
 

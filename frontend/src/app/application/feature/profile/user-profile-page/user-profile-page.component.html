@@ -1,16 +1,28 @@
 <window
-  style="top: 10px; left: 10px; position: absolute; width: 400px; height: 400px; min-width: 250px; min-height: 300px; z-index:0{{style.zIndex}};"
-  resizable draggable windowName="{{userDetails.name}}'s profile."
+  style="top: 10px; left: 10px; position: absolute; width: 600px; height: 500px; min-width: 600px; min-height: 300px; z-index:0{{style.zIndex}};"
+  resizable draggable windowName="{{userDetails.name}} {{userDetails.lastName}}'s profile."
   [icon]="icon"
   (onClose)="emitCloseWindowEvent()"
   (onMinimize)="minimize()"
   (onMaximize)="maximize()"
   (onWindowClick)="focus()"
 >
-  <div class="user-profile">
-    <div class="user-profile-frame">
-      <div class="user-profile-icon"></div>
+
+  <div class="container">
+
+    <div class="user-profile">
+      <div class="user-profile-frame">
+        <div class="user-profile-icon"></div>
+      </div>
     </div>
+
+    <div class="user-actions">
+      <div class="follow user-action-button" (click)="followUser()" *ngIf="canFollow"></div>
+      <div class="unfollow user-action-button" (click)="unfollowUser()" *ngIf="canUnfollow"></div>
+      <div class="friend user-action-button" (click)="befriendUser()" *ngIf="canSendFriendRequest"></div>
+      <div class="unfriend user-action-button" (click)="removeFriend()" *ngIf="canRemoveFriend"></div>
+    </div>
+
     <div class="user-posts">
       <div class="post" *ngFor="let post of posts">
         <div class="post-header">
@@ -20,7 +32,7 @@
         <div class="post-content">{{post.content}}</div>
         <div class="post-attachments"></div>
       </div>
-
     </div>
+
   </div>
 </window>

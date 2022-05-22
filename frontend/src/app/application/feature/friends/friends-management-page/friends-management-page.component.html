@@ -1,0 +1,76 @@
+<window
+  [icon]="icon"
+  [windowName]="title"
+  (onClose)="close()"
+  (onMinimize)="minimize()"
+  (onMaximize)="maximize()"
+  (onWindowClick)="focus()"
+  style="position:absolute; top: 10px; left: 10px; width: 300px; height: 500px; min-width: 300px; min-height: 200px; z-index: 0{{style.zIndex}}"
+  draggable
+  resizable
+>
+
+  <div class="container">
+
+    <div class="search">
+      <text-input (keyup)="search($event)">Search</text-input>
+    </div>
+
+    <hr style="width: 95%;" />
+
+    <div class="tabs">
+      <div class="tab-control">
+        <win-button (click)="showFriendsTab()">Friends ({{friendsList.length}})</win-button>
+        <win-button (click)="showPendingTab()">Pending ({{requestingUsersList.length}})</win-button>
+      </div>
+
+      <div ngModel #friends ngDefaultControl class="controlled-list">
+
+        <div class="friends-list">
+
+          <div *ngFor="let user of friendsList" class="friends-list-item" (click)="selectFriend(user.id)" (dblclick)="openProfile(user.id)">
+            <div class="friends-list-item-inner friends-list-item-inner-selected" *ngIf="user.id === selectedFriendId">
+              <div class="placeholder-icon"></div>
+              <div class="contact-name">{{user.name}} {{user.lastName}}</div>
+            </div>
+            <div class="friends-list-item-inner" *ngIf="user.id !== selectedFriendId">
+              <div class="placeholder-icon"></div>
+              <div class="contact-name">{{user.name}} {{user.lastName}}</div>
+            </div>
+          </div>
+
+        </div>
+
+        <div class="controls">
+          <div class="controls-button message" (click)="messageFriend()"></div>
+          <div class="controls-button unfriend" (click)="unfriend()"></div>
+        </div>
+
+      </div>
+
+      <div ngModel #pending ngDefaultControl class="controlled-list" style="display:none;">
+        <div class="pending-list">
+
+          <div *ngFor="let user of requestingUsersList" class="friends-list-item" (click)="selectRequest(user.id)" (dblclick)="openProfile(user.id)">
+            <div class="friends-list-item-inner friends-list-item-inner-selected" *ngIf="user.id === selectedUserRequestId">
+              <div class="placeholder-icon"></div>
+              <div class="contact-name">{{user.name}} {{user.lastName}}</div>
+            </div>
+            <div class="friends-list-item-inner" *ngIf="user.id !== selectedUserRequestId">
+              <div class="placeholder-icon"></div>
+              <div class="contact-name">{{user.name}} {{user.lastName}}</div>
+            </div>
+          </div>
+
+
+        </div>
+
+        <div class="controls">
+          <div class="controls-button accept" (click)="acceptRequest()"></div>
+          <div class="controls-button deny" (click)="denyFriendRequest()"></div>
+        </div>
+
+      </div>
+    </div>
+  </div>
+</window>
