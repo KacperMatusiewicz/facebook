@@ -37,7 +37,7 @@ public interface UserSearchRepository extends ElasticsearchRepository<User, Long
                             multiMatchQuery(query)
                                     .field("name")
                                     .field("lastName")
-                                    .fuzziness(Fuzziness.TWO)
+                                    .fuzziness(Fuzziness.ONE)
                                     .type(MultiMatchQueryBuilder.Type.BEST_FIELDS)
                     )
                     .build();

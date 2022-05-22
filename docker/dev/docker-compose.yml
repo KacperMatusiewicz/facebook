@@ -55,6 +55,21 @@ services:
       - "5436:5432"
     restart: unless-stopped
 
+  postgres-relation-dev:
+    container_name: postgres-relation-dev
+    image: postgres
+    environment:
+      POSTGRES_USER: user
+      POSTGRES_PASSWORD: password
+      POSTGRES_DB: relation
+      PGDATA: /data/postgres
+    volumes:
+      - postgres-relation-dev:/data/postgres
+    ports:
+      - "5437:5432"
+
+    restart: unless-stopped
+
   neo4j-relation-dev:
     image: neo4j
     restart: unless-stopped
@@ -126,6 +141,7 @@ volumes:
   postgres-post-dev:
   postgres-notification-dev:
   postgres-authentication-dev:
+  postgres-relation-dev:
   neo4j-relation-data-dev:
   redis-dev:
     driver: local

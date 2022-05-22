@@ -3,9 +3,7 @@ package ripoff.facebook.relation.relationManagement.controller;
 import lombok.AllArgsConstructor;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.bind.annotation.*;
-import ripoff.facebook.relation.relationManagement.service.FollowRequest;
-import ripoff.facebook.relation.relationManagement.service.FriendshipRequest;
-import ripoff.facebook.relation.relationManagement.service.RelationManagementService;
+import ripoff.facebook.relation.relationManagement.service.*;
 
 @RestController
 @RequestMapping("api/v1/relation")
@@ -15,23 +13,28 @@ public class RelationManagementController {
     RelationManagementService service;
 
     @PostMapping("follow")
-    public void followUser(@RequestBody FollowRequest request) {
-        service.follow(request.getFollowerId(), request.getTargetId());
+    public void follow(@RequestHeader("user-id") Long userId, @RequestBody FollowRequest request) {
+        service.follow(userId, request.getTargetId());
     }
 
     @DeleteMapping("follow")
-    public void unfollowUser(@RequestBody FollowRequest request) {
-        service.unfollow(request.getFollowerId(), request.getTargetId());
+    public void unfollowUser(@RequestHeader("user-id") Long userId, @RequestParam Long targetId) {
+        service.unfollow(userId, targetId);
     }
 
-    @PostMapping("friend")
+    @PostMapping("friend/request")
     @Transactional
-    public void makeFriendship(@RequestBody FriendshipRequest request) {
-        service.makeFriendship(request.getFriend1(), request.getFriend2());
+    public void sendFriendRequest(@RequestHeader("user-id") Long userId, @RequestBody FriendshipRequest request) {
+        service.createFriendRequest(new FriendshipRequestDto(userId, request.getTargetId()));
+    }
+
+    @PostMapping("friend/response")
+    public void sendFriendResponse(@RequestHeader("user-id") Long userId, @RequestBody FriendResponseRequest request) {
+        service.respondToFriendshipRequest(new FriendResponseDto(userId, request.getTargetId(), request.getResponseType()));
     }
 
     @DeleteMapping("friend")
-    public void unfriend(@RequestBody FriendshipRequest request) {
-        service.unfriend(request.getFriend1(), request.getFriend2());
+    public void unfriend(@RequestHeader("user-id") Long userId, @RequestParam Long targetId) {
+        service.unfriend(userId, targetId);
     }
 }

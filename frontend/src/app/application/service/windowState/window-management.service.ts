@@ -16,6 +16,9 @@ import {EditPostPageComponent} from "../../feature/post/edit-post-page/edit-post
 import {UserSearchComponent} from "../../feature/search/user-search/user-search.component";
 import {SelfProfilePageComponent} from "../../feature/profile/self-profile-page/self-profile-page.component";
 import {Observable} from "rxjs";
+import {
+  FriendsManagementPageComponent
+} from "../../feature/friends/friends-management-page/friends-management-page.component";
 
 @Injectable({
   providedIn: 'root'
@@ -56,6 +59,14 @@ export class WindowManagementService {
       case WindowType.SelftProfilePage:{
         if(this.windowContainerRef != undefined){
           newDesktopPage = this.windowContainerRef.createComponent(SelfProfilePageComponent);
+          this.windowList.set(this.idCounter, newDesktopPage.location.nativeElement);
+        }
+        break;
+      }
+
+      case WindowType.ManageFriendsPage:{
+        if(this.windowContainerRef != undefined){
+          newDesktopPage = this.windowContainerRef.createComponent(FriendsManagementPageComponent);
           this.windowList.set(this.idCounter, newDesktopPage.location.nativeElement);
         }
         break;

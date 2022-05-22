@@ -97,4 +97,10 @@ export class TaskbarComponent implements OnInit, AfterViewInit{
       windowType: WindowType.DeleteAccountPage
     });
   }
+
+  openManageFriendsPage() {
+    this.windowManagementService.openWindow({
+      windowType: WindowType.ManageFriendsPage
+    });
+  }
 }

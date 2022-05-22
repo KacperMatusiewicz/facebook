@@ -66,6 +66,22 @@ services:
       - general
     restart: unless-stopped
 
+  postgres-relation:
+    container_name: postgres-relation
+    image: postgres
+    environment:
+      POSTGRES_USER: user
+      POSTGRES_PASSWORD: password
+      POSTGRES_DB: relation
+      PGDATA: /data/postgres
+    volumes:
+      - postgres-relation:/data/postgres
+    ports:
+      - "5437:5432"
+    networks:
+      - general
+    restart: unless-stopped
+
   neo4jrelation:
     image: neo4j
     hostname: neo4jrelation
@@ -118,6 +134,30 @@ services:
     command: redis-server --save 20 1 --loglevel warning --requirepass eYVX7EwVmmxKPCDmwMtyKVge8oLd2t81
     volumes:
       - redis:/data
+
+  elasticsearch:
+    image: docker.elastic.co/elasticsearch/elasticsearch:7.4.0
+    container_name: elasticsearch
+    environment:
+      - xpack.security.enabled=false
+      - discovery.type=single-node
+    ulimits:
+      memlock:
+        soft: -1
+        hard: -1
+      nofile:
+        soft: 65536
+        hard: 65536
+    cap_add:
+      - IPC_LOCK
+    volumes:
+      - elasticsearch-data:/usr/share/elasticsearch/data
+    ports:
+      - 9200:9200
+      - 9300:9300
+    networks:
+      - general
+
 
   eureka:
     image: eureka:latest
@@ -247,6 +287,19 @@ services:
     depends_on:
       - eureka
 
+  search:
+    image: search:latest
+    container_name: search
+    environment:
+      - SPRING_PROFILES_ACTIVE=docker
+    ports:
+      - "8125:8125"
+    networks:
+      - general
+    depends_on:
+      - eureka
+      - elasticsearch
+
 networks:
   general:
     driver: bridge
@@ -260,4 +313,6 @@ volumes:
   pgadmin:
   neo4j_relation_data:
   redis:
+    driver: local
+  elasticsearch-data:
     driver: local

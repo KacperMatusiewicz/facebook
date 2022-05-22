@@ -1,6 +1,24 @@
-.user-profile{
+.container{
+  display: flex;
+  justify-content: flex-start;
+  align-items: center;
+  flex-flow: column;
+  flex-grow: 0;
+  flex-shrink: 0;
   width: 100%;
   height: 100%;
+  gap: 4px;
+  overflow: hidden auto;
+}
+
+.user-profile{
+  width: 100%;
+  height: 80px;
+  min-height: 80px;
+  max-width: 600px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
 
   box-sizing: border-box;
   overflow: hidden;
@@ -8,7 +26,7 @@
 
 .user-profile-frame{
   width: 100%;
-  height: 80px;
+  height: 100%;
   background-color: #808080;
   display: flex;
   justify-content: center;
@@ -33,9 +51,68 @@
   box-sizing: border-box;
 }
 
+.user-actions{
+  width: 100%;
+  height: 32px;
+  min-height: 32px;
+  max-width: 600px;
+  background-color: #d4d0c8;
+  border-top:  #fff 1px solid;
+  border-left: #fff 1px solid;
+  border-right: #404040 1px solid;
+  border-bottom:  #404040 1px solid;
+
+  display: flex;
+  justify-content: flex-end;
+  align-items: center;
+  padding: 2px;
+  gap: 4px;
+}
+
+
+.user-action-button{
+  width: 26px;
+  height: 26px;
+
+  background-color: #d4d0c8;
+  border-top:  transparent 1px solid;
+  border-left: transparent 1px solid;
+  border-bottom: transparent 1px solid;
+  border-right: transparent 1px solid;
+
+  background-size: cover;
+  image-rendering: pixelated;
+  background-repeat: no-repeat;
+  background-position: center;
+}
+
+.user-action-button:hover{
+  border-top:  #fff 1px solid;
+  border-left: #fff 1px solid;
+  border-bottom: #808080 1px solid;
+  border-right:  #808080 1px solid;
+
+}
+
+.follow{
+  background-image: url("/assets/icons/follow.png");
+}
+
+.unfollow{
+  background-image: url("/assets/icons/stop-following.png");
+}
+
+.friend{
+  background-image: url("/assets/icons/friend.png");
+}
+
+.unfriend{
+  background-image: url("/assets/icons/trash-icon.png");
+}
+
 .user-posts{
   width: 100%;
-  height: calc( 100% - 80px);
+  max-width: 600px;
   box-sizing: border-box;
   display: flex;
   justify-content: flex-start;
@@ -43,7 +120,6 @@
   flex-direction: column;
 
   gap: 4px;
-  overflow: hidden auto;
   opacity: 1;
   padding: 4px;
 }

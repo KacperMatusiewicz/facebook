@@ -28,7 +28,7 @@ public class UserValidationService {
     }
 
     private boolean validateName(String name) {
-        String nameRegex = "[a-zA-Z]+";
+        String nameRegex = "([a-zA-Z\\u00C0-\\u1FFF\\u2C00-\\uD7FF\\w',.-]+( [a-zA-Z\\u00C0-\\u1FFF\\u2C00-\\uD7FF\\w',.-]+)*){2,30}";
         if (name == null) {
             return false;
         }
@@ -36,7 +36,7 @@ public class UserValidationService {
     }
 
     private boolean validateLastName(String lastName) {
-        String lastNameRegex = "[a-zA-Z]+[\\-]?[a-zA-Z]+";
+        String lastNameRegex = "([a-zA-Z\\u00C0-\\u1FFF\\u2C00-\\uD7FF\\w',.-]+( [a-zA-Z\\u00C0-\\u1FFF\\u2C00-\\uD7FF\\w',.-]+)*){2,30}";
         if (lastName == null) {
             return false;
         }

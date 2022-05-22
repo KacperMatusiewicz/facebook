@@ -10,6 +10,20 @@
           (click)="openCreatePostPage()">
         </menu-item>
 
+        <menu-item
+          [hasChildren]="true"
+          displayValue="Friends"
+          icon="assets/icons/friend.png"
+        >
+
+          <menu-item
+            displayValue="Manage"
+            icon="assets/icons/user.png"
+            (click)="openManageFriendsPage()"
+          ></menu-item>
+
+        </menu-item>
+
         <menu-item [hasChildren]="true" displayValue="Search" icon="assets/icons/search-category.svg">
           <menu-item
             displayValue="For People..."

@@ -1,0 +1,175 @@
+.container{
+  width: 100%;
+  height: 100%;
+  background-color: #d4d0c8;
+
+  display: flex;
+  justify-content: flex-start;
+  align-items: center;
+  flex-direction: column;
+  flex-shrink: 0;
+  flex-grow: 0;
+  gap: 6px;
+
+}
+
+.search{
+  width: 100%;
+  height: 28px;
+  min-height: 28px;
+}
+
+.tabs{
+  width: 100%;
+  height: calc( 100% - 75px );
+  padding: 4px 0;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-flow: column;
+  flex-grow: 0;
+  flex-shrink: 0;
+}
+
+.tab-control{
+  width: 100%;
+  height: fit-content;
+  min-height: fit-content;
+  display: flex;
+  justify-content: flex-start;
+  align-items: center;
+  flex-direction: row;
+  gap: 4px;
+
+  padding: 4px 2px;
+}
+
+.controlled-list{
+  width: 100%;
+  height: 100%;
+
+  display: flex;
+  justify-content: flex-start;
+  align-items: center;
+  flex-direction: column;
+  flex-grow: 0;
+  flex-shrink: 0;
+}
+
+.friends-list, .pending-list{
+  width: 100%;
+  height: calc( 100% - 24px );
+  background-color: #fff;
+
+  display: flex;
+  justify-content: flex-start;
+  align-items: center;
+  flex-direction: column;
+  flex-grow: 0;
+  flex-shrink: 0;
+  padding: 2px;
+  gap: 2px;
+
+  border-top: #808080 1px solid;
+  border-left:  #808080 1px solid;
+  border-right:  #fff 1px solid;
+  border-bottom: #fff 1px solid;
+
+  overflow: hidden scroll;
+}
+
+.friends-list-item{
+  width: 100%;
+  height: 18px;
+  min-height: 18px;
+}
+
+.friends-list-item-inner{
+  width: 100%;
+  height: 100%;
+  padding: 2px;
+  background-color: #fff;
+  color: #000;
+  border: 1px transparent solid;
+
+  display: flex;
+  justify-content: flex-start;
+  align-items: center;
+  flex-grow: 0;
+  flex-shrink: 0;
+  flex-direction: row;
+  gap: 4px;
+}
+
+.friends-list-item-inner-selected{
+  background-color: #d4d0c8;
+}
+
+.placeholder-icon{
+  width: 18px;
+  height: 18px;
+
+  background-repeat: no-repeat;
+  background-position: center;
+  background-size: cover;
+  image-rendering: pixelated;
+  background-image: url("/assets/icons/user.png");
+}
+
+.controls{
+  width: 100%;
+  height: 28px;
+  min-height: 28px;
+
+  border-top: #fff 1px solid;
+  border-left: #fff 1px solid;
+  border-right: #404040 1px solid;
+  border-bottom: #404040 1px solid;
+
+  display: flex;
+  justify-content: flex-end;
+  align-items: center;
+  flex-direction: row;
+  gap: 4px;
+  margin: 4px 0;
+}
+
+.controls-button{
+  width: 20px;
+  height: 20px;
+  background-position: center;
+  background-size: cover;
+  background-repeat: no-repeat;
+  margin: 0 4px;
+  border: 1px solid transparent;
+}
+
+.controls-button:hover{
+  border-top: #fff 1px solid;
+  border-left: #fff 1px solid;
+  border-right: #404040 1px solid;
+  border-bottom: #404040 1px solid;
+}
+
+.controls-button:active{
+  border-top: #404040 1px solid;
+  border-left: #404040 1px solid;
+  border-right: #fff 1px solid;
+  border-bottom: #fff 1px solid;
+}
+
+.unfriend{
+  background-image: url("/assets/icons/trash-icon.png");
+}
+
+.accept{
+  background-image: url("/assets/icons/ok.png");
+}
+
+.deny{
+  background-image: url("/assets/icons/decline.png");
+}
+
+.message{
+  background-image: url("/assets/icons/message.png");
+}

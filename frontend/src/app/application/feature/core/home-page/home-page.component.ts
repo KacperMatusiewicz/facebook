@@ -2,6 +2,7 @@ import {AfterViewInit, Component, OnInit, ViewChild, ViewContainerRef} from '@an
 import {LogoutService} from 'src/app/core/logout/logout.service';
 import {WindowManagementService} from "../../../service/windowState/window-management.service";
 import {WindowType} from "../../../service/windowState/window-type";
+import {UserRelationsStoreService} from "../../../service/relation/store/user-relations-store.service";
 
 @Component({
   selector: 'app-home-page',
@@ -15,7 +16,11 @@ export class HomePageComponent implements OnInit, AfterViewInit {
   @ViewChild("desktopWindowOutlet", {read: ViewContainerRef})
   desktopWindowOutlet!: ViewContainerRef;
 
-  constructor(private logoutService: LogoutService, private windowManagementService: WindowManagementService) {
+  constructor(
+    private logoutService: LogoutService,
+    private windowManagementService: WindowManagementService,
+    private userRelationsStore: UserRelationsStoreService
+  ) {
     this.userProfileWindowVisibility = false;
   }
 

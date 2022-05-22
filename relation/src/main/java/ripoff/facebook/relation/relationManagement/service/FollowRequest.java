@@ -8,6 +8,5 @@ import lombok.*;
 @NoArgsConstructor
 @Setter
 public class FollowRequest {
-    private Long followerId;
     private Long targetId;
 }
