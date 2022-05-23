@@ -11,6 +11,12 @@
         </menu-item>
 
         <menu-item
+          displayValue="Open Feed"
+          icon="assets/icons/feed-icon.png"
+          (click)="openFeedPage()">
+        </menu-item>
+
+        <menu-item
           [hasChildren]="true"
           displayValue="Friends"
           icon="assets/icons/friend.png"
@@ -72,6 +78,10 @@
       <app-quick-button
         icon="assets/icons/create-post-page-icon.png"
         (click)="openCreatePostPage()"
+      ></app-quick-button>
+      <app-quick-button
+        icon="assets/icons/feed-icon.png"
+        (click)="openFeedPage()"
       ></app-quick-button>
     </div>
     <div class="running-tasks">

@@ -32,6 +32,7 @@ import { EditPostPageComponent } from './feature/post/edit-post-page/edit-post-p
 import { UserSearchComponent } from './feature/search/user-search/user-search.component';
 import { SelfProfilePageComponent } from './feature/profile/self-profile-page/self-profile-page.component';
 import { FriendsManagementPageComponent } from './feature/friends/friends-management-page/friends-management-page.component';
+import { FeedPageComponent } from './feature/feed/feed-page/feed-page.component';
 
 
 @NgModule({
@@ -57,6 +58,7 @@ import { FriendsManagementPageComponent } from './feature/friends/friends-manage
     UserSearchComponent,
     SelfProfilePageComponent,
     FriendsManagementPageComponent,
+    FeedPageComponent,
   ],
     imports: [
         CommonModule,

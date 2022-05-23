@@ -14,6 +14,10 @@ public class GetPostController {
 
     private final GetPostService service;
 
+    @GetMapping("id")
+    public Post getPostById(@RequestParam("postId") Long postId){
+        return service.getPostById(postId);
+    }
     @GetMapping("{userId}")
     public List<Post> getPostsByUserId(@PathVariable Long userId) {
         return service.getAllPostsByUser(userId);

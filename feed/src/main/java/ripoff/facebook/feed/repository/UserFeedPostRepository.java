@@ -6,9 +6,16 @@ import org.springframework.stereotype.Repository;
 import java.util.List;
 import java.util.Optional;
 
-@Repository
-public interface UserFeedPostRepository extends CrudRepository<UserFeedPost, String> {
+public interface UserFeedPostRepository {
 
-    Optional<List<UserFeedPost>> findAllByUserId(Long userId);
+    Optional<List<String>> findAllByUserId(Long userId);
+
+    void addToBeginningOfUserFeed(Long userId, Long postId);
+
+    Short checkUserFeedSize(Long userId);
+
+    void removeFromEndOfUserFeed(Long userId, Short count);
+
+    void removeUserFeed(Long userId);
 
 }
