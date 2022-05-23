@@ -103,4 +103,10 @@ export class TaskbarComponent implements OnInit, AfterViewInit{
       windowType: WindowType.ManageFriendsPage
     });
   }
+
+  openFeedPage(){
+    this.windowManagementService.openWindow({
+      windowType: WindowType.FeedPage
+    });
+  }
 }

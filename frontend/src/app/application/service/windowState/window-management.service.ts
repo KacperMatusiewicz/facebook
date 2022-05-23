@@ -19,6 +19,7 @@ import {Observable} from "rxjs";
 import {
   FriendsManagementPageComponent
 } from "../../feature/friends/friends-management-page/friends-management-page.component";
+import {FeedPageComponent} from "../../feature/feed/feed-page/feed-page.component";
 
 @Injectable({
   providedIn: 'root'
@@ -75,6 +76,14 @@ export class WindowManagementService {
       case WindowType.UserSearchPage:{
         if(this.windowContainerRef != undefined){
           newDesktopPage = this.windowContainerRef.createComponent(UserSearchComponent);
+          this.windowList.set(this.idCounter, newDesktopPage.location.nativeElement);
+        }
+        break;
+      }
+
+      case WindowType.FeedPage:{
+        if(this.windowContainerRef != undefined){
+          newDesktopPage = this.windowContainerRef.createComponent(FeedPageComponent);
           this.windowList.set(this.idCounter, newDesktopPage.location.nativeElement);
         }
         break;

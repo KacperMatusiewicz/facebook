@@ -1,33 +1,26 @@
 package ripoff.facebook.feed.application;
 
-import lombok.AllArgsConstructor;
+import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 import ripoff.facebook.amqp.FeedPostInformation;
-import ripoff.facebook.feed.repository.UserFeedPost;
 import ripoff.facebook.feed.repository.UserFeedPostRepository;
 
 import java.util.List;
 
 @Service
-@AllArgsConstructor
+@RequiredArgsConstructor
 public class UserFeedService {
 
-    UserFeedPostRepository repository;
+    private final UserFeedPostRepository repository;
 
     public void addNewUserFeedPost(FeedPostInformation feedPostInformation) {
-        repository.save(
-                new UserFeedPost(
-                        feedPostInformation.getUserId(), feedPostInformation.getPostId()
-                )
-        );
+        repository.addToBeginningOfUserFeed(feedPostInformation.getUserId(), feedPostInformation.getPostId());
     }
 
-    public List<UserFeedPost> getAllPostsByUserId(Long userId) {
-        List<UserFeedPost> posts = repository
-                .findAllByUserId(userId)
+    public List<String> getAllPostsByUserId(Long userId) {
+        return repository.findAllByUserId(userId)
                 .orElseThrow(
-                        () -> new FeedEmptyException("Feed posts for user id: "+ userId + " not found.")
+                        () -> new FeedEmptyException("Feed posts found for user id: "+ userId + " not found.")
                 );
-        return posts;
     }
 }

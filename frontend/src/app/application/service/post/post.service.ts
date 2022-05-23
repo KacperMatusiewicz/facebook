@@ -32,6 +32,10 @@ export class PostService {
     return this.httpClient.get<Post[]>(this.postUrl + "/" + userId);
   }
 
+  getPostById(postId: number): Observable<Post> {
+    return this.httpClient.get<Post>(this.postUrl+"/id?postId="+postId);
+  }
+
   editPost(updatePostRequest: UpdatePostRequest){
     return this.httpClient.put<Post>(this.editPostUrl, updatePostRequest);
   }

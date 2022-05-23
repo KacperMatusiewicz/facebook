@@ -1,0 +1,32 @@
+<window
+  style="position:absolute; top: 10px; left: 10px; width: 1000px; min-width: 500px; min-height: 400px; height: 800px; z-index: 0{{style.zIndex}};"
+  windowName="{{title}}"
+  icon="{{icon}}"
+  (onWindowClick)="focus()"
+  (onMinimize)="minimize()"
+  (onMaximize)="maximize()"
+  (onClose)="close()"
+  draggable
+  resizable
+>
+  <div class="container">
+    <div class="post-list">
+
+      <div *ngFor="let post of feedPosts; let i = index" class="post-entry">
+        <div class="post-header">
+
+          <div class="author-info" (click)="openAuthorProfilePage(post.userId)">
+            <div class="author-profile"></div>
+            <div class="author-name">{{formatAuthorName(postAuthors[i])}}</div>
+          </div>
+
+          <div class="timestamp">{{getFormattedDate(post.creationDate)}}</div>
+
+        </div>
+
+        <div class="post-content">{{post.content}}</div>
+      </div>
+
+    </div>
+  </div>
+</window>
