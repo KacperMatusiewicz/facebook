@@ -9,8 +9,7 @@ import org.springframework.cloud.netflix.eureka.EnableEurekaClient;
         scanBasePackages = {
                 "ripoff.facebook.amqp",
                 "ripoff.facebook.notification"
-        },
-        exclude = RabbitAutoConfiguration.class
+        }
 )
 @EnableEurekaClient
 public class NotificationApplication {

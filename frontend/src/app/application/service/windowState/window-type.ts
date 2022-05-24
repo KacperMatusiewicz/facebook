@@ -11,5 +11,7 @@ export enum WindowType {
     UserSearchPage,
     UserProfilePage,
     ManageFriendsPage,
-    FeedPage
+    FeedPage,
+    NotificationPage,
+
 }

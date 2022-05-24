@@ -50,6 +50,9 @@ export class FriendsManagementPageComponent implements OnInit, DesktopWindow {
       (next) => {
         this.friendsIds = next;
         this.friendsListBase = [];
+        if(this.friendsIds.length === 0) {
+          this.friendsList = [];
+        }
         this.friendsIds.forEach(
           (friendId) => {
             this.userDetailsService.getUserDetailsBy(friendId).subscribe(
@@ -74,6 +77,9 @@ export class FriendsManagementPageComponent implements OnInit, DesktopWindow {
       next: (value)=> {
         this.requestingUsersIds = value;
         this.requestingUsersListBase = [];
+        if(this.requestingUsersIds.length === 0) {
+          this.requestingUsersList = [];
+        }
         this.requestingUsersIds.forEach(
           (requestingUserId) => {
 

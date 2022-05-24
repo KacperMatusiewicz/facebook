@@ -1,0 +1,32 @@
+.notification-count-bulb{
+  background-color: red;
+  border-radius: 50%;
+  width: 12px;
+  height: 12px;
+  color: #fff;
+
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  font-size: 8px;
+  font-weight: bold;
+
+  position: relative;
+  top: -3px;
+  right: -6px;
+}
+
+.notification-icon{
+  background-image: url("/assets/icons/warning.svg");
+  background-position: center;
+  background-repeat: no-repeat;
+  background-size: cover;
+}
+
+.tray-icon{
+  width: 16px;
+  height: 16px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}

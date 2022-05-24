@@ -1,8 +1,11 @@
 package ripoff.facebook.relation.relationManagement.service;
 
 import lombok.AllArgsConstructor;
+import org.springframework.amqp.core.AmqpTemplate;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
+import ripoff.facebook.amqp.NotificationDTO;
+import ripoff.facebook.amqp.NotificationType;
 import ripoff.facebook.relation.commons.repository.GroupRepository;
 import ripoff.facebook.relation.relationManagement.repository.RelationRequest;
 import ripoff.facebook.relation.relationManagement.repository.RelationRequestRepository;
@@ -15,6 +18,8 @@ public class RelationManagementService {
 
     GroupRepository repository;
     RelationRequestRepository relationRequestRepository;
+
+    AmqpTemplate amqpTemplate;
 
     public void follow(Long followerId, Long targetId) {
         repository.createFollowRelation(followerId, targetId);
@@ -36,6 +41,15 @@ public class RelationManagementService {
         repository.deleteFollowRelation(friend2, friend1);
         relationRequestRepository.deleteByRequesterIdAndRecipientId(friend1, friend2);
         relationRequestRepository.deleteByRequesterIdAndRecipientId(friend2, friend1);
+        amqpTemplate.convertAndSend(
+                "general-notification-queue",
+                new NotificationDTO(
+                        friend2,
+                        "I'm not your friend anymore. Goodbye.",
+                        friend1,
+                        NotificationType.FRIEND_REMOVED
+                )
+        );
     }
 
     @Transactional
@@ -56,8 +70,17 @@ public class RelationManagementService {
                 .requestType(RelationRequestType.FRIEND)
                 .requestStatus(RelationRequestStatus.PENDING)
                 .build();
-
         relationRequestRepository.save(request);
+
+        amqpTemplate.convertAndSend(
+                "general-notification-queue",
+                new NotificationDTO(
+                        friendshipRequest.getTargetId(),
+                        "You have been sent a friendship request",
+                        friendshipRequest.getUserId(),
+                        NotificationType.FRIEND_REQUEST
+                )
+        );
     }
 
     public void respondToFriendshipRequest(FriendResponseDto friendResponseDto) {
@@ -78,6 +101,15 @@ public class RelationManagementService {
             case ACCEPT:{
                 request.setRequestStatus(RelationRequestStatus.ACCEPTED);
                 makeFriendship(request.getRequesterId(), request.getRecipientId());
+                amqpTemplate.convertAndSend(
+                        "general-notification-queue",
+                        new NotificationDTO(
+                                friendResponseDto.getTargetId(),
+                                "You have been added as a friend",
+                                friendResponseDto.getUserId(),
+                                NotificationType.FRIEND_APPROVAL
+                        )
+                );
                 break;
             }
             case IGNORE:{

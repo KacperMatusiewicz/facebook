@@ -14,9 +14,10 @@ div.taskbar{
   height: 100%;
   background-color: #d4d0c8;
   border-top: white 1px solid;
-  display: grid;
   position: relative;
   //justify-content: space-between;
+  
+  display: grid;
   grid-template-rows: 1fr;
   grid-template-columns: 59px 100px auto 112px;
 }

@@ -12,8 +12,6 @@ import ripoff.facebook.user.commons.UserRepository;
 @Service
 @RequiredArgsConstructor
 public class DeleteUserService {
-
-    private final UserNotificationQueueClient userNotificationQueueClient;
     private final RelationClient relationClient;
     private final PostClient postClient;
     private final AuthClient authenticationClient;
@@ -23,7 +21,6 @@ public class DeleteUserService {
 
     public void deleteUser(Long userId) {
         //TODO: Saga
-        userNotificationQueueClient.deleteQueue(userId);
         relationClient.deleteUser(userId);
         postClient.deleteAllPostsByUserId(userId);
         authenticationClient.deleteUserAuthenticationData(userId);
