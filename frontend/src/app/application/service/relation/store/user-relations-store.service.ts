@@ -63,8 +63,10 @@ export class UserRelationsStoreService {
   }
 
   addFriendId(id: number){
-    this.friendsIds.push(id);
-    this.friendsSubject.next(this.friendsIds);
+    if(!this.friendsIds.includes(id)){
+      this.friendsIds.push(id);
+      this.friendsSubject.next(this.friendsIds);
+    }
   }
   removeFriendId(id: number){
     let index: number = this.friendsIds.findIndex((friendId: number) => friendId === id);
@@ -94,8 +96,10 @@ export class UserRelationsStoreService {
     this.followingsSubject.next(this.followingsIds);
   }
   addRequestedFriendId(id: number){
-    this.sentFriendsRequests.push(id);
-    this.sentFriendRequestsSubject.next(this.sentFriendsRequests);
+    if(!this.sentFriendsRequests.includes(id)){
+      this.sentFriendsRequests.push(id);
+      this.sentFriendRequestsSubject.next(this.sentFriendsRequests);
+    }
   }
   removeRequestedFriendId(id: number){
     let index: number = this.sentFriendsRequests.findIndex((followerId: number) => followerId === id);
@@ -103,8 +107,10 @@ export class UserRelationsStoreService {
     this.sentFriendRequestsSubject.next(this.sentFriendsRequests);
   }
   addRequestingFriendId(id: number){
-    this.receivedFriendsRequest.push(id);
-    this.receivedFriendRequestsSubject.next(this.receivedFriendsRequest);
+    if(!this.receivedFriendsRequest.includes(id)){
+      this.receivedFriendsRequest.push(id);
+      this.receivedFriendRequestsSubject.next(this.receivedFriendsRequest);
+    }
   }
   removeRequestingFriendId(id: number){
     let index: number = this.receivedFriendsRequest.findIndex((followerId: number) => followerId === id);

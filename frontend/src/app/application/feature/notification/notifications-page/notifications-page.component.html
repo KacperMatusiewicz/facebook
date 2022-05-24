@@ -1,0 +1,23 @@
+<window
+  [windowName]="title"
+  (onClose)="close()"
+  (onWindowClick)="focus()"
+  minimizeBtnShow="false"
+  maximizeBtnShow="false"
+  style="position:absolute; bottom: 28px; right: 30px; width: 300px; height: 500px; min-width: 300px; min-height: 200px; z-index: 0{{style.zIndex}}"
+>
+
+  <div class="container">
+    <div class="notification-list">
+      <div *ngFor="let n of notificationList" class="notification-entry" (click)="notificationAction(n)">
+        <div class="notification-dispatch" (click)="removeNotification(n)"></div>
+        <div *ngIf="n.notificationType === 'FRIEND_REQUEST'" style="background-image: url('/assets/icons/friend.png')" class="notification-type-icon"></div>
+        <div *ngIf="n.notificationType === 'MESSAGE'" style="background-image: url('/assets/icons/message.png')" class="notification-type-icon"></div>
+        <div *ngIf="n.notificationType === 'FRIEND_APPROVAL'" style="background-image: url('/assets/icons/ok.png')" class="notification-type-icon"></div>
+        <div class="notification-content">{{n.content}}</div>
+      </div>
+      <div *ngIf="notificationList.length <= 0 " class="nothing">Nothing to see here<br/>¯\_(ツ)_/¯</div>
+    </div>
+  </div>
+
+</window>

@@ -20,6 +20,7 @@ import {
   FriendsManagementPageComponent
 } from "../../feature/friends/friends-management-page/friends-management-page.component";
 import {FeedPageComponent} from "../../feature/feed/feed-page/feed-page.component";
+import {NotificationsPageComponent} from "../../feature/notification/notifications-page/notifications-page.component";
 
 @Injectable({
   providedIn: 'root'
@@ -105,6 +106,14 @@ export class WindowManagementService {
       case WindowType.ChangePasswordPage:{
         if(this.windowContainerRef != undefined){
           newDesktopPage = this.windowContainerRef.createComponent(ChangePasswordPageComponent);
+          this.windowList.set(this.idCounter, newDesktopPage.location.nativeElement);
+        }
+        break;
+      }
+
+      case WindowType.NotificationPage:{
+        if(this.windowContainerRef != undefined){
+          newDesktopPage = this.windowContainerRef.createComponent(NotificationsPageComponent);
           this.windowList.set(this.idCounter, newDesktopPage.location.nativeElement);
         }
         break;

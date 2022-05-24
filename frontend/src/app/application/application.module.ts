@@ -33,6 +33,8 @@ import { UserSearchComponent } from './feature/search/user-search/user-search.co
 import { SelfProfilePageComponent } from './feature/profile/self-profile-page/self-profile-page.component';
 import { FriendsManagementPageComponent } from './feature/friends/friends-management-page/friends-management-page.component';
 import { FeedPageComponent } from './feature/feed/feed-page/feed-page.component';
+import { NotificationsPageComponent } from './feature/notification/notifications-page/notifications-page.component';
+import { NotificationIconComponent } from './feature/core/taskbar-menu/system-tray/notification-icon/notification-icon.component';
 
 
 @NgModule({
@@ -59,6 +61,8 @@ import { FeedPageComponent } from './feature/feed/feed-page/feed-page.component'
     SelfProfilePageComponent,
     FriendsManagementPageComponent,
     FeedPageComponent,
+    NotificationsPageComponent,
+    NotificationIconComponent,
   ],
     imports: [
         CommonModule,

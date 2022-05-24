@@ -1,13 +1,18 @@
 import { Injectable } from '@angular/core';
 import {UserRelationsStoreService} from "../store/user-relations-store.service";
 import {UserRelationsService} from "../user-relations.service";
+import {NotificationDispatcherService} from "../../notification/notification-dispatcher.service";
 
 @Injectable({
   providedIn: 'root'
 })
 export class UserRelationsControllerService {
 
-  constructor(private relationStore: UserRelationsStoreService, private relationService: UserRelationsService) { }
+  constructor(
+    private relationStore: UserRelationsStoreService,
+    private relationService: UserRelationsService,
+    private notificationDispatcherService: NotificationDispatcherService
+  ) { }
 
   followUser(userId: number) {
     this.relationService.followUser(userId).subscribe(
@@ -36,6 +41,7 @@ export class UserRelationsControllerService {
       response => {
         this.relationStore.removeRequestingFriendId(userId);
         this.relationStore.addFriendId(userId);
+        this.notificationDispatcherService.deleteNotificationIfExist(userId, "FRIEND_REQUEST");
       },
       error => window.alert(error.error)
     )
@@ -49,7 +55,10 @@ export class UserRelationsControllerService {
 
   denyFriendRequest(userId: number) {
     this.relationService.denyFriendRequest(userId).subscribe(
-      response => this.relationStore.removeRequestingFriendId(userId),
+      response => {
+        this.relationStore.removeRequestingFriendId(userId);
+        this.notificationDispatcherService.deleteNotificationIfExist(userId, "FRIEND_REQUEST");
+        },
       error => window.alert(error.error)
     );
   }

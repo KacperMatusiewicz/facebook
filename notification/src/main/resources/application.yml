@@ -25,9 +25,6 @@ eureka:
     fetch-registry: true
     register-with-eureka: true
 
-user-rabbit-queues:
-  host: localhost
-  port: 5673
 rabbit-queue-definition:
   host: localhost
   port: 5672

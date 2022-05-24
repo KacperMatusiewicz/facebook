@@ -22,11 +22,11 @@
 }
 
 .tray-icon{
-
   width: 16px;
   height: 16px;
-  background-color: red;
-
+  display: flex;
+  justify-content: center;
+  align-items: center;
 }
 
 .clock{

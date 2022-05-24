@@ -19,7 +19,6 @@ public class AccountActivationService {
 
     private final ActivationRepository activationRepository;
     private final UserRepository userRepository;
-    private final UserNotificationQueueClient userNotificationQueueClient;
     private final RelationClient relationClient;
     private final AuthClient authClient;
     private final SearchClient searchClient;
@@ -54,7 +53,6 @@ public class AccountActivationService {
                 )
         );
         relationClient.createUser(user.getId());
-        userNotificationQueueClient.createQueue(user.getId());
         searchClient.addUser(new UserRequest(user.getId(), user.getName(), user.getLastName()));
     }
 }
