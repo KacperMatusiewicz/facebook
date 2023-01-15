@@ -124,8 +124,9 @@ services:
     networks:
       - general
 
-  redis:
+  redis-notification:
     image: redis:6.2-alpine
+    container_name: redis_notification
     restart: always
     ports:
       - '6379:6379'
@@ -299,6 +300,7 @@ services:
     depends_on:
       - eureka
       - elasticsearch
+    restart: on-failure
 
 networks:
   general:

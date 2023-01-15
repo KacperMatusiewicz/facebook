@@ -13,6 +13,7 @@ export class LogoutService {
   constructor(private httpClient: HttpClient, private cookieService: CookieService) { }
 
   logout() {
+    this.httpClient.delete("http://localhost:8080/api/v1/notification/unsubsribe").subscribe();
     return this.httpClient.post(this.logoutUrl, null).subscribe(respone => {
       this.cookieService.delete("applicationAuth", "/");
       window.location.reload();

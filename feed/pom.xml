@@ -42,7 +42,7 @@
         </dependency>
         <dependency>
             <groupId>ripoff.facebook</groupId>
-            <artifactId>amqp-general-feed</artifactId>
+            <artifactId>mq-general</artifactId>
             <version>1.0-SNAPSHOT</version>
             <scope>compile</scope>
         </dependency>

@@ -1,5 +1,6 @@
 package ripoff.facebook.notification;
 
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.data.redis.connection.RedisStandaloneConfiguration;
@@ -10,11 +11,17 @@ import ripoff.facebook.amqp.NotificationDTO;
 
 @Configuration
 public class RedisConfiguration {
+
+    @Value("${redis.url}")
+    private String url;
+    @Value("${redis.port}")
+    private Integer port;
+
     @Bean
     LettuceConnectionFactory redisConnectionFactory() {
         RedisStandaloneConfiguration configuration = new RedisStandaloneConfiguration();
-        configuration.setHostName("localhost");
-        configuration.setPort(6380);
+        configuration.setHostName(url);
+        configuration.setPort(port);
         configuration.setPassword("eYVX7EwVmmxKPCDmwMtyKVge8oLd2t81");
         return new LettuceConnectionFactory(configuration);
     }

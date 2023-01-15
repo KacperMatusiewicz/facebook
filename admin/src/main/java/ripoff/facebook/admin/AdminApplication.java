@@ -25,7 +25,7 @@ public class AdminApplication {
     ApplicationRunner applicationRunner() {
         return args -> {
             //userGenerationService.registerUsers();
-                //userGenerationService.activateUsers(402L, 522L);
+                userGenerationService.activateUsers(1L, 100L);
 
         };
     }

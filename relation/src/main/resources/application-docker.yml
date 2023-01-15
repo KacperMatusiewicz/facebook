@@ -8,9 +8,16 @@ spring:
     authentication:
       username: neo4j
       password: password
+  datasource:
+    username: user
+    password: password
+    url: jdbc:postgresql://postgres-relation:5432/relation
 eureka:
   client:
     service-url:
       defaultZone: "http://eureka:8761/eureka"
     fetch-registry: true
     register-with-eureka: true
+rabbit-queue-definition:
+  host: rabbitmq_general
+  port: 5672

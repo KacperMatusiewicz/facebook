@@ -25,8 +25,8 @@ public class RelationManagementService {
         repository.createFollowRelation(followerId, targetId);
     }
 
-    @Transactional
-    public void makeFriendship(Long friendId1, Long friendId2) {
+
+    private void makeFriendship(Long friendId1, Long friendId2) {
         repository.createFollowRelation(friendId1, friendId2);
         repository.createFollowRelation(friendId2, friendId1);
     }
@@ -82,7 +82,7 @@ public class RelationManagementService {
                 )
         );
     }
-
+    @Transactional
     public void respondToFriendshipRequest(FriendResponseDto friendResponseDto) {
         RelationRequest request = relationRequestRepository
                 .findByRequesterIdAndRecipientId(friendResponseDto.getTargetId(), friendResponseDto.getUserId())

@@ -24,9 +24,10 @@ eureka:
       defaultZone: "http://eureka:8761/eureka"
     fetch-registry: true
     register-with-eureka: true
-user-rabbit-queues:
-  host: rabbitmq_user_notification
-  port: 5672
 rabbit-queue-definition:
   host: rabbitmq_general
   port: 5672
+
+redis:
+  url: "redis-notification"
+  port: 6379
