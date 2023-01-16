@@ -20,7 +20,7 @@
     "@angular/router": "~13.3.4",
     "@ngrx/store": "^13.2.0",
     "ngx-cookie-service": "^13.2.0",
-    "node": "^17.7.2",
+    "node": "^16.10.0",
     "rxjs": "~6.6.0",
     "tslib": "^2.1.0",
     "zone.js": "~0.11.4"
