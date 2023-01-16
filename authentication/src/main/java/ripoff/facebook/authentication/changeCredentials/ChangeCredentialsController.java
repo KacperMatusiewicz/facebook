@@ -1,8 +1,9 @@
 package ripoff.facebook.authentication.changeCredentials;
 
 import lombok.RequiredArgsConstructor;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.web.bind.annotation.*;
-
+@Slf4j
 @RestController
 @RequestMapping("api/v1/auth/password")
 @RequiredArgsConstructor
@@ -12,9 +13,7 @@ public class ChangeCredentialsController {
 
     @PutMapping()
     public void changePassword(@RequestHeader("user-id") Long  userId, @RequestBody ChangePasswordDto changePasswordDto){
-        System.out.println(userId);
-        System.out.println(changePasswordDto.getOldPassword());
-        System.out.println(changePasswordDto.getNewPassword());
+        log.info("Received change password request.");
         service.changePassword(userId, changePasswordDto);
     }
 }

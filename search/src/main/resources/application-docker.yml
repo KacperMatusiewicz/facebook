@@ -3,6 +3,8 @@ server:
 spring:
   application:
     name: search
+  zipkin:
+    base-url: http://zipkin:9411
 eureka:
   client:
     service-url:

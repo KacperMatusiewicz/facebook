@@ -18,6 +18,8 @@ spring:
         dialect: org.hibernate.dialect.PostgreSQLDialect
         format-sql: true
       show-sql: true
+  zipkin:
+    base-url: http://zipkin:9411
 eureka:
   client:
     service-url:
@@ -27,7 +29,6 @@ eureka:
 rabbit-queue-definition:
   host: rabbitmq_general
   port: 5672
-
 redis:
   url: "redis-notification"
   port: 6379

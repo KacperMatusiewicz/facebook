@@ -3,6 +3,8 @@ server:
 spring:
   application:
     name: api-gateway
+  zipkin:
+    base-url: http://zipkin:9411
 eureka:
   client:
     service-url:

@@ -6,6 +6,8 @@ spring:
   rabbitmq:
     port: 5672
     host: localhost
+  zipkin:
+    base-url: http://localhost:9411
 eureka:
   client:
     service-url:
@@ -15,3 +17,6 @@ eureka:
 rabbit-queue-definition:
   host: localhost
   port: 5672
+redis:
+  url: "localhost"
+  port: 6380

@@ -3,6 +3,8 @@ server:
 spring:
   application:
     name: mailing
+  zipkin:
+    base-url: http://zipkin:9411
 eureka:
   client:
     service-url:

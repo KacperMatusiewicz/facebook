@@ -12,6 +12,8 @@ spring:
     username: user
     password: password
     url: jdbc:postgresql://postgres-relation:5432/relation
+  zipkin:
+    base-url: http://zipkin:9411
 eureka:
   client:
     service-url:

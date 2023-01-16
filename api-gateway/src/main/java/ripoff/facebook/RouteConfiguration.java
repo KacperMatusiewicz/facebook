@@ -56,12 +56,14 @@ public class RouteConfiguration {
                         .method(HttpMethod.POST)
                         .and()
                         .path("/api/v1/user/**")
+                        .filters(f -> f.filter(loggingFilter))
                         .uri("lb://USER")
                 )
                 .route(r -> r
                         .host("localhost:8080")
                         .and()
                         .path("/api/v1/user/activate/**")
+                        .filters(f -> f.filter(loggingFilter))
                         .uri("lb://USER")
                 )
                 .route(r -> r

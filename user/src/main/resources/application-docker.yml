@@ -29,6 +29,8 @@ spring:
           auth: true
           starttls:
             enable: true
+  zipkin:
+    base-url: http://zipkin:9411
 
 eureka:
   client:

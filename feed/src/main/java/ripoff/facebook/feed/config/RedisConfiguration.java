@@ -1,5 +1,6 @@
 package ripoff.facebook.feed.config;
 
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.data.redis.connection.RedisStandaloneConfiguration;
@@ -11,11 +12,16 @@ import org.springframework.data.redis.core.StringRedisTemplate;
 @Configuration
 public class RedisConfiguration {
 
+    @Value("${redis.url}")
+    private String url;
+    @Value("${redis.port}")
+    private Integer port;
+
     @Bean
     LettuceConnectionFactory redisConnectionFactory() {
         RedisStandaloneConfiguration configuration = new RedisStandaloneConfiguration();
-        configuration.setHostName("localhost");
-        configuration.setPort(6379);
+        configuration.setHostName(url);
+        configuration.setPort(port);
         configuration.setPassword("eYVX7EwVmmxKPCDmwMtyKVge8oLd2t81");
         return new LettuceConnectionFactory(configuration);
     }

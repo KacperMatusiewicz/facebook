@@ -134,7 +134,19 @@ services:
       - general
     command: redis-server --save 20 1 --loglevel warning --requirepass eYVX7EwVmmxKPCDmwMtyKVge8oLd2t81
     volumes:
-      - redis:/data
+      - redis-notification:/data
+
+  redis-feed:
+    image: redis:6.2-alpine
+    container_name: redis_feed
+    restart: always
+    ports:
+      - '6380:6379'
+    networks:
+      - general
+    command: redis-server --save 20 1 --loglevel warning --requirepass eYVX7EwVmmxKPCDmwMtyKVge8oLd2t81
+    volumes:
+      - redis-feed:/data
 
   elasticsearch:
     image: docker.elastic.co/elasticsearch/elasticsearch:7.4.0
@@ -159,10 +171,19 @@ services:
     networks:
       - general
 
+  zipkin:
+    image: openzipkin/zipkin
+    container_name: zipkin
+    ports:
+      - "9411:9411"
+    networks:
+      - general
 
   eureka:
     image: eureka:latest
     container_name: eureka
+    environment:
+      - SPRING_PROFILES_ACTIVE=docker
     ports:
       - "8761:8761"
     networks:
@@ -204,7 +225,7 @@ services:
       - general
     depends_on:
       - eureka
-      - redis
+      - redis-feed
       - rabbitmq_general
 
   mailing:
@@ -233,6 +254,7 @@ services:
       - rabbitmq_user_notification
       - rabbitmq_general
       - postgres_notification
+      - redis-notification
 
   post:
     image: post:latest
@@ -314,7 +336,9 @@ volumes:
   postgres-authentication:
   pgadmin:
   neo4j_relation_data:
-  redis:
+  redis-notification:
+    driver: local
+  redis-feed:
     driver: local
   elasticsearch-data:
     driver: local

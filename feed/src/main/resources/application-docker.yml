@@ -6,6 +6,8 @@ spring:
   rabbitmq:
     port: 5672
     host: rabbitmq_general
+  zipkin:
+    base-url: http://zipkin:9411
 eureka:
   client:
     service-url:
@@ -15,3 +17,6 @@ eureka:
 rabbit-queue-definition:
   host: rabbitmq_general
   port: 5672
+redis:
+  url: "redis-feed"
+  port: 6379
