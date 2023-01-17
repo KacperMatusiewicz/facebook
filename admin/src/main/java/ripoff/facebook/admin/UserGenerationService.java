@@ -13,9 +13,9 @@ public class UserGenerationService {
 
     private final RestTemplate restTemplate;
 
-    public void registerUsers(){
+    public void registerUsers(int amount){
         ResponseEntity<UserDataGeneratorApiResponse> response = restTemplate.getForEntity(
-                "https://randomuser.me/api/?inc=name,last,email&results=100", UserDataGeneratorApiResponse.class
+                "https://randomuser.me/api/?inc=name,last,email&results="+amount, UserDataGeneratorApiResponse.class
         );
         //System.out.println(response.getBody().getResults());
         List<User> users = response.getBody().getResults();

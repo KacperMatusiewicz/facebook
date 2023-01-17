@@ -14,6 +14,7 @@ import {Sound} from "../../../../../../core/sound/sound";
 export class NotificationIconComponent implements OnInit {
 
   notifications: NotificationDto[] = [];
+  notificationsCount: string = ""
 
   constructor(
     private notificationDispatcher : NotificationDispatcherService,
@@ -26,9 +27,14 @@ export class NotificationIconComponent implements OnInit {
         if (this.notifications.length > 0){
           this.soundService.playSound(Sound.NOTIFICATION);
         }
+        this.updateNotificationCounter();
       }
   );
 
+  }
+
+  updateNotificationCounter(){
+    this.notificationsCount = this.notifications.length > 99 ? "99+" : `${this.notifications.length}`;
   }
 
   ngOnInit(): void {

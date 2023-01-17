@@ -5,7 +5,10 @@ import org.springframework.stereotype.Service;
 import org.springframework.web.servlet.mvc.method.annotation.SseEmitter;
 import ripoff.facebook.amqp.NotificationDTO;
 
+import java.util.HashSet;
 import java.util.List;
+import java.util.Optional;
+import java.util.Set;
 
 @Service
 public class NotificationService {
@@ -20,25 +23,26 @@ public class NotificationService {
 
     public SseEmitter subscribeToNewNotification(Long userId, String sessionId) {
 
-        NotificationEmitter notificationEmitter = sseEmitters.get(userId)
+        Optional<NotificationEmitter> notificationEmitter = sseEmitters.get(userId)
                 .stream()
                 .filter(
                         emitter -> emitter.getSessionId().equals(sessionId)
                 )
-                .findAny()
-                .orElse(
-                        new NotificationEmitter(
-                                sessionId,
-                                new SseEmitter(-1L)
-                        )
-                );
+                .findAny();
 
-        sseEmitters.put(
-                userId,
-                notificationEmitter
-        );
-
-        return  notificationEmitter.getSseEmitter();
+        if(notificationEmitter.isEmpty()) {
+            NotificationEmitter emitter = new NotificationEmitter(
+                    sessionId,
+                    new SseEmitter(-1L)
+            );
+            sseEmitters.put(
+                    userId,
+                    emitter
+            );
+            return emitter.getSseEmitter();
+        } else {
+            return  notificationEmitter.get().getSseEmitter();
+        }
     }
 
     public void unsubscribeToNewNotifications(Long userId, String sessionId) {
@@ -50,11 +54,16 @@ public class NotificationService {
 
     public void sendNotification(NotificationDTO notificationDTO) {
         repository.saveNotification(notificationDTO);
-        sseEmitters.get(notificationDTO.getUserId()).forEach(
-                   notificationEmitter -> {
-                       notificationEmitter.sendNotification(notificationDTO);
-                   }
-       );
+        Set<NotificationEmitter> emittersToDelete = new HashSet<>();
+        Set<NotificationEmitter> emitterSet = sseEmitters.get(notificationDTO.getUserId());
+        emitterSet.forEach(
+                notificationEmitter -> {
+                    if(!notificationEmitter.sendNotification(notificationDTO)) {
+                        emittersToDelete.add(notificationEmitter);
+                    }
+                }
+        );
+        emitterSet.removeAll(emittersToDelete);
     }
 
     public List<NotificationDTO> getAllUserNotificationsByUserId(Long userId) {

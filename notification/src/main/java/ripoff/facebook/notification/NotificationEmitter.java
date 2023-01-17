@@ -30,9 +30,9 @@ public class NotificationEmitter {
                 try {
                     log.info("Trying to send notification. Fail count: " + failCount);
                     sseEmitter.send(notificationDTO, MediaType.APPLICATION_JSON);
-                    //sseEmitter.complete();
+                    sseEmitter.complete();
                     sent = true;
-                } catch (IOException e) {
+                } catch (IOException | RuntimeException e ) {
                     failCount++;
                     if(failCount > MAX_FAIL_COUNT) {
                         log.warn("Sending notification failed.");

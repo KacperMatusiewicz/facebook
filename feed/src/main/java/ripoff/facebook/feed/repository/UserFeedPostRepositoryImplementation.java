@@ -5,8 +5,10 @@ import org.springframework.data.redis.core.RedisTemplate;
 import org.springframework.data.redis.core.StringRedisTemplate;
 import org.springframework.stereotype.Component;
 import org.springframework.stereotype.Repository;
+import ripoff.facebook.feed.application.FeedNotFoundException;
 
 import java.util.List;
+import java.util.Objects;
 import java.util.Optional;
 
 @RequiredArgsConstructor
@@ -33,7 +35,10 @@ public class UserFeedPostRepositoryImplementation implements UserFeedPostReposit
 
     @Override
     public Short checkUserFeedSize(Long userId) {
-        return stringRedisTemplate.opsForList().size(userId.toString()).shortValue();
+        return Optional.ofNullable(
+                stringRedisTemplate.opsForList().size(userId.toString())
+        ).orElseThrow( () -> new FeedNotFoundException("Feed not found exception."))
+        .shortValue();
     }
 
     @Override
