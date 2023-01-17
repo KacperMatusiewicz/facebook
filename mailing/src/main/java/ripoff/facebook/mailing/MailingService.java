@@ -1,34 +1,39 @@
 package ripoff.facebook.mailing;
 
 import lombok.AllArgsConstructor;
+import lombok.extern.slf4j.Slf4j;
+import org.springframework.mail.javamail.JavaMailSender;
+import org.springframework.mail.javamail.MimeMessageHelper;
+import org.springframework.mail.javamail.MimeMessagePreparator;
 import org.springframework.stereotype.Service;
 import ripoff.facebook.clients.mailing.MailDetails;
+import org.springframework.beans.factory.annotation.Value;
 
-import javax.mail.Message;
-import javax.mail.Session;
-import javax.mail.Transport;
-import javax.mail.internet.InternetAddress;
-import javax.mail.internet.MimeMessage;
-
+@Slf4j
 @Service
 @AllArgsConstructor
 public class MailingService {
 
-    private Session session;
+    @Value("${mail.address}")
+    private String emailAddress;
+
+    private JavaMailSender mailSender;
 
     public void sendMail(MailDetails mailDetails) {
 
         try{
+            MimeMessagePreparator preparator = mimeMessage -> {
+                MimeMessageHelper message = new MimeMessageHelper(mimeMessage);
+                message.setTo(mailDetails.getRecipient().split("[,;]"));
+                message.setFrom(emailAddress, "Ripoff Team");
+                message.setSubject(mailDetails.getSubject());
+                message.setText(mailDetails.getBody(), true);
+            };
+            mailSender.send(preparator);
 
-            Message message = new MimeMessage(session);
-            message.setFrom(new InternetAddress("confirmation.fb.ripoff@gmail.com"));
-            message.setRecipients(Message.RecipientType.TO, InternetAddress.parse(mailDetails.getRecipient()));
-            message.setSubject(mailDetails.getSubject());
-            message.setContent(mailDetails.getBody(), "text/html");
-            Transport.send(message);
-
+            log.info("Mail successfully sent");
         } catch(Exception e) {
-            System.out.println("Mail not sent.\nReason: "+e.getMessage());
+            log.error("Mail not sent.\nReason: "+e.getMessage());
         }
     }
 }
