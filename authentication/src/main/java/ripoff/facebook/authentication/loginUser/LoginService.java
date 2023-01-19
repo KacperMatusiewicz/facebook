@@ -9,6 +9,7 @@ import ripoff.facebook.authentication.commons.UserAuthenticationData;
 import ripoff.facebook.authentication.commons.UserAuthenticationDataRepository;
 
 import javax.transaction.Transactional;
+import java.time.LocalDateTime;
 import java.util.UUID;
 
 @Service
@@ -30,7 +31,7 @@ public class LoginService {
 
         if (passwordEncoder.matches(userCredentials.getPassword(), userAuthenticationData.getPassword())) {
             String sessionId = UUID.randomUUID().toString();
-            sessionRepository.save(new SessionEntry(sessionId, userAuthenticationData.getId()));
+            sessionRepository.save(new SessionEntry(sessionId, userAuthenticationData.getId(), LocalDateTime.now()));
             return sessionId;
         } else {
             throw new InvalidCredentialsException("Password not correct.");

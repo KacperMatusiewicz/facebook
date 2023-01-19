@@ -6,7 +6,7 @@ spring:
   datasource:
     username: user
     password: password
-    url: jdbc:postgresql://postgres-authentication:5432/authentication
+    url: jdbc:postgresql://postgres-authentication:5432/authentication?escapeSyntaxCallMode=callIfNoReturn
   jpa:
     hibernate:
       ddl-auto: validate

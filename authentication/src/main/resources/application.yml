@@ -6,7 +6,7 @@ spring:
   datasource:
     username: user
     password: password
-    url: jdbc:postgresql://localhost:5436/authentication
+    url: jdbc:postgresql://localhost:5436/authentication?escapeSyntaxCallMode=callIfNoReturn
   jpa:
     hibernate:
       ddl-auto: update

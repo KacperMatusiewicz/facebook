@@ -66,6 +66,7 @@ services:
       PGDATA: /data/postgres
     volumes:
       - ../../db-init/authentication/init_tables.sql:/docker-entrypoint-initdb.d/init_tables.sql
+      - ../../db-init/authentication/init_procedures.sql:/docker-entrypoint-initdb.d/init_procedures.sql
       - postgres-authentication:/data/postgres
     ports:
       - "5436:5432"

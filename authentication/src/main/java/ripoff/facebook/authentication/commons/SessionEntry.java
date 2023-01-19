@@ -6,6 +6,7 @@ import lombok.NoArgsConstructor;
 
 import javax.persistence.Entity;
 import javax.persistence.Id;
+import java.time.LocalDateTime;
 
 @Entity
 @NoArgsConstructor
@@ -17,4 +18,6 @@ public class SessionEntry {
     private String sessionId;
 
     private Long userId;
+
+    private LocalDateTime creationDate;
 }

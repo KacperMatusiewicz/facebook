@@ -2,6 +2,7 @@ create table session_entry
 (
     session_id varchar(255) not null,
     user_id    bigint,
+    creation_date timestamp,
     primary key (session_id)
 );
 create table user_authentication_data
