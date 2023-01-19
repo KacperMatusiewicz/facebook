@@ -12,6 +12,14 @@ spring:
     username: user
     password: password
     url: jdbc:postgresql://postgres-relation:5432/relation
+  jpa:
+    hibernate:
+      ddl-auto: validate
+    properties:
+      hibernate:
+        dialect: org.hibernate.dialect.PostgreSQLDialect
+        format-sql: true
+      show-sql: true
   zipkin:
     base-url: http://zipkin:9411
 eureka:

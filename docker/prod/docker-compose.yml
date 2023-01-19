@@ -10,6 +10,8 @@ services:
       POSTGRES_DB: users
       PGDATA: /data/postgres
     volumes:
+      - ../../db-init/user/init_tables.sql:/docker-entrypoint-initdb.d/init_tables.sql
+      - ../../db-init/user/init_sequences.sql:/docker-entrypoint-initdb.d/init_sequence.sql
       - postgres-user:/data/postgres
     ports:
       - "5432:5432"
@@ -27,6 +29,8 @@ services:
       POSTGRES_DB: posts
       PGDATA: /data/postgres
     volumes:
+      - ../../db-init/post/init_tables.sql:/docker-entrypoint-initdb.d/init_tables.sql
+      - ../../db-init/post/init_sequences.sql:/docker-entrypoint-initdb.d/init_sequence.sql
       - postgres-post:/data/postgres
     ports:
       - "5433:5432"
@@ -43,6 +47,8 @@ services:
       POSTGRES_DB: notifications
       PGDATA: /data/postgres
     volumes:
+      - ../../db-init/notification/init_tables.sql:/docker-entrypoint-initdb.d/init_tables.sql
+      - ../../db-init/notification/init_sequences.sql:/docker-entrypoint-initdb.d/init_sequence.sql
       - postgres-notification:/data/postgres
     ports:
       - "5435:5432"
@@ -59,6 +65,7 @@ services:
       POSTGRES_DB: authentication
       PGDATA: /data/postgres
     volumes:
+      - ../../db-init/authentication/init_tables.sql:/docker-entrypoint-initdb.d/init_tables.sql
       - postgres-authentication:/data/postgres
     ports:
       - "5436:5432"
@@ -75,6 +82,8 @@ services:
       POSTGRES_DB: relation
       PGDATA: /data/postgres
     volumes:
+      - ../../db-init/relation/init_tables.sql:/docker-entrypoint-initdb.d/init_tables.sql
+      - ../../db-init/relation/init_sequences.sql:/docker-entrypoint-initdb.d/init_sequence.sql
       - postgres-relation:/data/postgres
     ports:
       - "5437:5432"

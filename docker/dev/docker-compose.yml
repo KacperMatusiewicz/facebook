@@ -13,6 +13,12 @@ services:
       - "5432:5432"
     restart: unless-stopped
 
+  zipkin:
+    image: openzipkin/zipkin
+    container_name: zipkin-dev
+    ports:
+      - "9411:9411"
+
   postgres-post-dev:
     container_name: postgres-post-dev
     image: postgres
@@ -82,21 +88,20 @@ services:
       - NEO4J_dbms_default__database=neo4j
       - NEO4J_AUTH=neo4j/password
 
-  rabbitmq-general:
+  rabbitmq-general-dev:
     image: rabbitmq:3.9.11-management-alpine
     container_name: rabbitmq-general-dev
     ports:
       - "5672:5672"
       - "15672:15672"
-
-  rabbitmq-user-notification-dev:
+  rabbitmq-notification-dev:
     image: rabbitmq:3.9.11-management-alpine
-    container_name: rabbitmq-user-notification-dev
+    container_name: rabbitmq-notification-dev
     ports:
       - "5673:5672"
       - "15673:15672"
 
-  redis-dev:
+  redis-notification-dev:
     image: redis:6.2-alpine
     restart: always
     ports:
@@ -105,7 +110,7 @@ services:
     volumes:
       - redis-dev:/data
 
-  redis-notification-dev:
+  redis-fee-dev:
     image: redis:6.2-alpine
     restart: always
     ports:

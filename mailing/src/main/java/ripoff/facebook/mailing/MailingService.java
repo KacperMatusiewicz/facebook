@@ -1,23 +1,23 @@
 package ripoff.facebook.mailing;
 
-import lombok.AllArgsConstructor;
+import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.mail.javamail.JavaMailSender;
 import org.springframework.mail.javamail.MimeMessageHelper;
 import org.springframework.mail.javamail.MimeMessagePreparator;
 import org.springframework.stereotype.Service;
 import ripoff.facebook.clients.mailing.MailDetails;
-import org.springframework.beans.factory.annotation.Value;
 
 @Slf4j
 @Service
-@AllArgsConstructor
+@RequiredArgsConstructor
 public class MailingService {
 
     @Value("${mail.address}")
     private String emailAddress;
 
-    private JavaMailSender mailSender;
+    private final JavaMailSender mailSender;
 
     public void sendMail(MailDetails mailDetails) {
 

@@ -12,7 +12,7 @@ spring:
     url: jdbc:postgresql://postgres_notification:5432/notifications
   jpa:
     hibernate:
-      ddl-auto: update
+      ddl-auto: validate
     properties:
       hibernate:
         dialect: org.hibernate.dialect.PostgreSQLDialect
