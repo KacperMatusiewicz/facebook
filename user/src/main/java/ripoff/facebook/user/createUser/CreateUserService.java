@@ -52,6 +52,7 @@ public class CreateUserService {
                         .builder()
                         .user(user)
                         .creationDate(LocalDateTime.now())
+                        .used(false)
                         .build()
         );
     }
