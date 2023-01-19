@@ -4,6 +4,8 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 import ripoff.facebook.user.commons.*;
 
+import java.time.LocalDateTime;
+
 @Service
 @RequiredArgsConstructor
 public class CreateUserService {
@@ -39,6 +41,7 @@ public class CreateUserService {
                         .email(userRequest.getEmail())
                         .password(userRequest.getPassword())
                         .userStatus(UserStatus.INACTIVE)
+                        .creationDate(LocalDateTime.now())
                         .build()
         );
     }
@@ -48,6 +51,7 @@ public class CreateUserService {
                 ActivationLink
                         .builder()
                         .user(user)
+                        .creationDate(LocalDateTime.now())
                         .build()
         );
     }

@@ -3,6 +3,7 @@ package ripoff.facebook.user.commons;
 import lombok.*;
 
 import javax.persistence.*;
+import java.time.LocalDateTime;
 
 @AllArgsConstructor
 @NoArgsConstructor
@@ -28,7 +29,7 @@ public class User {
     private String email;
     private String password;
     private UserStatus userStatus;
-
+    private LocalDateTime creationDate;
     @OneToOne(mappedBy = "user", cascade = CascadeType.REMOVE)
     ActivationLink activationLink;
 }

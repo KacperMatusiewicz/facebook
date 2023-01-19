@@ -10,6 +10,7 @@ services:
       POSTGRES_DB: users
       PGDATA: /data/postgres
     volumes:
+      - ../../db-init/user/init_procedures.sql:/docker-entrypoint-initdb.d/init_procedures.sql
       - ../../db-init/user/init_tables.sql:/docker-entrypoint-initdb.d/init_tables.sql
       - ../../db-init/user/init_sequences.sql:/docker-entrypoint-initdb.d/init_sequence.sql
       - postgres-user:/data/postgres
@@ -196,6 +197,8 @@ services:
       - SPRING_PROFILES_ACTIVE=docker
     ports:
       - "8761:8761"
+    depends_on:
+      - zipkin
     networks:
       - general
 
@@ -210,6 +213,7 @@ services:
       - general
     depends_on:
       - eureka
+      - zipkin
 
   authentication:
     image: authentication:latest
@@ -223,6 +227,7 @@ services:
     depends_on:
       - eureka
       - postgres-authentication
+      - zipkin
 
   feed:
     image: feed:latest
@@ -237,6 +242,7 @@ services:
       - eureka
       - redis-feed
       - rabbitmq_general
+      - zipkin
 
   mailing:
     image: mailing:latest
@@ -249,6 +255,7 @@ services:
       - general
     depends_on:
       - eureka
+      - zipkin
 
   notification:
     image: notification:latest
@@ -265,6 +272,7 @@ services:
       - rabbitmq_general
       - postgres_notification
       - redis-notification
+      - zipkin
 
   post:
     image: post:latest
@@ -279,6 +287,7 @@ services:
       - eureka
       - postgres_post
       - rabbitmq_general
+      - zipkin
 
   relation:
     image: relation:latest
@@ -294,6 +303,8 @@ services:
         condition: service_started
       neo4jrelation:
         condition: service_healthy
+      zipkin:
+        condition: service_started
 
   user:
     image: user:latest
@@ -307,6 +318,7 @@ services:
     depends_on:
       - eureka
       - postgres_user
+      - zipkin
 
   web-server:
     image: web-server:latest
@@ -319,6 +331,7 @@ services:
       - general
     depends_on:
       - eureka
+      - zipkin
 
   search:
     image: search:latest
@@ -332,6 +345,7 @@ services:
     depends_on:
       - eureka
       - elasticsearch
+      - zipkin
     restart: on-failure
 
 networks:
@@ -344,7 +358,6 @@ volumes:
   postgres-relation:
   postgres-notification:
   postgres-authentication:
-  pgadmin:
   neo4j_relation_data:
   redis-notification:
     driver: local

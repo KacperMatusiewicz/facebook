@@ -18,7 +18,7 @@ public class ActivationEmail {
 
     public String getEmailBody() {
         return  "<h1 align=\"center\">Hello, " + name + "!</h1>\n" +
-                "<p align=\"center\">Please click the following button to activate your account:</p>\n" +
+                "<p align=\"center\">Please click the following button to activate your account (this code is valid for 2 days)</p>\n" +
                 "<table border=\"0\" cellpadding=\"0\" cellspacing=\"0\" class=\"btn btn-primary\" style=\"border-collapse: separate; mso-table-lspace: 0pt; mso-table-rspace: 0pt; width: 100%; box-sizing: border-box; min-width: 100% !important;\" width=\"100%\">\n" +
                 "    <tr>\n" +
                 "        <td align=\"center\" style=\"font-family: sans-serif; font-size: 14px; vertical-align: top; padding-bottom: 15px;\" valign=\"top\">\n" +

@@ -8,10 +8,7 @@ import ripoff.facebook.clients.notification.UserNotificationQueueClient;
 import ripoff.facebook.clients.relation.RelationClient;
 import ripoff.facebook.clients.search.UserRequest;
 import ripoff.facebook.clients.search.SearchClient;
-import ripoff.facebook.user.commons.ActivationRepository;
-import ripoff.facebook.user.commons.User;
-import ripoff.facebook.user.commons.UserRepository;
-import ripoff.facebook.user.commons.UserStatus;
+import ripoff.facebook.user.commons.*;
 
 @Service
 @RequiredArgsConstructor
@@ -38,9 +35,15 @@ public class AccountActivationService {
     }
 
     private User changeUserAccountStatusToActive(Long activationKey) {
-        User user = activationRepository.getById(activationKey).getUser();
+        ActivationLink activationLink = activationRepository.getById(activationKey);
+        User user = activationLink.getUser();
+
+        activationLink.setUsed(true);
         user.setUserStatus(UserStatus.ACTIVE);
+
         userRepository.save(user);
+        activationRepository.save(activationLink);
+
         return user;
     }
 

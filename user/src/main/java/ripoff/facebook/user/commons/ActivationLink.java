@@ -3,15 +3,18 @@ package ripoff.facebook.user.commons;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Getter;
+import lombok.Setter;
 import lombok.NoArgsConstructor;
 
 import javax.persistence.*;
+import java.time.LocalDateTime;
 
 @Entity
 @AllArgsConstructor
 @NoArgsConstructor
 @Builder
 @Getter
+@Setter
 public class ActivationLink {
 
     @Id
@@ -29,4 +32,7 @@ public class ActivationLink {
     @JoinColumn(name = "user_id", referencedColumnName = "id")
     User user;
 
+    LocalDateTime creationDate;
+
+    Boolean used;
 }
