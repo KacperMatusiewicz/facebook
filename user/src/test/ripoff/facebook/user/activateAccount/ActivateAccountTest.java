@@ -12,35 +12,16 @@ import ripoff.facebook.clients.authentication.AuthClient;
 import ripoff.facebook.clients.relation.RelationClient;
 import ripoff.facebook.clients.search.SearchClient;
 import ripoff.facebook.user.commons.*;
-import ripoff.facebook.user.createUser.CreateUserService;
-import ripoff.facebook.user.createUser.EmailAccountActivationService;
-import ripoff.facebook.user.createUser.EmailExistsException;
 import ripoff.facebook.user.createUser.UserRequest;
-
-import static org.junit.jupiter.api.Assertions.*;
-import static org.mockito.ArgumentMatchers.any;
-import static org.mockito.ArgumentMatchers.anyString;
-import static org.mockito.BDDMockito.given;
-
-import org.junit.jupiter.api.Assertions;
-import org.junit.jupiter.api.BeforeEach;
-import org.junit.jupiter.api.Test;
-import org.junit.jupiter.api.extension.ExtendWith;
-import org.junit.jupiter.api.function.Executable;
-import org.mockito.Mock;
-import org.mockito.junit.jupiter.MockitoExtension;
-import ripoff.facebook.user.commons.ActivationRepository;
-import ripoff.facebook.user.commons.BadUserDataException;
-import ripoff.facebook.user.commons.UserRepository;
-import ripoff.facebook.user.commons.UserValidationService;
 
 import java.time.LocalDateTime;
 import java.time.temporal.ChronoUnit;
 
+import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.mockito.ArgumentMatchers.any;
-import static org.mockito.ArgumentMatchers.anyString;
 import static org.mockito.BDDMockito.given;
-import static org.mockito.Mockito.*;
+import static org.mockito.Mockito.times;
+import static org.mockito.Mockito.verify;
 
 @ExtendWith(MockitoExtension.class)
 class ActivateAccountTest {

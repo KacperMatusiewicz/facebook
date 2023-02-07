@@ -1,29 +1,17 @@
 package ripoff.facebook.user.deleteUser;
 
+import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.Test;
+import org.junit.jupiter.api.extension.ExtendWith;
+import org.mockito.Mock;
+import org.mockito.junit.jupiter.MockitoExtension;
 import ripoff.facebook.clients.authentication.AuthClient;
 import ripoff.facebook.clients.post.PostClient;
 import ripoff.facebook.clients.relation.RelationClient;
 import ripoff.facebook.clients.search.SearchClient;
 import ripoff.facebook.user.commons.UserRepository;
 
-import static org.junit.jupiter.api.Assertions.*;
-
-
-import org.junit.jupiter.api.Assertions;
-import org.junit.jupiter.api.BeforeEach;
-import org.junit.jupiter.api.Test;
-import org.junit.jupiter.api.extension.ExtendWith;
-import org.junit.jupiter.api.function.Executable;
-import org.mockito.Mock;
-import org.mockito.junit.jupiter.MockitoExtension;
-import ripoff.facebook.user.commons.*;
-
-import java.time.LocalDateTime;
-import java.time.temporal.ChronoUnit;
-
 import static org.mockito.ArgumentMatchers.any;
-import static org.mockito.ArgumentMatchers.anyString;
-import static org.mockito.BDDMockito.given;
 import static org.mockito.Mockito.times;
 import static org.mockito.Mockito.verify;
 
