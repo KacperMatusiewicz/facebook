@@ -9,10 +9,10 @@ import ripoff.facebook.user.commons.UserRepository;
 @RequiredArgsConstructor
 public class GetUserDetailsService {
 
-    private final UserRepository userRepository;
+    private final UserDetailsViewRepository userDetailsViewRepository;
 
     public UserDetailsDto getUserDetails(Long userId) {
-        User user = userRepository.getById(userId);
+        UserDetailsView user = userDetailsViewRepository.getById(userId);
         return new UserDetailsDto(
                 user.getName(),
                 user.getLastName(),

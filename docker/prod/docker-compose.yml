@@ -39,24 +39,6 @@ services:
       - general
     restart: unless-stopped
 
-  postgres_notification:
-    container_name: postgres_notification
-    image: postgres
-    environment:
-      POSTGRES_USER: user
-      POSTGRES_PASSWORD: password
-      POSTGRES_DB: notifications
-      PGDATA: /data/postgres
-    volumes:
-      - ../../db-init/notification/init_tables.sql:/docker-entrypoint-initdb.d/init_tables.sql
-      - ../../db-init/notification/init_sequences.sql:/docker-entrypoint-initdb.d/init_sequence.sql
-      - postgres-notification:/data/postgres
-    ports:
-      - "5435:5432"
-    networks:
-      - general
-    restart: unless-stopped
-
   postgres-authentication:
     container_name: postgres-authentication
     image: postgres
@@ -123,15 +105,6 @@ services:
     ports:
       - "5672:5672"
       - "15672:15672"
-    networks:
-      - general
-
-  rabbitmq_user_notification:
-    image: rabbitmq:3.9.11-management-alpine
-    container_name: rabbitmq_user_notification
-    ports:
-      - "5673:5672"
-      - "15673:15672"
     networks:
       - general
 
@@ -268,9 +241,7 @@ services:
       - general
     depends_on:
       - eureka
-      - rabbitmq_user_notification
       - rabbitmq_general
-      - postgres_notification
       - redis-notification
       - zipkin
 
@@ -356,7 +327,6 @@ volumes:
   postgres-user:
   postgres-post:
   postgres-relation:
-  postgres-notification:
   postgres-authentication:
   neo4j_relation_data:
   redis-notification:

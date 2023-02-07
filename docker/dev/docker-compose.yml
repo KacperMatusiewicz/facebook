@@ -33,20 +33,6 @@ services:
       - "5433:5432"
     restart: unless-stopped
 
-  postgres-notification-dev:
-    container_name: postgres-notification-dev
-    image: postgres
-    environment:
-      POSTGRES_USER: user
-      POSTGRES_PASSWORD: password
-      POSTGRES_DB: notifications
-      PGDATA: /data/postgres
-    volumes:
-      - postgres-notification-dev:/data/postgres
-    ports:
-      - "5435:5432"
-    restart: unless-stopped
-
   postgres-authentication-dev:
     container_name: postgres-authentication-dev
     image: postgres
@@ -94,12 +80,6 @@ services:
     ports:
       - "5672:5672"
       - "15672:15672"
-  rabbitmq-notification-dev:
-    image: rabbitmq:3.9.11-management-alpine
-    container_name: rabbitmq-notification-dev
-    ports:
-      - "5673:5672"
-      - "15673:15672"
 
   redis-notification-dev:
     image: redis:6.2-alpine

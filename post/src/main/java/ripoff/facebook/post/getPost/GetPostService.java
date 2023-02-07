@@ -12,14 +12,14 @@ import java.util.List;
 @Service
 @RequiredArgsConstructor
 public class GetPostService {
+    //TODO: View
+    private final PostViewRepository repository;
 
-    private final PostRepository repository;
-
-    public List<Post> getAllPostsByUser(Long userId) {
+    public List<PostView> getAllPostsByUser(Long userId) {
         return repository.findAllByUserId(userId);
     }
 
-    public Post getPostById(Long postId) {
+    public PostView getPostById(Long postId) {
         return repository.findById(postId)
                 .orElseThrow(
                         () -> new PostNotFoundException("Post with id: "+ postId + " doesn't exist.")

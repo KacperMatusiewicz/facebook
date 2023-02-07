@@ -12,3 +12,6 @@ create table user_authentication_data
     password varchar(255),
     primary key (id)
 );
+
+create view user_authentication_data_view as
+    select * from user_authentication_data;

@@ -29,6 +29,7 @@ public class CreateUserService {
         }
     }
     private void checkIfMailExists(UserRequest userRequest) {
+        //TODO: View
         if (userRepository.checkIfMailExists(userRequest.getEmail())) {
             throw new EmailExistsException("Email exists.");
         }

@@ -23,3 +23,15 @@ alter table activation_link
     foreign key (user_id)
     references user_table;
 
+create view user_details_view as
+    select
+        u.id as id,
+        u.name as name,
+        u.last_name as last_name,
+        u.email as email
+    from user_table u;
+
+create view user_email_view as
+    select
+        u.email as email
+    from user_table u;

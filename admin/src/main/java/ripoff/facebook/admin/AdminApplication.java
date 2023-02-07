@@ -24,8 +24,8 @@ public class AdminApplication {
     @Bean
     ApplicationRunner applicationRunner() {
         return args -> {
-            userGenerationService.registerUsers(10);
-                userGenerationService.activateUsers(1L, 10L);
+//            userGenerationService.registerUsers(10);
+//                userGenerationService.activateUsers(1L, 10L);
 
         };
     }
