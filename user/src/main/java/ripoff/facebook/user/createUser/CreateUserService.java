@@ -15,12 +15,13 @@ public class CreateUserService {
     private final ActivationRepository activationRepository;
     private  final EmailAccountActivationService emailAccountActivationService;
 
-    public void registerUser(UserRequest userRequest) {
+    public String registerUser(UserRequest userRequest) {
         validateUserData(userRequest);
         checkIfMailExists(userRequest);
         User user = saveUser(userRequest);
         ActivationLink activationLink = createActivationLink(user);
         sendActivationEmail(user, activationLink);
+        return user.getEmail();
     }
 
     private void validateUserData(UserRequest userRequest) {

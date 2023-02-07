@@ -15,9 +15,9 @@ public class CreateUserController {
     private final CreateUserService service;
 
     @PostMapping
-    public void createUser(@RequestBody UserRequest userRequest) {
+    public String createUser(@RequestBody UserRequest userRequest) {
         log.info("Received request to create user.");
-        service.registerUser(userRequest);
+        return service.registerUser(userRequest);
     }
 
 }
