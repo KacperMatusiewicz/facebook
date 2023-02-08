@@ -82,6 +82,7 @@ public class RelationManagementService {
                 )
         );
     }
+
     @Transactional
     public void respondToFriendshipRequest(FriendResponseDto friendResponseDto) {
         RelationRequest request = relationRequestRepository
