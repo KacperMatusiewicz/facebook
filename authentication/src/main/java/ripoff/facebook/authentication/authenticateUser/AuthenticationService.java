@@ -12,6 +12,7 @@ import java.time.LocalDateTime;
 public class AuthenticationService {
 
     private final SessionRepository sessionRepository;
+
     public Long authenticateSession(String sessionId) {
         Long session = sessionRepository
                 .findById(sessionId)

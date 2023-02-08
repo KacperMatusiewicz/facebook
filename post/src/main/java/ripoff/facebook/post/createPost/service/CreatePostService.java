@@ -68,7 +68,7 @@ public class CreatePostService {
         if (!dataValidationService.validatePost(request)) {
             throw new BadPostDataException("Post data is not correct.");
         }
-        if (request.getVisibilityUsersId() == null) {
+        if (request.getVisibilityUsersId() == null && request.getVisibilityGroupType() == VisibilityGroupType.CUSTOM){
             throw new BadPostDataException("Recipient group not defined");
         }
     }
