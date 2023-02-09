@@ -11,6 +11,11 @@ public class ChangeCredentialsController {
 
     private final ChangeCredentialsService service;
 
+    /**
+     * Changes user password
+     * @param userId user id
+     * @param changePasswordDto json body containing old password: string, new password: string
+     */
     @PutMapping()
     public void changePassword(@RequestHeader("user-id") Long  userId, @RequestBody ChangePasswordDto changePasswordDto){
         log.info("Received change password request.");

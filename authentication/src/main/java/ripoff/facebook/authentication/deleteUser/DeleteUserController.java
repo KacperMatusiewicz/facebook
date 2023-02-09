@@ -14,6 +14,11 @@ public class DeleteUserController {
 
     private final DeleteUserService service;
 
+    /**
+     * DELETE api/v1/auth/delete/{userId} <br>
+     * Deletes user authentication data
+     * @param userId path variable containing user id
+     */
     @DeleteMapping("{userId}")
     public void deleteUserAuthenticationData(@PathVariable Long userId){
         log.info("Received delete user request.");

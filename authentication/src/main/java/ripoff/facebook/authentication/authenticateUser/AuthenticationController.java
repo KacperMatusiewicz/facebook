@@ -12,6 +12,11 @@ public class AuthenticationController {
 
     private final AuthenticationService service;
 
+    /**
+     * Authenticates session and returns user id.
+     * @param session
+     * @return
+     */
     @PostMapping
     public Long authenticateTokenAndReturnUserId(@RequestParam String session) {
         log.info("Received token authentication request.");

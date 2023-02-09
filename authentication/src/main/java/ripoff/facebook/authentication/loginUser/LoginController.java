@@ -17,6 +17,14 @@ public class LoginController {
 
     private final LoginService loginService;
 
+    /**
+     * GET api/v1/auth/login <br>
+     * Creates session for user
+     * @param userCredentials request body contains: <br>
+     *                        - login: string <br>
+     *                        - password: string <br>
+     * @return response containing session cookie "JSESSIONID"
+     */
     @PostMapping("login")
     public ResponseEntity loginUser(@RequestBody UserCredentials userCredentials){
 
@@ -43,6 +51,12 @@ public class LoginController {
                 .build();
     }
 
+    /**
+     * POST api/v1/auth/logout <br>
+     * Logs out user.
+     * @param sessionId cookie "JSESSIONID" represents session key
+     * @return response with unset cookie JSESSIONID
+     */
     @PostMapping("logout")
     public ResponseEntity logoutUser(@CookieValue(value = "JSESSIONID") String sessionId) {
 
@@ -61,6 +75,12 @@ public class LoginController {
                 .build();
     }
 
+    /**
+     * POST api/v1/auth/logoutAll <br>
+     * Ends all user sessions
+     * @param userId request header "user-id"
+     * @return response with unset cookie JSESSIONID
+     */
     @PostMapping("logoutAll")
     public ResponseEntity logoutFromAll(@RequestHeader("user-id") Long userId) {
 

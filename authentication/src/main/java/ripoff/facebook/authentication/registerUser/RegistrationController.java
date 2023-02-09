@@ -15,6 +15,11 @@ public class RegistrationController {
 
     private final RegistrationService service;
 
+    /**
+     * POST api/v1/auth/register <br>
+     * Creates user authentication data
+     * @param authenticationMethodDto json body containg id: number, email:string, password:string
+     */
     @PostMapping
     public void registerNewUserAuthenticationMethod(@RequestBody AuthenticationMethodDto authenticationMethodDto) {
         service.registerNewUserAuthenticationMethod(authenticationMethodDto);
